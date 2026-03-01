@@ -4,148 +4,143 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exclusive Footer</title>
+    <title>login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 
+
+
     <style>
-        footer {
-            background-color: #000000;
-            color: #c0c0c0;
-            font-size: 0.875rem;
+       
+
+        body {
+            min-height: 100vh;
         }
 
-        footer h6 {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        footer p,
-        footer address {
-            font-size: 0.825rem;
-            color: #aaaaaa;
-            line-height: 1.8;
-        }
-
-        footer a {
-            color: #aaaaaa;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.2s ease;
-        }
-
-        footer a:hover {
-            color: var(--mainColor);
-        }
-
-        .subscribe-label {
-            font-size: 0.78rem;
-
-        }
-
-        .subscribe-form {
-            border-radius: 4px;
+        .login-wrapper {
+            max-width: 860px;
+            min-height: 520px;
+            border: 1px solid #e8e8e8;
             overflow: hidden;
-            background: #1a1a1a;
         }
 
-        .subscribe-form input {
-            background: transparent;
-            outline: none;
-            color: #ccc;
+        .image-panel {
+            flex: 1;
+            background: #CBE4E8;
+            width: 100%;
 
-            font-size: 0.8rem;
+            overflow: hidden;
+        }
+
+        .image-panel img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .form-panel {
             flex: 1;
         }
 
-        .subscribe-form input::placeholder {
-            color: #555;
-        }
-
-        .subscribe-form button {
-            background: transparent;
-            border: none;
-            border-left: 1px solid #333;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.2s, background 0.2s;
-        }
-
-        .subscribe-form button:hover {
-            background: var(--mainColor);
-
-            border-left-color: var(--mainColor);
-        }
-
-        .app-badges {
-            flex-direction: column;
-        }
-
-        .app-badge {
-
-
-            border-radius: 6px;
-            border: 1px solid transparent;
-            background: #1a1a1a;
-            transition: border-color 0.2s, background 0.2s;
-            width: fit-content;
-        }
-
-        .app-badge:hover {
-            border:1px solid var(--mainColor) ;
-            background: #222;
-        }
-
-        .app-badge i {
-            font-size: 1.4rem;
-            color: #ccc;
-        }
-
-        .app-badge .badge-text small {
-
-            font-size: 0.65rem;
-
-            line-height: 1;
-        }
-
-        .app-badge .badge-text span {
-            font-size: 0.8rem;
+        .form-panel h2 {
+            font-size: 1.75rem;
             font-weight: 600;
         }
 
-
-        .social-icons a {
-            width: 34px;
-            height: 34px;
-            border: 1px solid #333;
-            color: #aaa;
+        .form-panel p {
             font-size: 0.9rem;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            color: #555;
         }
 
-        .social-icons a:hover {
+        .form-group input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            font-size: 0.9rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-group input:focus {
+            border-bottom-color: var(--mainColor);
+        }
+
+        .btn-login {
             background: var(--mainColor);
-            border-color: var(--mainColor);
-            color: #fff;
+            padding: 12px 40px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .footer-bottom {
-
-            font-size: 0.78rem;
+        .btn-login:hover {
+            background: var(--mainColor);
         }
 
-        .save-text {
-            font-size: 0.72rem;
-            color: #777;
+        .forgot-link {
+            color: var(--mainColor);
+            font-size: 0.85rem;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 767px) {
+            .login-wrapper {
+                flex-direction: column;
+                max-width: 420px;
+                min-height: auto;
+            }
+
+            .image-panel {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 40px 28px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="login-wrapper d-flex w-100 rounded rounded-3 m-4">
+
+            <div class="image-panel d-none d-md-flex align-items-center justify-content-center">
+                <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80" alt="Shopping" />
+            </div>
+
+            <div class="form-panel d-flex justify-content-center flex-column py-4 px-5">
+                <h2 class="text-black mb-2">Log in to Exclusive</h2>
+                <p class="mb-5">Enter your details below</p>
+
+                <div class="form-group mb-4">
+                    <input class="w-100 py-2 bg-transparent" type="text" placeholder="Email or Phone Number">
+                </div>
+
+                <div class="form-group mb-4">
+                    <input type="password" placeholder="Password">
+                </div>
+
+                <div class="actions d-flex align-items-center gap-4 mt-3">
+                    <button class="btn-login  text-white border-0 rounded rounded-2">Log In</button>
+                    <a href="#" class="forgot-link text-decoration-none">Forget Password?</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
     <footer class="pt-3">
@@ -217,10 +212,14 @@
                     </div>
 
                     <div class="social-icons d-flex gap-2 mt-2">
-                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 " ><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
 

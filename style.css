@@ -1,3 +1,142 @@
+
+ * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+   }
+
 :root{
     --mainColor : #e8294c
 }
+
+footer {
+            background-color: #000000;
+            color: #c0c0c0;
+            font-size: 0.875rem;
+        }
+
+        footer h6 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        footer p,
+        footer address {
+            font-size: 0.825rem;
+            color: #aaaaaa;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #aaaaaa;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--mainColor);
+        }
+
+        footer .subscribe-label {
+            font-size: 0.78rem;
+
+        }
+
+        footer .subscribe-form {
+            border-radius: 4px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        footer .subscribe-form input {
+            background: transparent;
+            outline: none;
+            color: #ccc;
+
+            font-size: 0.8rem;
+            flex: 1;
+        }
+
+        footer .subscribe-form input::placeholder {
+            color: #555;
+        }
+
+        footer .subscribe-form button {
+            background: transparent;
+            border: none;
+            border-left: 1px solid #333;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        footer .subscribe-form button:hover {
+            background: var(--mainColor);
+
+            border-left-color: var(--mainColor);
+        }
+
+        footer .app-badges {
+            flex-direction: column;
+        }
+
+        footer .app-badge {
+
+
+            border-radius: 6px;
+            border: 1px solid transparent;
+            background: #1a1a1a;
+            transition: border-color 0.2s, background 0.2s;
+            width: fit-content;
+        }
+
+        footer .app-badge:hover {
+            border: 1px solid var(--mainColor);
+            background: #222;
+        }
+
+        footer .app-badge i {
+            font-size: 1.4rem;
+            color: #ccc;
+        }
+
+        footer .app-badge .badge-text small {
+
+            font-size: 0.65rem;
+
+            line-height: 1;
+        }
+
+        footer .app-badge .badge-text span {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+
+        footer .social-icons a {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: var(--mainColor);
+            border-color: var(--mainColor);
+            color: #fff;
+        }
+
+        footer .footer-bottom {
+
+            font-size: 0.78rem;
+
+        }
+
+        footer .save-text {
+            font-size: 0.72rem;
+            color: #777;
+        }
