@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exclusive Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        footer {
+            background-color: #000000;
+            color: #c0c0c0;
+            font-size: 0.875rem;
+        }
+
+        footer h6 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        footer p,
+        footer address {
+            font-size: 0.825rem;
+            color: #aaaaaa;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #aaaaaa;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--mainColor);
+        }
+
+        .subscribe-label {
+            font-size: 0.78rem;
+
+        }
+
+        .subscribe-form {
+            border-radius: 4px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .subscribe-form input {
+            background: transparent;
+            outline: none;
+            color: #ccc;
+
+            font-size: 0.8rem;
+            flex: 1;
+        }
+
+        .subscribe-form input::placeholder {
+            color: #555;
+        }
+
+        .subscribe-form button {
+            background: transparent;
+            border: none;
+            border-left: 1px solid #333;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .subscribe-form button:hover {
+            background: var(--mainColor);
+
+            border-left-color: var(--mainColor);
+        }
+
+        .app-badges {
+            flex-direction: column;
+        }
+
+        .app-badge {
+
+
+            border-radius: 6px;
+            border: 1px solid transparent;
+            background: #1a1a1a;
+            transition: border-color 0.2s, background 0.2s;
+            width: fit-content;
+        }
+
+        .app-badge:hover {
+            border:1px solid var(--mainColor) ;
+            background: #222;
+        }
+
+        .app-badge i {
+            font-size: 1.4rem;
+            color: #ccc;
+        }
+
+        .app-badge .badge-text small {
+
+            font-size: 0.65rem;
+
+            line-height: 1;
+        }
+
+        .app-badge .badge-text span {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+
+        .social-icons a {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: var(--mainColor);
+            border-color: var(--mainColor);
+            color: #fff;
+        }
+
+        .footer-bottom {
+
+            font-size: 0.78rem;
+        }
+
+        .save-text {
+            font-size: 0.72rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <footer class="pt-3">
+        <div class="container">
+            <div class="row g-4">
+
+                <div class="col-12 col-sm-6 col-lg-3 ">
+                    <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form d-flex border-1 border-secondary">
+                        <input type="email" placeholder="Enter your email" class="border-0 px-2 py-2" />
+                        <button type="button" aria-label="Submit" class=" px-2 py-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Support</h6>
+                    <address>
+                        111 Bijoy sarani, Dhaka,<br />
+                        DH 1515, Bangladesh.<br />
+                        exclusive@gmail.com<br />
+                        +88015-88888-9999
+                    </address>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Account</h6>
+                    <a href="#">My Account</a>
+                    <a href="#">Login / Register</a>
+                    <a href="#">Cart</a>
+                    <a href="#">Wishlist</a>
+                    <a href="#">Shop</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms Of Use</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Download App</h6>
+                    <p class="save-text mb-1">Save $3 with App New User Only</p>
+
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">GET IT ON</small>
+                                    <span class="text-white">Google Play</span>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">Download on the</small>
+                                    <span class="text-white">App Store</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 " ><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+            <div class="container">
+                &copy; Copyright Rimel 2022. All right reserved
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
