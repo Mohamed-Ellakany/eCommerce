@@ -105,4 +105,12 @@
         top: 20%;
         width: 65%;
     }
+         .flash-product-card {
+             width: 200px;
+             min-width: 200px;
+         }
+    
+         .flash-title {
+             font-size: 1.5rem;
+         }
 }
