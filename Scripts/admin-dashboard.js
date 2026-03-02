@@ -4,6 +4,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.querySelector("input[type='text']");
   const searchBtn = document.querySelector(".btn-outline-secondary");
 
+  // ✅ Update Stats
+  function updateStats(list) {
+    document.getElementById("total-users").textContent = list.length;
+    document.getElementById("total-admins").textContent = list.filter(
+      (u) => u.role === "admin",
+    ).length;
+    document.getElementById("total-sellers").textContent = list.filter(
+      (u) => u.role === "seller",
+    ).length;
+    document.getElementById("total-customers").textContent = list.filter(
+      (u) => u.role === "customer",
+    ).length;
+  }
+
   function renderUsers(filteredUsers) {
     usersContainer.innerHTML = "";
 
@@ -39,20 +53,18 @@ document.addEventListener("DOMContentLoaded", function () {
         user.name.toLowerCase().includes(query) ||
         user.email.toLowerCase().includes(query),
     );
+    // ✅ Update stats to reflect search results
+    updateStats(filtered);
     renderUsers(filtered);
   }
 
-  // Search on button click
   searchBtn.addEventListener("click", handleSearch);
-
-  // Search on typing (live search)
   searchInput.addEventListener("input", handleSearch);
-
-  // Search on Enter key
-  searchInput.addEventListener("keydown", function (e) {
+  searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleSearch();
   });
 
   // Initial render
+  updateStats(users);
   renderUsers(users);
 });
