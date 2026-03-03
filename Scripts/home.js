@@ -79,23 +79,44 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ===== Slider Logic =====
-const track = document.getElementById("flashProductsTrack");
-const prevBtn = document.getElementById("flash-prev");
-const nextBtn = document.getElementById("flash-next");
-const cardWidth = 270 + 16; 
-let currentIndex = 0;
+function initializeSliders() {
+    const sections = document.querySelectorAll('.flash-sales');
+    
+    sections.forEach((section, index) => {
+        const track = section.querySelector('.flash-products');
+        const prevBtn = section.querySelector('.flash-nav-btn:first-child');
+        const nextBtn = section.querySelector('.flash-nav-btn:last-child');
+        
+        if (!track || !prevBtn || !nextBtn) return;
+        
+        const cardWidth = 270 + 16; 
+        let currentIndex = 0;
 
-function getVisibleCount() {
-  const wrapper = track.parentElement;
-  return Math.floor(wrapper.offsetWidth / cardWidth);
+        function getVisibleCount() {
+            const wrapper = track.parentElement;
+            return Math.floor(wrapper.offsetWidth / cardWidth);
+        }
+
+        function slideTo(index) {
+            const cards = track.querySelectorAll(".flash-product-card");
+            const maxIndex = Math.max(0, cards.length - getVisibleCount());
+            currentIndex = Math.max(0, Math.min(index, maxIndex));
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        const newPrevBtn = prevBtn.cloneNode(true);
+        const newNextBtn = nextBtn.cloneNode(true);
+        
+        prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+        nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+        
+        newNextBtn.addEventListener("click", () => slideTo(currentIndex + 1));
+        newPrevBtn.addEventListener("click", () => slideTo(currentIndex - 1));
+
+        window.addEventListener("resize", () => slideTo(currentIndex));
+        
+        slideTo(0);
+    });
 }
 
-function slideTo(index) {
-  const cards = track.querySelectorAll(".flash-product-card");
-  const maxIndex = Math.max(0, cards.length - getVisibleCount());
-  currentIndex = Math.max(0, Math.min(index, maxIndex));
-  track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-}
-
-nextBtn.addEventListener("click", () => slideTo(currentIndex + 1));
-prevBtn.addEventListener("click", () => slideTo(currentIndex - 1));
+document.addEventListener("DOMContentLoaded", initializeSliders);

@@ -8,6 +8,9 @@ body {
 :root {
     --mainFont: 'Franklin Gothic Medium';
     --mainColor: #DB4444;
+    --green: #00e94d;
+        --dark: #0a0a0a;
+        --dark2: #111111;
 }
 
 header nav p {
