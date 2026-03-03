@@ -318,3 +318,98 @@ aside ul li.active {
     border: 1px solid #DB4444 !important; 
     color:#fff !important;
  }
+ .hero-section {
+     background: radial-gradient(ellipse 70% 80% at 70% 50%, #1a1a1a 0%, var(--dark) 70%);
+ }
+
+ .font-barlow {
+     font-family: 'Barlow Condensed', sans-serif;
+ }
+
+ .grid-overlay {
+     background-image:
+         linear-gradient(rgba(0, 233, 77, .03) 1px, transparent 1px),
+         linear-gradient(90deg, rgba(0, 233, 77, .03) 1px, transparent 1px);
+     background-size: 48px 48px;
+     pointer-events: none;
+ }
+
+ /* Categories label */
+ .categories-label {
+     color: var(--green);
+     font-size: .85rem;
+     letter-spacing: .12em;
+ }
+
+ /* Hero title */
+ .hero-title {
+     font-size: clamp(2.4rem, 5vw, 4rem);
+     letter-spacing: -.01em;
+ }
+
+ /* Countdown items */
+ .countdown-item {
+     width: 72px;
+     height: 72px;
+     backdrop-filter: blur(4px);
+     transition: border-color .3s;
+ }
+
+ .countdown-item:hover {
+     border-color: var(--green) !important;
+ }
+
+ .countdown-num {
+     font-size: 1.35rem;
+ }
+
+ .countdown-label {
+     font-size: .6rem;
+     letter-spacing: .08em;
+     margin-top: 2px;
+ }
+
+ /* Buy button */
+ .btn-buy {
+     background: var(--green);
+     color: #000;
+     font-size: 1rem;
+     letter-spacing: .08em;
+     transition: transform .2s, box-shadow .2s, background .2s;
+     box-shadow: 0 0 0 0 rgba(0, 233, 77, .4);
+ }
+
+ .btn-buy:hover {
+     background: #00ff57 !important;
+     color: #000 !important;
+     transform: translateY(-2px);
+     box-shadow: 0 8px 28px rgba(0, 233, 77, .35) !important;
+ }
+
+ /* Speaker glow */
+ .speaker-glow {
+     width: 72%;
+     height: 72%;
+     background: radial-gradient(circle, rgba(0, 233, 77, .12) 0%, transparent 70%);
+     filter: blur(32px);
+ }
+
+ /* Speaker image */
+ .speaker-img {
+     max-width: 580px;
+     filter: drop-shadow(0 24px 48px rgba(0, 0, 0, .8));
+     animation: float 4s ease-in-out infinite;
+ }
+
+ @keyframes float {
+
+     0%,
+     100% {
+         transform: translateY(0);
+     }
+
+     50% {
+         transform: translateY(-14px);
+     }
+ }
+
