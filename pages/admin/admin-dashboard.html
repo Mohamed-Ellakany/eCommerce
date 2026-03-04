@@ -25,6 +25,11 @@
           flex-direction: column;
         }
       }
+      #user-name:hover {
+        cursor: default;
+        background: transparent;
+        font-weight: bolder;
+      }
       .sidebar {
         display: flex;
         flex-direction: column;
@@ -79,11 +84,17 @@
                 my profile
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Eslam Tarek</a></li>
-                <li><a class="dropdown-item" href="#">settings</a></li>
+                <li>
+                  <a class="dropdown-item" id="user-name" href="#"
+                    >Eslam Tarek</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../../index.html">home</a>
+                </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="#">logout</a>
+                  <a class="dropdown-item" id="logout-btn" href="#">logout</a>
                 </li>
               </ul>
             </li>

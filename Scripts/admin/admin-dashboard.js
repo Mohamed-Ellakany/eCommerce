@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  function logout() {
+    localStorage.removeItem("shop_session");
+    window.location.href = "../../login.html";
+    console.log(this);
+  }
+
   const usersContainer = document.getElementById("users");
   const searchInput = document.querySelector("input[type='text']");
   const searchBtn = document.querySelector(".btn-outline-secondary");
@@ -128,6 +134,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   window.editUser = function (id) {
     window.location.href = `updateuser.html?id=${id}`;
   };
+  document.getElementById("logout-btn").addEventListener("click", logout);
 
   // Initial render
   updateStats(users);
