@@ -2,6 +2,15 @@
   "users": [
     {
       "id": "1741123456789",
+      "name": "Admin_name",
+      "email": "admin@shop.com",
+      "password": "Admin@1234",
+      "role": "admin",
+      "address": "admin Address",
+      "createdAt": "2026-03-04T18:25:00.025Z"
+    },
+    {
+      "id": "1741123456789",
       "name": "rawda2",
       "email": "rawda2@gmail.com",
       "password": "Rawda@1234",
@@ -26,6 +35,15 @@
       "role": "customer",
       "address": "Tanta Railway Station",
       "createdAt": "2026-03-04T18:34:03.327Z"
+    },
+    {
+      "id": "6f671065-c6a0-4281-8c02-567320848bde",
+      "name": "Esam",
+      "email": "esamm612@gmail.com",
+      "password": "Mohamed@123",
+      "role": "customer",
+      "address": "El gesh\nDesouk\nDesouk",
+      "createdAt": "2026-03-04T20:04:12.535Z"
     }
   ],
   "products": [

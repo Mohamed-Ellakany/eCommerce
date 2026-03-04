@@ -56,10 +56,10 @@ document.getElementById("regPassword").addEventListener("input", function () {
     isValidPass(v)
       ? clearError("passwordGroup")
       : setError(
-          "passwordGroup",
-          "passwordError",
-          "Min 8 chars, include a letter and a number.",
-        );
+        "passwordGroup",
+        "passwordError",
+        "Min 8 chars, include a letter and a number.",
+      );
   } else clearError("passwordGroup");
 
   const c = document.getElementById("regConfirm").value;
@@ -75,10 +75,10 @@ document.getElementById("regName").addEventListener("input", function () {
   isValidName(this.value)
     ? clearError("nameGroup")
     : setError(
-        "nameGroup",
-        "nameError",
-        "Full name must be at least 2 characters.",
-      );
+      "nameGroup",
+      "nameError",
+      "Full name must be at least 2 characters.",
+    );
 });
 
 document.getElementById("regEmail").addEventListener("input", function () {
@@ -86,10 +86,10 @@ document.getElementById("regEmail").addEventListener("input", function () {
   isValidEmail(this.value)
     ? clearError("emailGroup")
     : setError(
-        "emailGroup",
-        "emailError",
-        "Please enter a valid email address.",
-      );
+      "emailGroup",
+      "emailError",
+      "Please enter a valid email address.",
+    );
 });
 
 document.getElementById("regConfirm").addEventListener("input", function () {
@@ -105,10 +105,10 @@ document.getElementById("regAddress").addEventListener("input", function () {
   isValidAddr(this.value)
     ? clearError("addressGroup")
     : setError(
-        "addressGroup",
-        "addressError",
-        "Address must be at least 10 characters.",
-      );
+      "addressGroup",
+      "addressError",
+      "Address must be at least 10 characters.",
+    );
 });
 
 function makeToggle(btnId, inputId) {
@@ -260,18 +260,18 @@ document
       }
 
       // Create new user object
-     const newUser = {
-       id: crypto.randomUUID
-         ? crypto.randomUUID()
-         : "user_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
+      const newUser = {
+        id: crypto.randomUUID
+          ? crypto.randomUUID()
+          : "user_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
 
-       name: name.trim(),
-       email: email.toLowerCase(),
-       password: pass,
-       role: "customer",
-       address: addr.trim(),
-       createdAt: new Date().toISOString(),
-     };
+        name: name.trim(),
+        email: email.toLowerCase(),
+        password: pass,
+        role: "customer",
+        address: addr.trim(),
+        createdAt: new Date().toISOString(),
+      };
       const createdUser = await registerUser(newUser);
 
       const { password, ...safeUser } = createdUser;
