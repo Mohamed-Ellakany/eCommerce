@@ -1,7 +1,7 @@
-// If already logged in, redirect
+
 const session = DB.getSession();
 if (session) {
-    window.location.href = session.role === 'admin' ? '../pages/admin/admin-dashboard.html' : window.location.href = session.role === 'seller' ? 'seller_dashboard.html' : 'profile.html';
+    window.location.href = session.role === 'admin' ? '../pages/admin/admin-dashboard.html' : window.location.href = session.role === 'seller' ? '../seller_dashboard.html' : '../Profile.html';
 }
 
 const isValidEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -60,9 +60,14 @@ document.getElementById('loginBtn').addEventListener('click', function () {
     alertEl.textContent = `✓ Welcome back, ${user.name}! Redirecting…`;
     alertEl.classList.remove('d-none');
 
+
     setTimeout(() => {
-        window.location.href = session.role === 'admin' ? '../pages/admin/admin-dashboard.html' : window.location.href = session.role === 'seller' ? 'seller_dashboard.html' : 'profile.html';
-    }, 1200);
+        window.location.href = safeUser.role === 'admin'
+            ? '../pages/admin/admin-dashboard.html'
+            : safeUser.role === 'seller'
+                ? '../seller_dashboard.html'
+                : '../Profile.html';
+    }, 500);
 });
 
 document.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginBtn').click(); });
