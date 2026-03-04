@@ -2,31 +2,12 @@
   "users": [
     {
       "id": "1741123456789",
-      "name": "Admin_name",
-      "email": "admin@shop.com",
-      "password": "a!@aAhjkhjk45",
-      "role": "admin",
-      "address": "admin Address",
-      "createdAt": "2026-03-04T18:25:00.025Z",
-      "updatedAt": "2026-03-04T22:31:42.490Z"
-    },
-    {
-      "id": "1741123456789",
       "name": "rawda2",
       "email": "rawda2@gmail.com",
       "password": "Rawda@1234",
       "role": "customer",
       "address": "Tanta Railway Station",
       "createdAt": "2026-03-04T18:25:00.025Z"
-    },
-    {
-      "id": "1741123501295",
-      "name": "json",
-      "email": "json@gmail.com",
-      "password": "json@123",
-      "role": "customer",
-      "address": "Tanta Railway Station",
-      "createdAt": "2026-03-04T18:30:01.295Z"
     },
     {
       "id": "1bbd05ef-914f-4b3a-bdf1-bcd2990369e1",
@@ -54,24 +35,6 @@
       "role": "admin",
       "address": "adsfafs",
       "createdAt": "2026-03-04T21:48:06.617Z"
-    },
-    {
-      "id": "dc4bb070-33cb-47c3-afa1-9aa741564cd1",
-      "name": "fasdf",
-      "email": "asdfasfafa@aef",
-      "password": "adsfasdfaf231$Q@#ADFa65156a1fa1212",
-      "role": "admin",
-      "address": "dsbvdfsgadsg",
-      "createdAt": "2026-03-04T21:50:50.088Z"
-    },
-    {
-      "id": "c8f5030d-06fa-4798-9581-c495d5c6da35",
-      "name": "sdfas",
-      "email": "adfa@faf",
-      "password": "adsfafafadsf@asdfasddf!2A",
-      "role": "admin",
-      "address": "dsbvdfsgadsg",
-      "createdAt": "2026-03-04T21:57:22.469Z"
     },
     {
       "id": "92077be9-a122-49eb-998f-107899bd6363",

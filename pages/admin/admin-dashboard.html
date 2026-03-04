@@ -196,6 +196,54 @@
         </div>
       </div>
     </div>
+    <!-- ══════════ DELETE CONFIRMATION MODAL ══════════ -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header modal-header-danger">
+            <h5 class="modal-title" id="deleteModalLabel">🗑 Delete User</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body py-4 text-center">
+            <p class="mb-1 fs-5">Are you sure you want to delete</p>
+            <p class="fs-5 mb-3">
+              <span class="delete-user-name" id="deleteUserName">this user</span
+              >?
+            </p>
+            <p class="text-muted small mb-0">This action cannot be undone.</p>
+          </div>
+
+          <div class="modal-footer justify-content-center gap-2 border-0 pb-4">
+            <button
+              type="button"
+              class="btn btn-outline-secondary px-4"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger px-4"
+              id="confirmDeleteBtn"
+            >
+              Yes, Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- bootstrap -->
     <script src="../../Scripts/DB.js"></script>
     <script
