@@ -25,6 +25,9 @@ header nav p {
     font-family: var(--mainFont);
 }
 
+.navbar i{
+    cursor: pointer;
+}
 
 input::placeholder {
     font-size: 14px;
