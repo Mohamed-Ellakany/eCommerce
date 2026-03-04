@@ -17,9 +17,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   // ── Stats ────────────────────────────────────────────────────
   function updateStats(list) {
     document.getElementById("total-users").textContent = list.length;
-    document.getElementById("total-admins").textContent = list.filter(u => u.role === "admin").length;
-    document.getElementById("total-sellers").textContent = list.filter(u => u.role === "seller").length;
-    document.getElementById("total-customers").textContent = list.filter(u => u.role === "customer").length;
+    document.getElementById("total-admins").textContent = list.filter(
+      (u) => u.role === "admin",
+    ).length;
+    document.getElementById("total-sellers").textContent = list.filter(
+      (u) => u.role === "seller",
+    ).length;
+    document.getElementById("total-customers").textContent = list.filter(
+      (u) => u.role === "customer",
+    ).length;
   }
 
   // ── Render ───────────────────────────────────────────────────
@@ -57,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const filtered = users.filter(
       (user) =>
         user.name.toLowerCase().includes(query) ||
-        user.email.toLowerCase().includes(query)
+        user.email.toLowerCase().includes(query),
     );
     updateStats(filtered);
     renderUsers(filtered);
@@ -74,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!confirm("Are you sure you want to delete this user?")) return;
     try {
       await DB.deleteUser(id);
-      users = users.filter(u => u.id !== id);
+      users = users.filter((u) => u.id !== id);
       handleSearch();
     } catch (err) {
       console.error("Delete failed:", err);
@@ -82,12 +88,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   };
 
-  // ── Edit (placeholder — wire up to your modal) ───────────────
+  // ── Edit — redirect to updateuser.html with the user's id ────
   window.editUser = function (id) {
-    const user = users.find(u => u.id === id);
-    if (!user) return;
-    // TODO: open your edit modal and populate it with `user`
-    console.log("Edit user:", user);
+    window.location.href = `updateuser.html?id=${id}`;
   };
 
   // Initial render
