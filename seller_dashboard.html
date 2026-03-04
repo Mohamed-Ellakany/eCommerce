@@ -259,8 +259,8 @@
 <script>
 const session = DB.getSession();
 
-if (!session || session.role !== 'seller') {
-    window.location.href = 'login.html';
+if (!session || (session.role !== 'seller' && session.role !== 'admin')) {
+    window.location.href = 'index.html';
 }
 
 const SELLER_ID = session.id;
