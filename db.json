@@ -44,6 +44,42 @@
       "role": "customer",
       "address": "El gesh\nDesouk\nDesouk",
       "createdAt": "2026-03-04T20:04:12.535Z"
+    },
+    {
+      "id": "9d115a16-c3a7-4179-991d-228d8c60a2a5",
+      "name": "@dafa",
+      "email": "adsfas@af",
+      "password": "!@Aasdf65161",
+      "role": "admin",
+      "address": "adsfafs",
+      "createdAt": "2026-03-04T21:48:06.617Z"
+    },
+    {
+      "id": "dc4bb070-33cb-47c3-afa1-9aa741564cd1",
+      "name": "fasdf",
+      "email": "asdfasfafa@aef",
+      "password": "adsfasdfaf231$Q@#ADFa65156a1fa1212",
+      "role": "admin",
+      "address": "dsbvdfsgadsg",
+      "createdAt": "2026-03-04T21:50:50.088Z"
+    },
+    {
+      "id": "c8f5030d-06fa-4798-9581-c495d5c6da35",
+      "name": "sdfas",
+      "email": "adfa@faf",
+      "password": "adsfafafadsf@asdfasddf!2A",
+      "role": "admin",
+      "address": "dsbvdfsgadsg",
+      "createdAt": "2026-03-04T21:57:22.469Z"
+    },
+    {
+      "id": "92077be9-a122-49eb-998f-107899bd6363",
+      "name": "ESlam",
+      "email": "eslam20@yahoo.com",
+      "password": "EA!1jhasdbf",
+      "role": "seller",
+      "address": "HDSHAFD",
+      "createdAt": "2026-03-04T22:04:01.051Z"
     }
   ],
   "products": [
