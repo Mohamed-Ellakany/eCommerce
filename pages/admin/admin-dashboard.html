@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>admin dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../Styles/style.css" />
+    <style>
+      .admin-logo {
+        color: var(--mainColor) !important;
+      }
+      .mainwrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      @media (max-width: 991px) {
+        .mainwrapper {
+          flex-direction: column;
+        }
+      }
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+
+        flex: 1;
+      }
+      .content {
+        display: flex;
+        flex: 10;
+        padding: 20px;
+      }
+      .navbar {
+        border-bottom: none;
+      }
+      .sidebar .nav-item.active::after,
+      .sidebar .nav-item:has(.active)::after {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><span class="admin-logo">Admin </span>
+          Dashboard
+        </a>
+        <!-- this button for collapse nav bar if navbar-expand specified in the nav bar  -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- ms-auto for pushing elements to the right of navbar -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                my profile
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Eslam Tarek</a></li>
+                <li><a class="dropdown-item" href="#">settings</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainwrapper">
+      <div class="sidebar bg-dark text-light p-3">
+        <!-- nav pills for the button -->
+        <ul
+          class="nav flex-lg-column flex-row nav-pills justify-content-around justify-content-lg-start gap-3s"
+        >
+          <li class="nav-item">
+            <a class="nav-link text-light active" href="#">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Products</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content flex-column w-100">
+        <!-- Top Controls -->
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 w-100"
+        >
+          <!-- Search Bar -->
+          <div class="input-group w-100 w-md-50">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users..."
+            />
+            <button class="btn btn-outline-secondary" type="button">
+              Search
+            </button>
+          </div>
+
+          <!-- Add User Button -->
+          <button
+            class="btn btn-success"
+            onclick="window.location.href = 'createuser.html'"
+          >
+            &plus;
+          </button>
+        </div>
+        <!-- Stats Bar -->
+        <div class="row g-3 mb-4 w-100">
+          <!-- Total Users - Blue -->
+          <div class="col-6 col-md-3">
+            <div
+              class="rounded-3 px-3 py-3 d-flex align-items-center gap-2 text-white"
+              style="background-color: #2563eb"
+            >
+              <span style="font-size: 1.8rem">👥</span>
+              <div>
+                <div class="fw-bold fs-5" id="total-users">0</div>
+                <div class="small opacity-75">Total Users</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Admins - Purple -->
+          <div class="col-6 col-md-3">
+            <div
+              class="rounded-3 px-3 py-3 d-flex align-items-center gap-2 text-white"
+              style="background-color: #7c3aed"
+            >
+              <span style="font-size: 1.8rem">🔒</span>
+              <div>
+                <div class="fw-bold fs-5" id="total-admins">0</div>
+                <div class="small opacity-75">Admins</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sellers - Emerald Green -->
+          <div class="col-6 col-md-3">
+            <div
+              class="rounded-3 px-3 py-3 d-flex align-items-center gap-2 text-white"
+              style="background-color: #059669"
+            >
+              <span style="font-size: 1.8rem">🛒</span>
+              <div>
+                <div class="fw-bold fs-5" id="total-sellers">0</div>
+                <div class="small opacity-75">Sellers</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customers - Amber -->
+          <div class="col-6 col-md-3">
+            <div
+              class="rounded-3 px-3 py-3 d-flex align-items-center gap-2 text-white"
+              style="background-color: #d97706"
+            >
+              <span style="font-size: 1.8rem">🧑‍💼</span>
+              <div>
+                <div class="fw-bold fs-5" id="total-customers">0</div>
+                <div class="small opacity-75">Customers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Users Cards Container -->
+        <div class="container-fluid">
+          <div class="row g-4" id="users">
+            <!-- User Card -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- bootstrap -->
+    <script src="../../Scripts/DB.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../Scripts/admin/admin-dashboard.js"></script>
+  </body>
+</html>

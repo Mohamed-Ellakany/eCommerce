@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create User — Admin Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../../Styles/style.css" />
+    <style>
+      .admin-logo {
+        color: var(--mainColor) !important;
+      }
+
+      .mainwrapper {
+        display: flex;
+        min-height: 100vh;
+      }
+      @media (max-width: 991px) {
+        .mainwrapper {
+          flex-direction: column;
+        }
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .content {
+        display: flex;
+        flex: 10;
+        padding: 32px 24px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .navbar {
+        border-bottom: none;
+      }
+
+      .sidebar .nav-item.active::after,
+      .sidebar .nav-item:has(.active)::after {
+        display: none !important;
+      }
+
+      .form-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        padding: 36px 32px;
+        max-width: 680px;
+        width: 100%;
+      }
+
+      @media (max-width: 576px) {
+        .form-card {
+          padding: 24px 16px;
+          border-radius: 8px;
+        }
+      }
+
+      .form-card h4 {
+        font-family: var(--mainFont, "Franklin Gothic Medium", sans-serif);
+        color: #1a1a1a;
+        margin-bottom: 6px;
+      }
+
+      .form-card .subtitle {
+        color: #888;
+        font-size: 0.875rem;
+        margin-bottom: 28px;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--mainColor);
+        box-shadow: 0 0 0 0.2rem rgba(219, 68, 68, 0.18);
+      }
+
+      .form-label {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: #333;
+      }
+
+      .role-hint {
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 4px;
+      }
+
+      /* Password toggle */
+      .pw-wrapper {
+        position: relative;
+      }
+      .pw-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #aaa;
+        padding: 0;
+        line-height: 1;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+      }
+      .pw-toggle:hover {
+        color: var(--mainColor);
+      }
+      .pw-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+      .pw-wrapper input {
+        padding-right: 42px;
+      }
+
+      .btn-create {
+        background-color: var(--mainColor);
+        border-color: var(--mainColor);
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        padding: 10px 32px;
+        border-radius: 8px;
+        transition: filter 0.2s ease;
+        display: inline-block;
+      }
+      .btn-create:hover {
+        filter: brightness(0.88);
+        color: #fff;
+      }
+
+      @media (max-width: 576px) {
+        .btn-create,
+        .btn-cancel {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      .btn-cancel {
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-weight: 500;
+      }
+
+      /* Divider between sections */
+      .section-divider {
+        border: none;
+        border-top: 1px solid #f0f0f0;
+        margin: 24px 0;
+      }
+
+      /* Success toast */
+      .toast-container {
+        z-index: 9999;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="admin-dashboard.html">
+          <span class="admin-logo">Admin </span>Dashboard
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                my profile
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Eslam Tarek</a></li>
+                <li><a class="dropdown-item" href="#">settings</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ══════════ MAIN WRAPPER ══════════ -->
+    <div class="mainwrapper">
+      <!-- ── SIDEBAR ── -->
+      <div class="sidebar bg-dark text-light p-3">
+        <ul
+          class="nav flex-lg-column flex-row nav-pills justify-content-around justify-content-lg-start gap-3"
+        >
+          <li class="nav-item">
+            <a class="nav-link text-light active" href="admin-dashboard.html"
+              >Users</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Products</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ── CONTENT ── -->
+      <div class="content w-100 d-flex flex-column align-items-center">
+        <!-- Breadcrumb -->
+        <nav
+          aria-label="breadcrumb"
+          class="mb-3 w-100"
+          style="max-width: 680px"
+        >
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a
+                href="admin-dashboard.html"
+                style="color: var(--mainColor); text-decoration: none"
+                >Users</a
+              >
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Create User
+            </li>
+          </ol>
+        </nav>
+
+        <!-- Form Card -->
+        <div class="form-card">
+          <h4>Create New User</h4>
+          <p class="subtitle">
+            Fill in the details below. All fields are required.
+          </p>
+
+          <form id="createUserForm" novalidate>
+            <!-- ── Personal Info ── -->
+            <div class="row g-3">
+              <!-- Full Name -->
+              <div class="col-12">
+                <label for="userName" class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userName"
+                  placeholder="e.g. Layla Adel"
+                  required
+                  minlength="3"
+                />
+                <div class="invalid-feedback">
+                  Name must be at least 3 characters.
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="col-12">
+                <label for="userEmail" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="userEmail"
+                  placeholder="e.g. layla@customer.com"
+                  required
+                />
+                <div class="invalid-feedback" id="emailFeedback">
+                  Please enter a valid email address.
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="col-12">
+                <label for="userPassword" class="form-label">Password</label>
+                <div class="pw-wrapper">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="userPassword"
+                    placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="pw-toggle"
+                    id="togglePassword"
+                    title="Show/hide password"
+                  >
+                    <svg
+                      id="iconEye"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <svg
+                      id="iconEyeOff"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      style="display: none"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.97 9.97 0 012.563-4.024M6.53 6.53A9.97 9.97 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.965 9.965 0 01-4.077 5.198M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 3l18 18"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="invalid-feedback" id="passwordFeedback">
+                  Password must be at least 8 characters, include uppercase, a
+                  number, and a symbol (@#$!%).
+                </div>
+              </div>
+            </div>
+
+            <hr class="section-divider" />
+
+            <!-- ── Role & Address ── -->
+            <div class="row g-3">
+              <!-- Role -->
+              <div class="col-12 col-sm-6">
+                <label for="userRole" class="form-label">Role</label>
+                <select class="form-select" id="userRole" required>
+                  <option value="" disabled selected>Select a role…</option>
+                  <option value="admin">Admin</option>
+                  <option value="seller">Seller</option>
+                  <option value="customer">Customer</option>
+                </select>
+                <div class="invalid-feedback">Please select a role.</div>
+                <p class="role-hint" id="roleHint"></p>
+              </div>
+
+              <!-- Address -->
+              <div class="col-12 col-sm-6">
+                <label for="userAddress" class="form-label">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userAddress"
+                  placeholder="e.g. 9 Desert Lane, Aswan, Egypt"
+                  required
+                  minlength="5"
+                />
+                <div class="invalid-feedback">
+                  Please enter a valid address.
+                </div>
+              </div>
+            </div>
+
+            <hr class="section-divider" />
+
+            <!-- ── Actions ── -->
+            <div class="d-flex gap-3 flex-wrap">
+              <button type="submit" class="btn btn-primary btn-create">
+                Create User
+              </button>
+              <a
+                href="admin-dashboard.html"
+                class="btn btn-outline-secondary btn-cancel"
+              >
+                Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+        <!-- /form-card -->
+      </div>
+      <!-- /content -->
+    </div>
+    <!-- /mainwrapper -->
+
+    <!-- ── Success Toast ── -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div
+        id="successToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body fw-semibold">
+            ✅ User created successfully!
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../Scripts/DB.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../../Scripts/admin/createuser.js"></script>
+  </body>
+</html>
