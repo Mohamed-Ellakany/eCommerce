@@ -1,23 +1,28 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const users = JSON.parse(localStorage.getItem("shop_users")) || [];
+document.addEventListener("DOMContentLoaded", async function () {
   const usersContainer = document.getElementById("users");
   const searchInput = document.querySelector("input[type='text']");
   const searchBtn = document.querySelector(".btn-outline-secondary");
 
-  // ✅ Update Stats
-  function updateStats(list) {
-    document.getElementById("total-users").textContent = list.length;
-    document.getElementById("total-admins").textContent = list.filter(
-      (u) => u.role === "admin",
-    ).length;
-    document.getElementById("total-sellers").textContent = list.filter(
-      (u) => u.role === "seller",
-    ).length;
-    document.getElementById("total-customers").textContent = list.filter(
-      (u) => u.role === "customer",
-    ).length;
+  let users = [];
+
+  // ── Load users from API ──────────────────────────────────────
+  try {
+    users = await DB.getUsers();
+  } catch (err) {
+    console.error("Failed to load users:", err);
+    usersContainer.innerHTML = `<p class="text-danger">⚠ Could not load users. Make sure JSON Server is running.</p>`;
+    return;
   }
 
+  // ── Stats ────────────────────────────────────────────────────
+  function updateStats(list) {
+    document.getElementById("total-users").textContent = list.length;
+    document.getElementById("total-admins").textContent = list.filter(u => u.role === "admin").length;
+    document.getElementById("total-sellers").textContent = list.filter(u => u.role === "seller").length;
+    document.getElementById("total-customers").textContent = list.filter(u => u.role === "customer").length;
+  }
+
+  // ── Render ───────────────────────────────────────────────────
   function renderUsers(filteredUsers) {
     usersContainer.innerHTML = "";
 
@@ -36,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
               <p class="card-text mb-1"><strong>Role:</strong> ${user.role}</p>
               <p class="card-text"><strong>Address:</strong> ${user.address}</p>
               <div class="mt-auto d-flex justify-content-between">
-                <button class="btn btn-primary btn-sm">Edit</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                <button class="btn btn-primary btn-sm" onclick="editUser('${user.id}')">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
               </div>
             </div>
           </div>
@@ -46,14 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ── Search ───────────────────────────────────────────────────
   function handleSearch() {
     const query = searchInput.value.trim().toLowerCase();
     const filtered = users.filter(
       (user) =>
         user.name.toLowerCase().includes(query) ||
-        user.email.toLowerCase().includes(query),
+        user.email.toLowerCase().includes(query)
     );
-    // ✅ Update stats to reflect search results
     updateStats(filtered);
     renderUsers(filtered);
   }
@@ -63,6 +68,27 @@ document.addEventListener("DOMContentLoaded", function () {
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleSearch();
   });
+
+  // ── Delete ───────────────────────────────────────────────────
+  window.deleteUser = async function (id) {
+    if (!confirm("Are you sure you want to delete this user?")) return;
+    try {
+      await DB.deleteUser(id);
+      users = users.filter(u => u.id !== id);
+      handleSearch();
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("⚠ Could not delete user. Please try again.");
+    }
+  };
+
+  // ── Edit (placeholder — wire up to your modal) ───────────────
+  window.editUser = function (id) {
+    const user = users.find(u => u.id === id);
+    if (!user) return;
+    // TODO: open your edit modal and populate it with `user`
+    console.log("Edit user:", user);
+  };
 
   // Initial render
   updateStats(users);

@@ -8,83 +8,78 @@ document.getElementById("userRole").addEventListener("change", function () {
   document.getElementById("roleHint").textContent = roleHints[this.value] || "";
 });
 
-document
-  .getElementById("togglePassword")
-  .addEventListener("click", function () {
-    const pw = document.getElementById("userPassword");
-    const isHidden = pw.type === "password";
-    pw.type = isHidden ? "text" : "password";
-    document.getElementById("iconEye").style.display = isHidden
-      ? "none"
-      : "block";
-    document.getElementById("iconEyeOff").style.display = isHidden
-      ? "block"
-      : "none";
-  });
+document.getElementById("togglePassword").addEventListener("click", function () {
+  const pw = document.getElementById("userPassword");
+  const isHidden = pw.type === "password";
+  pw.type = isHidden ? "text" : "password";
+  document.getElementById("iconEye").style.display = isHidden ? "none" : "block";
+  document.getElementById("iconEyeOff").style.display = isHidden ? "block" : "none";
+});
 
 function isValidPassword(pw) {
   return /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*])[A-Za-z\d@#$!%^&*]{8,}$/.test(pw);
 }
 
-function isEmailTaken(email) {
-  const users = JSON.parse(localStorage.getItem("shop_users")) || [];
-  return users.some((u) => u.email.toLowerCase() === email.toLowerCase());
+async function isEmailTaken(email) {
+  const user = await DB.findByEmail(email);
+  return user !== null;
 }
 
-document
-  .getElementById("createUserForm")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
+document.getElementById("createUserForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const form = this;
-    const nameEl = document.getElementById("userName");
-    const emailEl = document.getElementById("userEmail");
-    const passEl = document.getElementById("userPassword");
-    const roleEl = document.getElementById("userRole");
-    const addrEl = document.getElementById("userAddress");
+  const form = this;
+  const nameEl  = document.getElementById("userName");
+  const emailEl = document.getElementById("userEmail");
+  const passEl  = document.getElementById("userPassword");
+  const roleEl  = document.getElementById("userRole");
+  const addrEl  = document.getElementById("userAddress");
+  const submitBtn = form.querySelector("[type='submit']");
 
-    let valid = true;
+  let valid = true;
 
-    emailEl.setCustomValidity("");
-    passEl.setCustomValidity("");
+  emailEl.setCustomValidity("");
+  passEl.setCustomValidity("");
 
-    // Email duplicate check
-    if (emailEl.value && isEmailTaken(emailEl.value)) {
-      emailEl.setCustomValidity("taken");
-      document.getElementById("emailFeedback").textContent =
-        "This email is already registered.";
-      valid = false;
-    } else {
-      document.getElementById("emailFeedback").textContent =
-        "Please enter a valid email address.";
-    }
+  // Email duplicate check
+  if (emailEl.value && await isEmailTaken(emailEl.value)) {
+    emailEl.setCustomValidity("taken");
+    document.getElementById("emailFeedback").textContent = "This email is already registered.";
+    valid = false;
+  } else {
+    document.getElementById("emailFeedback").textContent = "Please enter a valid email address.";
+  }
 
-    // Password strength check
-    if (passEl.value && !isValidPassword(passEl.value)) {
-      passEl.setCustomValidity("weak");
-      valid = false;
-    }
+  // Password strength check
+  if (passEl.value && !isValidPassword(passEl.value)) {
+    passEl.setCustomValidity("weak");
+    valid = false;
+  }
 
-    // Bootstrap's native validation
-    if (!form.checkValidity()) {
-      valid = false;
-    }
+  // Bootstrap's native validation
+  if (!form.checkValidity()) valid = false;
 
-    form.classList.add("was-validated");
+  form.classList.add("was-validated");
+  if (!valid) return;
 
-    if (!valid) return;
+  // Loading state
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating…';
 
-    const users = JSON.parse(localStorage.getItem("shop_users")) || [];
+  try {
     const newUser = {
-      id: Date.now(),
+      id: crypto.randomUUID
+        ? crypto.randomUUID()
+        : "user_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
       name: nameEl.value.trim(),
-      email: emailEl.value.trim(),
+      email: emailEl.value.trim().toLowerCase(),
       password: passEl.value,
       role: roleEl.value,
       address: addrEl.value.trim(),
+      createdAt: new Date().toISOString(),
     };
-    users.push(newUser);
-    localStorage.setItem("shop_users", JSON.stringify(users));
+
+    await DB.addUser(newUser);
 
     const toast = new bootstrap.Toast(document.getElementById("successToast"));
     toast.show();
@@ -92,4 +87,11 @@ document
     setTimeout(() => {
       window.location.href = "admin-dashboard.html";
     }, 1500);
-  });
+
+  } catch (err) {
+    console.error("Create user failed:", err);
+    alert("⚠ Could not create user. Make sure JSON Server is running.");
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "Create User";
+  }
+});
