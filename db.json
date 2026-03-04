@@ -29,21 +29,23 @@
     },
     {
       "id": "9d115a16-c3a7-4179-991d-228d8c60a2a5",
-      "name": "@dafa",
-      "email": "adsfas@af",
-      "password": "!@Aasdf65161",
-      "role": "admin",
-      "address": "adsfafs",
-      "createdAt": "2026-03-04T21:48:06.617Z"
+      "name": "deda",
+      "email": "adsfas@af.com",
+      "password": "adsf@$#@%@^DSF+626",
+      "role": "customer",
+      "address": "tanta",
+      "createdAt": "2026-03-04T21:48:06.617Z",
+      "updatedAt": "2026-03-04T22:42:33.690Z"
     },
     {
       "id": "92077be9-a122-49eb-998f-107899bd6363",
       "name": "ESlam",
       "email": "eslam20@yahoo.com",
       "password": "EA!1jhasdbf",
-      "role": "seller",
+      "role": "admin",
       "address": "HDSHAFD",
-      "createdAt": "2026-03-04T22:04:01.051Z"
+      "createdAt": "2026-03-04T22:04:01.051Z",
+      "updatedAt": "2026-03-04T22:42:58.194Z"
     }
   ],
   "products": [
