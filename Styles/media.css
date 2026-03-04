@@ -113,4 +113,23 @@
          .flash-title {
              font-size: 1.5rem;
          }
+                  .hero-section {
+                      min-height: auto;
+                      padding: 3rem 0 2rem;
+                      text-align: center;
+                  }
+        
+                  .countdown-wrapper {
+                      justify-content: center;
+                  }
+        
+                  .speaker-img {
+                      max-width: 320px !important;
+                      margin-top: 1.5rem;
+                  }
+        
+                  .speaker-glow {
+                      display: none;
+                  }
 }
+
