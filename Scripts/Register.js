@@ -1,4 +1,4 @@
-if (DB.getSession()) window.location.href = "profile.html";
+if (DB.getSession()) window.location.href = '../Profile.html';
 
 const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 const isValidName = (v) => v.trim().length >= 2;
