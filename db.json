@@ -10,6 +10,33 @@
       "createdAt": "2026-03-04T18:25:00.025Z"
     },
     {
+      "id": "1741123501295",
+      "name": "json",
+      "email": "json@gmail.com",
+      "password": "json@123",
+      "role": "customer",
+      "address": "Tanta Railway Station",
+      "createdAt": "2026-03-04T18:30:01.295Z"
+    },
+    {
+      "id": "2",
+      "name": "Ahmed Hassan",
+      "email": "ahmed@seller.com",
+      "password": "Seller@123",
+      "role": "seller",
+      "address": "Alexandria, Egypt",
+      "createdAt": "2026-03-04T18:25:00.025Z"
+    },
+    {
+      "id": "3",
+      "name": "Sara Mohamed",
+      "email": "sara@seller.com",
+      "password": "Seller@456",
+      "role": "seller",
+      "address": "Giza, Egypt",
+      "createdAt": "2026-03-04T18:25:00.025Z"
+    },
+    {
       "id": "1bbd05ef-914f-4b3a-bdf1-bcd2990369e1",
       "name": "rawda abdelhady",
       "email": "rawda@gmail.com",
@@ -164,6 +191,30 @@
       ],
       "price": 349.99,
       "sellerId": "2"
+    },
+    {
+      "id": "2d45",
+      "name": "alarm",
+      "category": "electronics",
+      "price": 50,
+      "stock": 1,
+      "details": [],
+      "images": [
+        "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
+      ],
+      "sellerId": "3"
+    },
+    {
+      "id": "74df",
+      "name": "alarm",
+      "category": "electronics",
+      "price": 50,
+      "stock": 1,
+      "details": [],
+      "images": [
+        "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
+      ],
+      "sellerId": "3"
     }
   ],
   "cart": [
