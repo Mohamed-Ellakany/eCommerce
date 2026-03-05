@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Create User — Admin Dashboard</title>
+    <title>Update User — Admin Dashboard</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -189,6 +189,13 @@
         color: #dc3545;
       }
 
+      /* Optional password hint */
+      .pw-optional-hint {
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 5px;
+      }
+
       /* ── Buttons ── */
       .btn-create {
         background-color: var(--mainColor);
@@ -304,18 +311,18 @@
               >
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Create User
+              Update User
             </li>
           </ol>
         </nav>
 
         <div class="form-card">
-          <h4>Create New User</h4>
+          <h4>Update User</h4>
           <p class="subtitle">
-            Fill in the details below. All fields are required.
+            Edit the details below. All fields except password are required.
           </p>
 
-          <form id="createUserForm" novalidate>
+          <form id="updateUserForm" novalidate>
             <div class="row g-3">
               <!-- Full Name -->
               <div class="col-12">
@@ -348,16 +355,16 @@
                 </div>
               </div>
 
-              <!-- Password -->
+              <!-- Password (optional on update) -->
               <div class="col-12">
                 <label for="userPassword" class="form-label">Password</label>
                 <div class="pw-wrapper">
+                  <!-- NOT required on update – leave blank to keep existing password -->
                   <input
                     type="password"
                     class="form-control"
                     id="userPassword"
-                    placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol"
-                    required
+                    placeholder="Leave blank to keep current password"
                   />
                   <button
                     type="button"
@@ -410,6 +417,10 @@
                     </svg>
                   </button>
                 </div>
+
+                <p class="pw-optional-hint">
+                  Leave blank to keep the current password.
+                </p>
 
                 <!-- Strength bar -->
                 <div class="pw-strength-bar" id="pwStrengthBar">
@@ -477,7 +488,7 @@
 
             <div class="d-flex gap-3 flex-wrap">
               <button type="submit" class="btn btn-primary btn-create">
-                Create User
+                Update User
               </button>
               <a
                 href="admin-dashboard.html"
@@ -501,7 +512,7 @@
       >
         <div class="d-flex">
           <div class="toast-body fw-semibold">
-            ✅ User created successfully!
+            ✅ User updated successfully!
           </div>
           <button
             type="button"
@@ -519,6 +530,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="../../Scripts/admin/createuser.js"></script>
+    <script src="../../Scripts/admin/updateuser.js"></script>
   </body>
 </html>

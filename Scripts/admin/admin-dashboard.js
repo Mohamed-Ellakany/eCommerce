@@ -1,7 +1,23 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  function logout() {
+    localStorage.removeItem("shop_session");
+    window.location.href = "../../login.html";
+    console.log(this);
+  }
+
   const usersContainer = document.getElementById("users");
   const searchInput = document.querySelector("input[type='text']");
   const searchBtn = document.querySelector(".btn-outline-secondary");
+
+  // ── Delete modal elements ─────────────────────────────────────
+  const deleteModal = new bootstrap.Modal(
+    document.getElementById("deleteModal"),
+  );
+  const deleteUserName = document.getElementById("deleteUserName");
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+  // Holds the id of the user currently pending deletion
+  let pendingDeleteId = null;
 
   let users = [];
 
@@ -17,9 +33,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   // ── Stats ────────────────────────────────────────────────────
   function updateStats(list) {
     document.getElementById("total-users").textContent = list.length;
-    document.getElementById("total-admins").textContent = list.filter(u => u.role === "admin").length;
-    document.getElementById("total-sellers").textContent = list.filter(u => u.role === "seller").length;
-    document.getElementById("total-customers").textContent = list.filter(u => u.role === "customer").length;
+    document.getElementById("total-admins").textContent = list.filter(
+      (u) => u.role === "admin",
+    ).length;
+    document.getElementById("total-sellers").textContent = list.filter(
+      (u) => u.role === "seller",
+    ).length;
+    document.getElementById("total-customers").textContent = list.filter(
+      (u) => u.role === "customer",
+    ).length;
   }
 
   // ── Render ───────────────────────────────────────────────────
@@ -42,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               <p class="card-text"><strong>Address:</strong> ${user.address}</p>
               <div class="mt-auto d-flex justify-content-between">
                 <button class="btn btn-primary btn-sm" onclick="editUser('${user.id}')">Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
+                <button class="btn btn-danger  btn-sm" onclick="deleteUser('${user.id}', '${user.name.replace(/'/g, "\\'")}')">Delete</button>
               </div>
             </div>
           </div>
@@ -57,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const filtered = users.filter(
       (user) =>
         user.name.toLowerCase().includes(query) ||
-        user.email.toLowerCase().includes(query)
+        user.email.toLowerCase().includes(query),
     );
     updateStats(filtered);
     renderUsers(filtered);
@@ -69,26 +91,50 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (e.key === "Enter") handleSearch();
   });
 
-  // ── Delete ───────────────────────────────────────────────────
-  window.deleteUser = async function (id) {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+  // ── Delete — open modal ──────────────────────────────────────
+  window.deleteUser = function (id, name) {
+    pendingDeleteId = id;
+    deleteUserName.textContent = name; // show the user's name in the modal body
+    deleteModal.show();
+  };
+
+  // ── Confirm delete button inside modal ───────────────────────
+  confirmDeleteBtn.addEventListener("click", async function () {
+    if (!pendingDeleteId) return;
+
+    // Loading state while the API request runs
+    confirmDeleteBtn.disabled = true;
+    confirmDeleteBtn.innerHTML =
+      '<span class="spinner-border spinner-border-sm me-2"></span>Deleting…';
+
     try {
-      await DB.deleteUser(id);
-      users = users.filter(u => u.id !== id);
-      handleSearch();
+      await DB.deleteUser(pendingDeleteId);
+      users = users.filter((u) => u.id !== pendingDeleteId);
+      handleSearch(); // re-render cards + stats
+      deleteModal.hide();
     } catch (err) {
       console.error("Delete failed:", err);
       alert("⚠ Could not delete user. Please try again.");
+    } finally {
+      // Always reset regardless of success / failure
+      confirmDeleteBtn.disabled = false;
+      confirmDeleteBtn.innerHTML = "Yes, Delete";
+      pendingDeleteId = null;
     }
-  };
+  });
 
-  // ── Edit (placeholder — wire up to your modal) ───────────────
+  // Also clear pendingDeleteId if modal is closed without confirming
+  document
+    .getElementById("deleteModal")
+    .addEventListener("hidden.bs.modal", () => {
+      pendingDeleteId = null;
+    });
+
+  // ── Edit ─────────────────────────────────────────────────────
   window.editUser = function (id) {
-    const user = users.find(u => u.id === id);
-    if (!user) return;
-    // TODO: open your edit modal and populate it with `user`
-    console.log("Edit user:", user);
+    window.location.href = `updateuser.html?id=${id}`;
   };
+  document.getElementById("logout-btn").addEventListener("click", logout);
 
   // Initial render
   updateStats(users);

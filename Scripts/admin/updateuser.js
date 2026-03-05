@@ -30,6 +30,7 @@ document
 
 /* ═══════════════════════════════════════════════════
    Password – live custom validation
+   (only active when the field has a value)
 ═══════════════════════════════════════════════════ */
 const PW_RULES = [
   { id: "rule-length", test: (v) => v.length >= 8 },
@@ -39,11 +40,11 @@ const PW_RULES = [
 ];
 
 const STRENGTH_CONFIG = [
-  { label: "", color: "" }, // 0 rules – nothing typed
-  { label: "Weak", color: "#dc3545" }, // 1 rule
-  { label: "Fair", color: "#fd7e14" }, // 2 rules
-  { label: "Good", color: "#ffc107" }, // 3 rules
-  { label: "Strong", color: "#198754" }, // 4 rules (all pass)
+  { label: "", color: "" },
+  { label: "Weak", color: "#dc3545" },
+  { label: "Fair", color: "#fd7e14" },
+  { label: "Good", color: "#ffc107" },
+  { label: "Strong", color: "#198754" },
 ];
 
 const pwInput = document.getElementById("userPassword");
@@ -51,73 +52,109 @@ const pwRulesList = document.getElementById("pwRules");
 const pwStrengthBar = document.getElementById("pwStrengthBar");
 const pwStrengthLbl = document.getElementById("pwStrengthLabel");
 
-/**
- * Evaluate each rule and return how many pass.
- * Also updates the DOM for every rule <li>.
- */
 function evaluatePasswordRules(value) {
   let passed = 0;
-
   PW_RULES.forEach(({ id, test }) => {
     const li = document.getElementById(id);
     const icon = li.querySelector(".ri");
     const ok = test(value);
-
     li.classList.toggle("pass", ok);
     li.classList.toggle("fail", !ok && value.length > 0);
     icon.textContent = ok ? "✓" : value.length > 0 ? "✗" : "○";
     if (ok) passed++;
   });
-
   return passed;
 }
 
-/** Update the 4-segment strength bar and label. */
 function updateStrengthBar(passed, hasValue) {
-  // Remove all strength classes
   pwStrengthBar.className = "pw-strength-bar";
-
   if (!hasValue) {
     pwStrengthLbl.textContent = "";
     pwStrengthLbl.style.color = "";
     return;
   }
-
   pwStrengthBar.classList.add("s" + passed);
   const cfg = STRENGTH_CONFIG[passed];
   pwStrengthLbl.textContent = cfg.label;
   pwStrengthLbl.style.color = cfg.color;
 }
 
-/* Show rules panel on focus, hide on blur (only if empty) */
 pwInput.addEventListener("focus", () => pwRulesList.classList.add("visible"));
 pwInput.addEventListener("blur", () => {
   if (!pwInput.value) pwRulesList.classList.remove("visible");
 });
 
-/* React to every keystroke */
 pwInput.addEventListener("input", function () {
   const val = this.value;
   const passed = evaluatePasswordRules(val);
   updateStrengthBar(passed, val.length > 0);
 
-  if (passed === PW_RULES.length) {
+  // Password is optional on update: only invalid if something was typed but rules fail
+  if (val.length === 0 || passed === PW_RULES.length) {
     this.setCustomValidity("");
   } else {
     this.setCustomValidity("weak");
   }
 
-  // If the field already had an error shown, update it live
   if (this.closest("form").classList.contains("was-validated")) {
-    this.classList.toggle("is-invalid", passed < PW_RULES.length);
-    this.classList.toggle("is-valid", passed === PW_RULES.length);
+    this.classList.toggle(
+      "is-invalid",
+      val.length > 0 && passed < PW_RULES.length,
+    );
+    this.classList.toggle(
+      "is-valid",
+      val.length === 0 || passed === PW_RULES.length,
+    );
   }
 });
 
 /* ═══════════════════════════════════════════════════
+   Pre-fill form from DB using ?id= URL param
+═══════════════════════════════════════════════════ */
+const params = new URLSearchParams(window.location.search);
+const userId = params.get("id");
+let origEmail = ""; // store original email to allow "no change" on email field
+
+async function prefillForm() {
+  if (!userId) {
+    alert("No user ID provided. Redirecting to dashboard.");
+    window.location.href = "admin-dashboard.html";
+    return;
+  }
+
+  try {
+    const user = await DB.findById(userId);
+    if (!user) {
+      alert("User not found. Redirecting to dashboard.");
+      window.location.href = "admin-dashboard.html";
+      return;
+    }
+
+    origEmail = user.email.toLowerCase();
+
+    document.getElementById("userName").value = user.name;
+    document.getElementById("userEmail").value = user.email;
+    document.getElementById("userAddress").value = user.address;
+
+    // Set role dropdown
+    const roleEl = document.getElementById("userRole");
+    roleEl.value = user.role;
+    document.getElementById("roleHint").textContent =
+      roleHints[user.role] || "";
+  } catch (err) {
+    console.error("Failed to load user:", err);
+    alert("⚠ Could not load user data. Make sure JSON Server is running.");
+  }
+}
+
+prefillForm();
+
+/* ═══════════════════════════════════════════════════
    Helpers
 ═══════════════════════════════════════════════════ */
-async function isEmailTaken(email) {
+async function isEmailTakenByOther(email) {
+  // Allow the user to keep their own email without a "taken" error
+  if (email.toLowerCase() === origEmail) return false;
   const user = await DB.findByEmail(email);
   return user !== null;
 }
@@ -126,7 +163,7 @@ async function isEmailTaken(email) {
    Form submit
 ═══════════════════════════════════════════════════ */
 document
-  .getElementById("createUserForm")
+  .getElementById("updateUserForm")
   .addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -140,10 +177,11 @@ document
 
     // Reset custom validity before re-checking
     emailEl.setCustomValidity("");
+    passEl.setCustomValidity("");
 
-    // Email duplicate check
+    // Email duplicate check (skip if unchanged)
     if (emailEl.value) {
-      const taken = await isEmailTaken(emailEl.value);
+      const taken = await isEmailTakenByOther(emailEl.value);
       if (taken) {
         emailEl.setCustomValidity("taken");
         document.getElementById("emailFeedback").textContent =
@@ -154,14 +192,18 @@ document
       }
     }
 
-    // Make sure password rules are freshly evaluated (handles the case where
-    // the user never typed in the field after page load)
-    const passed = evaluatePasswordRules(passEl.value);
-    updateStrengthBar(passed, passEl.value.length > 0);
-    pwRulesList.classList.add("visible"); // ensure rules are visible on error
-    passEl.setCustomValidity(passed === PW_RULES.length ? "" : "weak");
+    // Password: only validate if the field has a value (it's optional on update)
+    if (passEl.value.length > 0) {
+      const passed = evaluatePasswordRules(passEl.value);
+      updateStrengthBar(passed, true);
+      pwRulesList.classList.add("visible");
+      passEl.setCustomValidity(passed === PW_RULES.length ? "" : "weak");
+    } else {
+      // Empty = keep existing password → always valid
+      passEl.setCustomValidity("");
+    }
 
-    // Trigger Bootstrap's visual validation state
+    // Trigger Bootstrap visual validation state
     form.classList.add("was-validated");
 
     if (!form.checkValidity()) return;
@@ -169,25 +211,24 @@ document
     // ── All valid – submit ──
     submitBtn.disabled = true;
     submitBtn.innerHTML =
-      '<span class="spinner-border spinner-border-sm me-2"></span>Creating…';
+      '<span class="spinner-border spinner-border-sm me-2"></span>Updating…';
 
     try {
-      const newUser = {
-        id: crypto.randomUUID
-          ? crypto.randomUUID()
-          : "user_" +
-            Date.now() +
-            "_" +
-            Math.random().toString(36).substr(2, 9),
+      // Build the updated user object; keep old password if field is blank
+      const existingUser = await DB.findById(userId);
+
+      const updatedUser = {
+        ...existingUser, // preserve id, createdAt, etc.
         name: nameEl.value.trim(),
         email: emailEl.value.trim().toLowerCase(),
-        password: passEl.value,
+        password:
+          passEl.value.trim() !== "" ? passEl.value : existingUser.password, // keep old password if blank
         role: roleEl.value,
         address: addrEl.value.trim(),
-        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       };
 
-      await DB.addUser(newUser);
+      await DB.updateUser(userId, updatedUser);
 
       const toast = new bootstrap.Toast(
         document.getElementById("successToast"),
@@ -198,9 +239,9 @@ document
         window.location.href = "admin-dashboard.html";
       }, 1500);
     } catch (err) {
-      console.error("Create user failed:", err);
-      alert("⚠ Could not create user. Make sure JSON Server is running.");
+      console.error("Update user failed:", err);
+      alert("⚠ Could not update user. Make sure JSON Server is running.");
       submitBtn.disabled = false;
-      submitBtn.innerHTML = "Create User";
+      submitBtn.innerHTML = "Update User";
     }
   });
