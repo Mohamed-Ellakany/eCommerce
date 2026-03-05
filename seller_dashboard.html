@@ -15,9 +15,10 @@
 <link rel="stylesheet" href="Styles/style.css">
 <link rel="stylesheet" href="Styles/Home.css">
 <link rel="stylesheet" href="Styles/media.css">
+<!-- New seller dashboard CSS -->
+<link rel="stylesheet" href="Styles/seller-dashboard.css">
 
 <style>
-    
     img{
         border-radius: 4px;
     }
@@ -78,6 +79,7 @@
     </div>
 </div>
 
+<!-- Edit / Add Product Modal - CHANGED: file input to URL input -->
 <!-- Edit / Add Product Modal -->
 <div class="modal fade" id="editmodal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -92,6 +94,10 @@
                     <input type="text" class="form-control" id="product-name">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <input type="text" class="form-control" id="product-category" placeholder="e.g., Electronics, Clothing, Books">
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Price</label>
                     <input type="number" class="form-control" id="price">
                 </div>
@@ -100,12 +106,13 @@
                     <input type="number" class="form-control" id="stock">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Image</label>
-                    <input type="file" class="form-control" id="image" accept="image/*">
+                    <label class="form-label">Image URL</label>
+                    <input type="text" class="form-control" id="image-url" placeholder="https://example.com/image.jpg">
+                    <small class="text-muted">Enter direct link to image</small>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" id="description" rows="3"></textarea>
+                    <label class="form-label">Details (comma separated)</label>
+                    <textarea class="form-control" id="description" rows="3" placeholder="e.g., 4GB RAM, 128GB Storage, Blue color"></textarea>
                 </div>
                 <div id="form-error" class="alert alert-danger d-none"></div>
             </div>
@@ -249,162 +256,11 @@
         <div class="container">&copy; Copyright Rimel 2022. All right reserved</div>
     </div>
 </footer>
+
 <script src="Scripts/db.js"></script>
-<script src="Scripts/script.js"></script>
-<script src="Scripts/home.js"></script>
+<!-- <script src="Scripts/home.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-const session = DB.getSession();
-
-if (!session || (session.role !== 'seller' && session.role !== 'admin')) {
-    window.location.href = 'index.html';
-}
-
-const SELLER_ID = session.id;
-
-function getProducts()      { return JSON.parse(localStorage.getItem('products') || '[]'); }
-function saveProducts(arr)  { localStorage.setItem('products', JSON.stringify(arr)); }
-
-const productModal = new bootstrap.Modal(document.getElementById('productModal'));
-const editModal    = new bootstrap.Modal(document.getElementById('editmodal'));
-const deleteModal  = new bootstrap.Modal(document.getElementById('deleteModal'));
-
-let currentProductId = null;
-//render prods
-function renderProducts() {
-    const tbody    = document.getElementById('products-tbody');
-    const products = getProducts().filter(p => p.sellerId === SELLER_ID);
-
-    if (products.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="text-muted py-4">No products yet.</td></tr>`;
-        return;
-    }
-
-    tbody.innerHTML = products.map(p => `
-        <tr>
-            <td class="py-3">
-                <div class="product-img-wrap">
-                    <img src="${p.image}" class="product-card" data-id="${p.id}" alt="${p.name}" style="height:180px; object-fit:contain; cursor:pointer;">
-                </div>
-            </td>
-            <td class="align-middle">${p.name}</td>
-            <td class="align-middle">$${p.price}</td>
-            <td class="align-middle">${p.stock}</td>
-        </tr>
-    `).join('');
-
-    document.querySelectorAll('.product-card').forEach(function(img) {
-        img.addEventListener('click', function() {
-            currentProductId = parseInt(img.getAttribute('data-id'));
-            const product = getProducts().find(p => p.id === currentProductId);
-
-            document.getElementById('modal-product-name').textContent        = product.name;
-            document.getElementById('modal-product-price').textContent       = product.price;
-            document.getElementById('modal-product-stock').textContent       = product.stock;
-            document.getElementById('modal-product-description').textContent = product.Details;
-            document.getElementById('modal-product-img').src                 = product.image;
-
-            productModal.show();
-        });
-    });
-}
-
-// add item button function
-document.getElementById('btn-add-product').addEventListener('click', function() {
-    currentProductId = null;
-    document.getElementById('edit-modal-title').textContent = 'Add New Product';
-    document.getElementById('product-name').value = '';
-    document.getElementById('price').value        = '';
-    document.getElementById('stock').value        = '';
-    document.getElementById('description').value  = '';
-    document.getElementById('image').value        = '';
-    document.getElementById('form-error').classList.add('d-none');
-    editModal.show();
-});
-
-// edit button function
-document.getElementById('btn-edit').addEventListener('click', function() {
-    productModal.hide();
-    const product = getProducts().find(p => p.id === currentProductId);
-    if (!product) return;
-
-    document.getElementById('edit-modal-title').textContent = 'Edit Product';
-    document.getElementById('product-name').value = product.name;
-    document.getElementById('price').value        = product.price;
-    document.getElementById('stock').value        = product.stock;
-    document.getElementById('description').value  = product.Details;
-    document.getElementById('image').value        = '';
-    document.getElementById('form-error').classList.add('d-none');
-    editModal.show();
-});
-
-// save function
-document.getElementById('btn-save').addEventListener('click', function() {
-    const name        = document.getElementById('product-name').value.trim();
-    const price       = document.getElementById('price').value.trim();
-    const stock       = document.getElementById('stock').value.trim();
-    const description = document.getElementById('description').value.trim();
-    const imageInput  = document.getElementById('image');
-    const errorBox    = document.getElementById('form-error');
-
-    if (!name || !price || !stock) {
-        errorBox.textContent = 'Name, price and stock are required.';
-        errorBox.classList.remove('d-none');
-        return;
-    }
-    errorBox.classList.add('d-none');
-
-    function doSave(imageSrc) {
-        const products = getProducts();
-        if (currentProductId === null) {
-            products.push({
-                id: Date.now(), name, price: Number(price), stock: Number(stock),
-                Details: description, image: imageSrc || 'Imgs/prod1.png',
-                category: 'Electronics', sellerId: SELLER_ID
-            });
-        } else {
-            const i = products.findIndex(p => p.id === currentProductId);
-            if (i !== -1) {
-                products[i].name    = name;
-                products[i].price   = Number(price);
-                products[i].stock   = Number(stock);
-                products[i].Details = description;
-                if (imageSrc) products[i].image = imageSrc;
-            }
-        }
-        saveProducts(products);
-        editModal.hide();
-        renderProducts();
-    }
-
-    if (imageInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = function(e) { doSave(e.target.result); };
-        reader.readAsDataURL(imageInput.files[0]);
-    } else {
-        doSave(null);
-    }
-});
-
-// delete
-document.getElementById('btn-delete').addEventListener('click', function() {
-    productModal.hide();
-    const product = getProducts().find(p => p.id === currentProductId);
-    if (!product) return;
-    document.getElementById('delete-product-name').textContent = product.name;
-    deleteModal.show();
-});
-
-document.getElementById('btn-confirm-delete').addEventListener('click', function() {
-    saveProducts(getProducts().filter(p => p.id !== currentProductId));
-    deleteModal.hide();
-    renderProducts();
-});
-
-//start
-renderProducts();
-</script>
+<script src="Scripts/seller-dashboard.js"></script>
 
 </body>
 </html>
