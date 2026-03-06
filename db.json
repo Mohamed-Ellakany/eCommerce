@@ -5,9 +5,10 @@
       "name": "rawda2",
       "email": "rawda2@gmail.com",
       "password": "Rawda@1234",
-      "role": "customer",
+      "role": "seller",
       "address": "Tanta Railway Station",
-      "createdAt": "2026-03-04T18:25:00.025Z"
+      "createdAt": "2026-03-04T18:25:00.025Z",
+      "updatedAt": "2026-03-05T09:48:56.599Z"
     },
     {
       "id": "1bbd05ef-914f-4b3a-bdf1-bcd2990369e1",

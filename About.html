@@ -1,180 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!--BootStrap CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-<!-- Bootstrab Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
-    integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- Animation library CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!--BootStrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <!-- Bootstrab Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
+        integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Animation library CDN -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-<!-- Main Style Sheet CDN -->
-<link rel="stylesheet" href="Styles/style.css">
-<!-- Home Style -->
-<link rel="stylesheet" href="Styles/Home.css">
-<!-- Media Queries -->
-<link rel="stylesheet" href="Styles/media.css">
-
+    <!-- Main Style Sheet CDN -->
+    <link rel="stylesheet" href="Styles/style.css">
+    <!-- Home Style -->
+    <link rel="stylesheet" href="Styles/Home.css">
+    <!-- Media Queries -->
+    <link rel="stylesheet" href="Styles/media.css">
+    <!-- About Style -->
+    <link rel="stylesheet" href="Styles/About.css">
 </head>
 
 <body>
- <!-- Main navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
-            <div class="container-xl container-fluid d-flex align-items-center">
-                <!-- Brand -->
-                <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
+    <!-- Main navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
+        <div class="container-xl container-fluid d-flex align-items-center">
+            <!-- Brand -->
+            <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
 
 
 
 
-                <div class=" d-flex align-items-center gap-3 order-lg-3">
+            <div class=" d-flex align-items-center gap-3 order-lg-3">
 
-                    <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px;">
-                        <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
-                            placeholder="What are you looking for?" aria-label="Search" />
-                        <i
-                            class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
-                    </div>
-
-
-                    <i class="fa-solid fa-cart-shopping fa-xl  text-success-emphasis"></i>
-
-
-                    <i class="fa-solid fa-heart fa-xl  text-danger-emphasis"></i>
-                    <i class="fa-solid fa-arrow-right-from-bracket text-danger fa-xl  d-none" id="logout" ></i>
-
-                    <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px;">
+                    <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
+                        placeholder="What are you looking for?" aria-label="Search" />
+                    <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
                 </div>
 
-                <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./About.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="" id="profileLink"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./login.html" id="signUp">Sign Up</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-<!-- Footer -->
-<footer class="pt-3">
-    <div class="container">
-        <div class="row g-4">
 
-            <div class="col-12 col-sm-6 col-lg-3 ">
-                <h6 class="text-white fs-4 mb-3">Exclusive</h6>
-                <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
-                <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
-                <div class="subscribe-form d-flex border-1 border-secondary">
-                    <input type="email" placeholder="Enter your email" class="border-0 px-2 py-2" />
-                    <button type="button" aria-label="Submit" class=" px-2 py-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </div>
+                <i class="fa-solid fa-cart-shopping fa-xl  text-success-emphasis"></i>
+
+
+                <i class="fa-solid fa-heart fa-xl  text-danger-emphasis"></i>
+                <i class="fa-solid fa-arrow-right-from-bracket text-danger fa-xl  d-none" id="logout"></i>
+
+                <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
 
-            <div class="col-12 col-sm-6 col-lg-2">
-                <h6 class="text-white fs-4 mb-3">Support</h6>
-                <address>
-                    111 Bijoy sarani, Dhaka,<br />
-                    DH 1515, Bangladesh.<br />
-                    exclusive@gmail.com<br />
-                    +88015-88888-9999
-                </address>
+            <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./About.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="" id="profileLink"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./login.html" id="signUp">Sign Up</a>
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-12 col-sm-6 col-lg-2">
-                <h6 class="text-white fs-4 mb-3">Account</h6>
-                <a href="#">My Account</a>
-                <a href="#">Login / Register</a>
-                <a href="#">Cart</a>
-                <a href="#">Wishlist</a>
-                <a href="#">Shop</a>
-            </div>
-
-            <div class="col-12 col-sm-6 col-lg-2">
-                <h6 class="text-white fs-4 mb-3">Quick Link</h6>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms Of Use</a>
-                <a href="#">FAQ</a>
-                <a href="#">Contact</a>
-            </div>
-
-            <div class="col-12 col-sm-6 col-lg-3">
-                <h6 class="text-white fs-4 mb-3">Download App</h6>
-                <p class="save-text mb-1">Save $3 with App New User Only</p>
-
-                <div class="d-flex gap-3 align-items-start mb-3">
-                    <div class="app-badges d-flex gap-2 mt-1">
-                        <a href="#"
-                            class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
-                            <i class="fa-brands fa-google-play fs-4"></i>
-                            <div class="badge-text">
-                                <small class="d-block text-secondary mb-1">GET IT ON</small>
-                                <span class="text-white">Google Play</span>
-                            </div>
-                        </a>
-                        <a href="#"
-                            class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
-                            <i class="fa-brands fa-apple fs-4"></i>
-                            <div class="badge-text">
-                                <small class="d-block text-secondary mb-1">Download on the</small>
-                                <span class="text-white">App Store</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="social-icons d-flex gap-2 mt-2">
-                    <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
-                            class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
-                            class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
-
         </div>
-    </div>
+    </nav>
 
-    <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+
+<section class="main container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb" style="font-size:0.85rem;">
+            <li class="breadcrumb-item"><a href="./index.html" style="color:var(--mainColor);">Home</a></li>
+            <li class="breadcrumb-item active">About</li>
+        </ol>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="header container px-0">
+        <div class="row g-5 align-items-center justify-content-between">
+            <div class="col-12 col-lg-6">
+                <h1 class="display-5 fw-bold">Our Story</h1>
+                <p class="col-lg-10">Launced in 2015, Exclusive is South Asia's premier online shopping
+                    makterplace with an active presense in Bangladesh.
+                    Supported by wide range of tailored marketing, data and service solutions, Exclusive has 10,500
+                    sallers and 300 brands and serves 3 millioons customers across the region.</p>
+
+                <p class="col-lg-10">
+                    Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a
+                    diverse assotment in categories ranging from consumer.
+                </p>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <img src="Imgs/about.png" alt="About" class="img-fluid w-100">
+            </div>
+        </div>
+    </section>
+
+<div class="container my-5 ">
+    <section class="mb-5 numbers">
+        <div class="row g-3 d-flex justify-content-lg-around">
+            <div class="col-4 col-md-3">
+                <div class="card border text-center p-2  shadow-sm">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="icon d-flex align-items-center justify-content-center rounded-circle "
+                            style="width: 60px; height: 60px;">
+                            <i class="fas fa-store  fs-4"></i>
+                        </div>
+                    </div>
+                    <h3 class="fs-2 fw-bold mb-1">10.5k</h3>
+                    <p class="text-secondary small text-uppercase">Sellers active on site</p>
+                </div>
+            </div>
+            <div class="col-4 col-md-3">
+                
+                <div class="card border text-center p-2  shadow-sm">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="icon d-flex align-items-center justify-content-center rounded-circle "
+                            style="width: 60px; height: 60px;">
+                            <i class="fas fa-dollar-sign  fs-4"></i>
+                        </div>
+                    </div>
+                    <h3 class="fs-2 fw-bold mb-1">33k</h3>
+                    <p class=" small text-uppercase">Majority inactive users</p>
+                </div>
+            </div>
+            <div class="col-4 col-md-3">
+                <div class="card border text-center p-2 h-100 shadow-sm">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="icon d-flex align-items-center justify-content-center rounded-circle "
+                            style="width: 60px; height: 60px;">
+                            <i class="fas fa-shopping-bag  fs-4"></i>
+                        </div>
+                    </div>
+                    <h3 class="fs-2 fw-bold mb-1">45.5k</h3>
+                    <p class="text-secondary small text-uppercase">Customer active in our site</p>
+                </div>
+            </div>
+            <div class="col-4 col-md-3">
+                <div class="card border text-center p-2 h-100 shadow-sm">
+                    <div class="d-flex justify-content-center mb-3">
+                        <div class="icon d-flex align-items-center justify-content-center rounded-circle "
+                            style="width: 60px; height: 60px;">
+                            <i class="fa-solid fa-dollar  fs-4"></i>
+                        </div>
+                    </div>
+                    <h3 class="fs-2 fw-bold mb-1">25k</h3>
+                    <p class="text-secondary small text-uppercase">Anual gross sale our site</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5">
+        <div class="row g-4 team d-flex justify-content-evenly">
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow">
+                    <img src="Imgs/per (1).png"
+                        class="card-img-top" alt="Tom Cruise"
+                       >
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-bold mb-1">Tom Cruise</h5>
+                        <p class="text-secondary small mb-3">Founder &amp; Chairman</p>
+                        <div class="d-flex justify-content-start gap-3">
+                            <a href="#" class=""><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  border-0 shadow">
+                    <img src="Imgs/per (2).png"
+                        class="card-img-top" alt="Emma Watson"
+                       >
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-bold mb-1">Emma Watson</h5>
+                        <p class="text-secondary small mb-3">Managing Director</p>
+                        <div class="d-flex justify-content-start gap-3">
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  border-0 shadow">
+                    <img src="Imgs/per (3).png" class="card-img-top"
+                        alt="Will Smith"
+                       >
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-bold mb-1">Will Smith</h5>
+                        <p class="text-secondary small mb-3">Product Designer</p>
+                        <div class="d-flex justify-content-start gap-3">
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  border-0 shadow">
+                    <img src="Imgs/per (1).png" class="card-img-top" alt="Will Smith">
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-bold mb-1">Will Smith</h5>
+                        <p class="text-secondary small mb-3">Product Designer</p>
+                        <div class="d-flex justify-content-start gap-3">
+                            <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-dark"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2 mt-4">
+            <span class="bg-secondary rounded-circle" style="width: 10px; height: 10px;"></span>
+            <span class="bg-secondary rounded-circle" style="width: 10px; height: 10px;"></span>
+            <span class="bg-danger rounded-circle" style="width: 10px; height: 10px;"></span>
+            <span class="bg-secondary rounded-circle" style="width: 10px; height: 10px;"></span>
+            <span class="bg-secondary rounded-circle" style="width: 10px; height: 10px;"></span>
+        </div>
+    </section>
+</div>
+<!-- Services -->
+<section class="py-5 px-3 px-md-5">
+    <div class="row text-center g-4">
+
+        <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+            <div class="service-icon ">
+                <i class="fas fa-truck"></i>
+            </div>
+            <p class="service-title">FREE AND FAST DELIVERY</p>
+            <p class="service-desc">Free delivery for all orders over $140</p>
+        </div>
+
+        <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-between">
+            <div class="service-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <p class="service-title">24/7 CUSTOMER SERVICE</p>
+            <p class="service-desc">Friendly 24/7 customer support</p>
+        </div>
+
+        <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+            <div class="service-icon">
+                <i class="fa-solid fa-money-bill"></i>
+            </div>
+            <p class="service-title">MONEY BACK GUARANTEE</p>
+            <p class="service-desc">We return money within 30 days</p>
+        </div>
+
+    </div>
+</section>1
+
+
+</section>
+</section>
+    <!-- Footer -->
+    <footer class="pt-3">
         <div class="container">
-            &copy; Copyright Rimel 2022. All right reserved
-        </div>
-    </div>
-</footer>
-<!-- Main Script -->
-<script src="Scripts/script.js"></script>
+            <div class="row g-4">
 
-<!-- Bootstrap Script -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                <div class="col-12 col-sm-6 col-lg-3 ">
+                    <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form d-flex border-1 border-secondary">
+                        <input type="email" placeholder="Enter your email" class="border-0 px-2 py-2" />
+                        <button type="button" aria-label="Submit" class=" px-2 py-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Support</h6>
+                    <address>
+                        111 Bijoy sarani, Dhaka,<br />
+                        DH 1515, Bangladesh.<br />
+                        exclusive@gmail.com<br />
+                        +88015-88888-9999
+                    </address>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Account</h6>
+                    <a href="#">My Account</a>
+                    <a href="#">Login / Register</a>
+                    <a href="#">Cart</a>
+                    <a href="#">Wishlist</a>
+                    <a href="#">Shop</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms Of Use</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Download App</h6>
+                    <p class="save-text mb-1">Save $3 with App New User Only</p>
+
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">GET IT ON</small>
+                                    <span class="text-white">Google Play</span>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">Download on the</small>
+                                    <span class="text-white">App Store</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+            <div class="container">
+                &copy; Copyright Rimel 2022. All right reserved
+            </div>
+        </div>
+    </footer>
+    <!-- Main Script -->
+    <script src="Scripts/script.js"></script>
+
+    <!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
