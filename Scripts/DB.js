@@ -77,4 +77,8 @@ const DB = {
     if (!res.ok) throw new Error("Failed to delete user");
     return true;
   },
+  async getProducts() {
+    const res = await fetch(`${API_URL}/products`);
+    return res.json();
+  },
 };
