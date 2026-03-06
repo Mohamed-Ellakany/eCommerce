@@ -11,6 +11,33 @@
       "updatedAt": "2026-03-05T09:48:56.599Z"
     },
     {
+      "id": "1741123501295",
+      "name": "json",
+      "email": "json@gmail.com",
+      "password": "json@123",
+      "role": "customer",
+      "address": "Tanta Railway Station",
+      "createdAt": "2026-03-04T18:30:01.295Z"
+    },
+    {
+      "id": "2",
+      "name": "Ahmed Hassan",
+      "email": "ahmed@seller.com",
+      "password": "Seller@123",
+      "role": "seller",
+      "address": "Alexandria, Egypt",
+      "createdAt": "2026-03-04T18:25:00.025Z"
+    },
+    {
+      "id": "3",
+      "name": "Sara Mohamed",
+      "email": "sara@seller.com",
+      "password": "Seller@456",
+      "role": "seller",
+      "address": "Giza, Egypt",
+      "createdAt": "2026-03-04T18:25:00.025Z"
+    },
+    {
       "id": "1bbd05ef-914f-4b3a-bdf1-bcd2990369e1",
       "name": "rawda abdelhady",
       "email": "rawda@gmail.com",
@@ -56,7 +83,7 @@
       "category": "Electronics",
       "stock": 25,
       "images": [
-        "https://images.unsplash.com/photo-1695048133142-1a20484d2568?w=500",
+        "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=500",
         "https://images.unsplash.com/photo-1696426051666-1c1222203ef1?w=500",
         "https://images.unsplash.com/photo-1695048132926-9c4a5f99df21?w=500"
       ],
@@ -76,7 +103,7 @@
       "category": "Electronics",
       "stock": 30,
       "images": [
-        "https://images.unsplash.com/photo-1707583882921-5934d6b4f0f3?w=500",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500",
         "https://images.unsplash.com/photo-1707583883035-91428b9b0c0a?w=500"
       ],
       "details": [
@@ -165,6 +192,30 @@
       ],
       "price": 349.99,
       "sellerId": "2"
+    },
+    {
+      "id": "2d45",
+      "name": "alarm",
+      "category": "electronics",
+      "price": 50,
+      "stock": 1,
+      "details": [],
+      "images": [
+        "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
+      ],
+      "sellerId": "3"
+    },
+    {
+      "id": "74df",
+      "name": "alarm",
+      "category": "electronics",
+      "price": 50,
+      "stock": 1,
+      "details": [],
+      "images": [
+        "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
+      ],
+      "sellerId": "3"
     }
   ],
   "cart": [

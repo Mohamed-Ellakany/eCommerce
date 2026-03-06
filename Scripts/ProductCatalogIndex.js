@@ -1,26 +1,26 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const productsContainer = document.getElementById("ProductCatolog");
+document.addEventListener("DOMContentLoaded", async function () {
+  const productsContainer = document.getElementById("flashProductsTrack");
+
   console.log("Products container:", productsContainer);
   if (!productsContainer) return;
 
   let allProducts = [];
 
-  // =========================
-  // GET PRODUCTS FROM API
-  // =========================
+  // ===============================
+  // Fetch Products From JSON Server
+  // ===============================
 
   try {
-    const res = await fetch("http://localhost:3000/products");
-    allProducts = await res.json();
-
+    allProducts = await DB.getProducts();
     displayProducts(allProducts);
-  } catch (error) {
-    console.error("Error loading products:", error);
+    console.log("Products loaded from server:", allProducts);
+  } catch (err) {
+    console.error("Failed to load products", err);
   }
 
-  // =========================
-  // DISPLAY PRODUCTS
-  // =========================
+  // ===============================
+  // Display Products
+  // ===============================
 
   function displayProducts(products) {
     productsContainer.innerHTML = "";
@@ -33,24 +33,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     products.forEach((product) => {
       productsContainer.innerHTML += `
       
-      <div 
-  class="flash-product-card"
-  data-product-id="${product.id}"
-  data-stock="${product.stock}"
-  data-category="${product.category}"
-  data-seller-id="${product.sellerId}"
->
+      <div class="flash-product-card">
 
           <div class="product-img-wrap position-relative">
-
+              
               <span class="discount-badge">-30%</span>
 
-              <img 
-                src="${product.images[0]}" 
-                alt="${product.name}" 
-                class="w-100"
-                onerror="this.src='Imgs/prod1.png'"
-              >
+              <img src="${product.images[0]}" 
+                   alt="${product.name}" 
+                   class="w-100">
 
               <div class="product-actions position-absolute d-flex flex-column gap-2">
 
@@ -77,10 +68,8 @@ document.addEventListener("DOMContentLoaded", async () => {
               <p class="product-name mb-1">${product.name}</p>
 
               <div class="d-flex gap-2 align-items-center mb-1">
-
                   <span class="price-new">$${product.price}</span>
-                  <span class="price-old">$${(product.price + 100).toFixed(2)}</span>
-
+                  <span class="price-old">$${product.price + 40}</span>
               </div>
 
               <div class="d-flex align-items-center gap-1">
@@ -93,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                       <i class="fas fa-star-half-alt"></i>
                   </div>
 
-                  <span class="review-count">(${product.stock})</span>
+                  <span class="review-count">(75)</span>
 
               </div>
 
@@ -105,11 +94,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // =========================
-  // SEARCH
-  // =========================
+  // ===============================
+  // Search Products
+  // ===============================
 
   const searchInput = document.querySelector("input[type='search']");
+
   if (searchInput) {
     searchInput.addEventListener("keyup", function () {
       const value = this.value.toLowerCase();
@@ -121,4 +111,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       displayProducts(filtered);
     });
   }
+
+  // ===============================
+  // Add To Cart
+  // ===============================
+
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("add-to-cart-btn")) {
+      const productId = e.target.dataset.id;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const product = allProducts.find((p) => p.id == productId);
+
+      if (!product) return;
+
+      const exists = cart.find((item) => item.id == product.id);
+
+      if (exists) {
+        exists.qty += 1;
+      } else {
+        cart.push({
+          ...product,
+          qty: 1,
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      alert("Product added to cart");
+    }
+  });
 });
