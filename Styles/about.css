@@ -1,0 +1,73 @@
+.row .right img{
+    width: 500px;
+    height:500px;
+}
+.team .col-md-3 .card{
+    height: 400px !important;
+}
+
+
+ .card-img-top {
+     height: 220px;
+     object-fit: contain;
+ }
+
+
+ .stat-card-active .text-body-secondary,
+ .stat-card-active .text-secondary {
+     color: rgba(255, 255, 255, 0.85) !important;
+ }
+
+ .stat-card-active .border-dark {
+     border-color: white !important;
+ }
+ 
+ .numbers .card{
+   transition: all 0.3s;
+ }
+ .numbers .icon{
+    color: #fff;
+
+    background-color: #000;
+    border: 8px solid #ccc !important; 
+ }
+  .numbers .card:hover{
+    background-color: #dc3545 !important;
+        border-color: #dc3545 !important;
+        color: white !important;
+
+  }
+ .numbers .card:hover .icon{
+    color: #000;
+    background-color: #fff;
+    border: 8px solid #dfa4a4 !important; 
+ }
+ .numbers .card:hover p{
+    color: #fff !important;
+ }
+  .team .card {
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.2s;
+  }
+
+  .team .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+      border-color: #dc3545 !important;
+  }
+
+  .team .card:hover .social-icon {
+      color: #dc3545 !important;
+  }
+
+  .team .card-img-top {
+      transition: transform 0.3s ease;
+  }
+
+  .team .card:hover .card-img-top {
+      transform: scale(1.02);
+  }
+
+  .team .card-img-top {
+      height: 240px;
+      object-fit: contain;
+  }
