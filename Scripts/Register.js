@@ -5,7 +5,7 @@ const isValidName = (v) => v.trim().length >= 2;
 const isValidPass = (v) => v.length >= 8 && /[a-zA-Z]/.test(v) && /\d/.test(v);
 const isValidAddr = (v) => v.trim().length >= 10;
 
-const API_URL = "http://localhost:3000";
+
 
 function setError(gId, eId, msg) {
   const g = document.getElementById(gId);

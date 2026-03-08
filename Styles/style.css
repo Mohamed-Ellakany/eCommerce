@@ -28,7 +28,27 @@ header nav p {
 .navbar i{
     cursor: pointer;
 }
+ .cart-nav-wrapper {
+     position: relative;
+     cursor: pointer;
+ }
 
+ .cart-badge {
+     position: absolute;
+     top: -8px;
+     right: -8px;
+     background: #db4444;
+     color: #fff;
+     font-size: 10px;
+     font-weight: 700;
+     width: 18px;
+     height: 18px;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     line-height: 1;
+ }
 input::placeholder {
     font-size: 14px;
 }
