@@ -1,0 +1,260 @@
+
+
+/* Contact Section Layout */
+.contact-wrapper {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Info Cards */
+.contact-info-card {
+    height: 100%;
+    padding: 2rem 1.5rem;
+    background: #fff;
+    border-right: 1px solid var(--border-light);
+    transition: var(--transition);
+}
+
+.contact-info-card:hover {
+    box-shadow: 0 10px 30px rgba(219, 68, 68, 0.1);
+}
+
+.info-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: rgba(219, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.info-icon-wrapper i {
+    font-size: 1.5rem;
+    color: var(--mainColor);
+}
+
+.info-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 0.75rem;
+}
+
+.info-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.info-phone,
+.info-email {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.info-phone:hover,
+.info-email:hover {
+    color: var(--mainColor);
+}
+
+/* Form Section */
+.contact-form-section {
+    padding: 2.5rem;
+    background: #fff;
+}
+
+/* Form Inputs */
+.form-control-custom {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1.5px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background: #fff;
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--mainColor);
+    box-shadow: 0 0 0 4px rgba(219, 68, 68, 0.1);
+}
+
+.form-control-custom::placeholder {
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+textarea.form-control-custom {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit Button */
+.btn-submit {
+    background: var(--mainColor);
+    color: white;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(219, 68, 68, 0.3);
+}
+
+.btn-submit:hover {
+    background: var(--main-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(219, 68, 68, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Required field indicator */
+.required-field::after {
+    content: '*';
+    color: var(--mainColor);
+    margin-left: 4px;
+    font-weight: 600;
+}
+
+/* Divider for mobile */
+.contact-divider {
+    display: none;
+}
+
+/* Success/Error message styling */
+.contact-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    display: none;
+}
+
+.contact-message.success {
+    background: rgba(25, 135, 84, 0.1);
+    color: #198754;
+    border: 1px solid rgba(25, 135, 84, 0.2);
+    display: block;
+}
+
+.contact-message.error {
+    background: rgba(219, 68, 68, 0.1);
+    color: var(--mainColor);
+    border: 1px solid rgba(219, 68, 68, 0.2);
+    display: block;
+}
+
+@media (max-width: 991.98px) {
+    .contact-info-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        padding: 1.5rem;
+    }
+
+    .contact-divider {
+        display: block;
+        width: 50px;
+        height: 3px;
+        background: var(--mainColor);
+        margin: 2rem auto;
+    }
+
+    .contact-form-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .contact-wrapper {
+        border-radius: 12px;
+    }
+
+    .info-icon-wrapper {
+        width: 45px;
+        height: 45px;
+    }
+
+    .info-icon-wrapper i {
+        font-size: 1.25rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .contact-info-card {
+        padding: 1.25rem;
+    }
+
+    .contact-form-section {
+        padding: 1.25rem;
+    }
+
+    .form-control-custom {
+        padding: 0.8rem 1rem;
+    }
+}
+
+/* Animation for form focus */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(219, 68, 68, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(219, 68, 68, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(219, 68, 68, 0);
+    }
+}
+
+.form-control-custom:focus {
+    animation: pulse 1s ease-out;
+}
+
+/* Loading state for submit button */
+.btn-submit.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.btn-submit.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
