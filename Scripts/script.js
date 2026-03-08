@@ -1,9 +1,16 @@
 function logout() {
   localStorage.removeItem("shop_session");
   window.location.href = "../login.html";
-  console.log(this);
 }
 
+function updateNavBadge() {
+  const count = Cart.totalQty();
+  const badge = document.getElementById("navCartCount");
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? "flex" : "none";
+  }
+}
 
 
 window.onload=function () {

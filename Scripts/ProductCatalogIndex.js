@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
   const productsContainer = document.getElementById("flashProductsTrack");
 
-  console.log("Products container:", productsContainer);
   if (!productsContainer) return;
 
   let allProducts = [];
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     allProducts = await DB.getProducts();
     displayProducts(allProducts);
-    console.log("Products loaded from server:", allProducts);
   } catch (err) {
     console.error("Failed to load products", err);
   }
@@ -139,7 +137,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       localStorage.setItem("cart", JSON.stringify(cart));
 
-      alert("Product added to cart");
     }
   });
 });

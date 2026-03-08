@@ -10,10 +10,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // =========================
 
   try {
-    const res = await fetch("http://localhost:3000/products");
+    const res = await fetch("https://e-commerce-server-xi.vercel.app/products");
     allProducts = await res.json();
 
     displayProducts(allProducts);
+    console.log("All Products ra",allProducts)
   } catch (error) {
     console.error("Error loading products:", error);
   }
