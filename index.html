@@ -37,46 +37,41 @@
         <nav
             class="w-100 bg-black text-light overflow-hidden d-flex justify-content-center align-items-center flex-wrap py-2">
             <p class="my-auto text-center px-3 mb-0">Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-                <button class="bg-transparent text-light border-0 text-decoration-underline">Shop Now</button>
+                <button class="bg-transparent text-light  text-decoration-underline">Shop Now</button>
             </p>
         </nav>
 
         <!-- Main navbar -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
             <div class="container-xl container-fluid d-flex align-items-center">
-                <!-- Brand -->
                 <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
-
-
-
-
-                <div class=" d-flex align-items-center gap-3 order-lg-3">
-
-                    <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px;">
+        
+                <div class="d-flex align-items-center gap-3 order-lg-3">
+                    <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
                         <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
                             placeholder="What are you looking for?" aria-label="Search" />
-                        <i
-                            class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+                        <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
                     </div>
-
-
-                    <i class="fa-solid fa-cart-shopping fa-xl  text-success-emphasis"></i>
-
-
-                    <i class="fa-solid fa-heart fa-xl  text-danger-emphasis"></i>
-                    <i class="fa-solid fa-arrow-right-from-bracket text-danger fa-xl  d-none" id="logout" ></i>
-
-                    <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        
+                    <!-- Cart icon with badge -->
+                    <div class="cart-nav-wrapper" onclick="location.href = 'cart.html'">
+                        <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
+                        <span class="cart-badge" id="navCartCount">0</span>
+                    </div>
+        
+                    <i class="fa-solid fa-heart fa-xl text-danger-emphasis"></i>
+                    <i class="fa-solid fa-arrow-right-from-bracket text-danger fa-xl d-none" id="logout"></i>
+        
+                    <button class="navbar-toggler  p-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-
+        
                 <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-link" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./Contact.html">Contact</a>
@@ -117,13 +112,13 @@
 
 
             <ul class=" list-unstyled p-0 m-0 d-flex flex-xl-column w-100 gap-3">
-                <li class="d-flex justify-content-between align-items-center active">Woman's Fashion</li>
-                <li class="d-flex justify-content-between align-items-center ">Man's Fashion</li>
-                <li class="d-flex justify-content-between align-items-center ">Home &amp; Lifestyle</li>
-                <li class="d-flex justify-content-between align-items-center ">Sports &amp; Outdoor</li>
-                <li class="d-flex justify-content-between align-items-center ">Baby's &amp; Toys</li>
-                <li class="d-flex justify-content-between align-items-center ">Groceries &amp; Pets</li>
-                <li class="d-flex justify-content-between align-items-center ">Health &amp; Beauty</li>
+                <li class="d-flex justify-content-between align-items-center active"><a href="ProductCatalog.html" class="text-decoration-none">Woman's Fashion</a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Man's Fashion    </a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Home & Lifestyle </a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Sports & Outdoor </a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Baby's & Toys </a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Groceries & Pets </a></li>
+                <li class="d-flex justify-content-between align-items-center "><a href="ProductCatalog.html" class="text-decoration-none">Health & Beauty </a></li>
             </ul>
         </aside>
         <!-- CAROUSEL WRAPPER -->
@@ -143,25 +138,31 @@
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative overflow-hidden w-100 active">
                         <img src="Imgs/img1 (1).jpg" class="w-100 h-100 object-fit-cover d-block" alt="Sale Banner 1">
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block" >
+                            <a  class=" text-decoration-none text-light" href="./ProductCatalog.html">
                             <h2>Attractive Sales</h2>
                             <p>Up to 10% off Voucher</p>
+                            </a>
                         </div>
                     </div>
 
                     <div class="carousel-item position-relative overflow-hidden w-100">
                         <img src="Imgs/img1 (2).jpg" class="w-100 h-100 object-fit-cover d-block" alt="Sale Banner 2">
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block" >
+                            <a  class=" text-decoration-none text-light" href="./ProductCatalog.html">
                             <h2>Attractive Sales</h2>
                             <p>Up to 10% off Voucher</p>
+                            </a>
                         </div>
                     </div>
 
                     <div class="carousel-item position-relative overflow-hidden w-100">
                         <img src="Imgs/img1 (4).jpg" class="w-100 h-100 object-fit-cover d-block" alt="Sale Banner 3">
-                        <div class="carousel-caption d-none d-md-block">
+                        <div class="carousel-caption d-none d-md-block" >
+                            <a  class=" text-decoration-none text-light" href="./ProductCatalog.html">
                             <h2>Attractive Sales</h2>
                             <p>Up to 10% off Voucher</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -240,9 +241,9 @@
                         <span class="discount-badge">-40%</span>
                         <img src="Imgs/prod1.png" alt="HAVIT HV-G92 Gamepad" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -270,9 +271,9 @@
                         <span class="discount-badge">-35%</span>
                         <img src="Imgs/prod4.png" alt="AK-900 Wired Keyboard" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -299,9 +300,9 @@
                         <span class="discount-badge">-30%</span>
                         <img src="Imgs/prod3.png" alt="IPS LCD Gaming Monitor" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -328,9 +329,9 @@
                         <span class="discount-badge">-25%</span>
                         <img src="Imgs/prod2.png" alt="S-Series Comfort Chair" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -357,9 +358,9 @@
                         <span class="discount-badge">-30%</span>
                         <img src="Imgs/prod3.png" alt="IPS LCD Gaming Monitor" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -385,9 +386,9 @@
                         <span class="discount-badge">-35%</span>
                         <img src="Imgs/prod4.png" alt="AK-900 Wired Keyboard" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -413,7 +414,7 @@
 
         <!-- View All Button -->
         <div class="text-center mt-5">
-            <a href="#" class="btn view-all-btn px-5 py-2">View All Products</a>
+            <a href="ProductCatalog.html" class="btn view-all-btn px-5 py-2">View All Products</a>
         </div>
 
         <hr class="mt-5">
@@ -434,11 +435,11 @@
             <h2 class="flash-title fw-bold mt-3">Browse By Category</h2>
             <!-- Nav Arrows -->
             <div class="d-flex gap-2 ms-auto">
-                <button class="flash-nav-btn d-flex justify-content-center align-items-center border-0 " id="flash-prev"
+                <button class="flash-nav-btn border-0 d-flex justify-content-center align-items-center  " id="flash-prev"
                     aria-label="Previous">
                     <i class="fas fa-arrow-left"></i>
                 </button>
-                <button class="flash-nav-btn d-flex justify-content-center align-items-center border-0 " id="flash-next"
+                <button class="flash-nav-btn border-0 d-flex justify-content-center align-items-center  " id="flash-next"
                     aria-label="Next">
                     <i class="fas fa-arrow-right"></i>
                 </button>
@@ -451,45 +452,57 @@
             <div class="flash-products d-flex gap-3" id="flashProductsTrack">
 
                 <!-- Category 1 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-phone "></i>
+                     <i class="bi bi-phone "></i> 
                     <p>Phones</p>
-                </div>
+                    
+                </div></a>
 
                 <!-- Category 2 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-laptop "></i>
+                     <i class="bi bi-laptop "></i> 
                     <p>Computers</p>
-                </div>
+                    
+                </div></a>
 
                 <!-- Category 3 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-smartwatch "></i>
+                     <i class="bi bi-smartwatch "></i> 
                     <p>Smart Watches</p>
-                </div>
+                    
+                </div></a>
 
                 <!-- Category 4 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-camera "></i>
+                     <i class="bi bi-camera "></i> 
                     <p>Cameras</p>
-                </div>
+                    
+                </div></a>
 
                 <!-- Category 5 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-headphones "></i>
+                     <i class="bi bi-headphones "></i> 
                     <p>headphones</p>
-                </div>
+                    
+                </div></a>
                 <!-- Category 6 -->
-                <div
+                 <a  class=" text-decoration-none categText" href="ProductCatalog.html">
+                <div 
                     class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
-                    <i class="bi bi-controller "></i>
+                     <i class="bi bi-controller "></i> 
                     <p>Gaming</p>
-                </div>
+                    
+                </div></a>
             </div>
 
         </div>
@@ -522,9 +535,9 @@
                         <div class="product-img-wrap position-relative">
                             <img src="Imgs/fav (1).png" alt="HAVIT HV-G92 Gamepad" class="w-100">
                             <div class="product-actions position-absolute d-flex flex-column gap-2">
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
@@ -552,9 +565,9 @@
                         <div class="product-img-wrap position-relative">
                             <img src="Imgs/fav (2).png" alt="AK-900 Wired Keyboard" class="w-100">
                             <div class="product-actions position-absolute d-flex flex-column gap-2">
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
@@ -582,9 +595,9 @@
                         <div class="product-img-wrap position-relative">
                             <img src="Imgs/fav (3).png" alt="IPS LCD Gaming Monitor" class="w-100">
                             <div class="product-actions position-absolute d-flex flex-column gap-2">
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
@@ -612,9 +625,9 @@
                         <div class="product-img-wrap position-relative">
                             <img src="Imgs/fav (4).png" alt="S-Series Comfort Chair" class="w-100">
                             <div class="product-actions position-absolute d-flex flex-column gap-2">
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                                <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                                <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                     aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                             </div>
                         </div>
@@ -678,8 +691,8 @@
                         </div>
                     </div>
 
-                    <a href="#"
-                        class="btn-buy btn btn-success fw-bold text-uppercase text-decoration-none px-4 py-2 rounded-1 border-0">Buy
+                    <a href="ProductCatalog.html"
+                        class="btn-buy btn btn-success fw-bold text-uppercase text-decoration-none px-4 py-2 rounded-1 ">Buy
                         Now!</a>
                 </div>
 
@@ -720,9 +733,9 @@
                         <span class="discount-badge">-40%</span>
                         <img src="Imgs/prod1.png" alt="HAVIT HV-G92 Gamepad" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -749,9 +762,9 @@
                         <span class="discount-badge">-35%</span>
                         <img src="Imgs/prod4.png" alt="AK-900 Wired Keyboard" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -778,9 +791,9 @@
                         <span class="discount-badge">-30%</span>
                         <img src="Imgs/prod3.png" alt="IPS LCD Gaming Monitor" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -807,9 +820,9 @@
                         <span class="discount-badge">-25%</span>
                         <img src="Imgs/prod2.png" alt="S-Series Comfort Chair" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -836,9 +849,9 @@
                         <span class="discount-badge">-30%</span>
                         <img src="Imgs/prod3.png" alt="IPS LCD Gaming Monitor" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -865,9 +878,9 @@
                         <span class="discount-badge">-35%</span>
                         <img src="Imgs/prod4.png" alt="AK-900 Wired Keyboard" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -894,9 +907,9 @@
                         <span class="discount-badge">-30%</span>
                         <img src="Imgs/prod3.png" alt="IPS LCD Gaming Monitor" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -923,9 +936,9 @@
                         <span class="discount-badge">-25%</span>
                         <img src="Imgs/prod2.png" alt="S-Series Comfort Chair" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn d-flex justify-content-center align-items-center border-0"
+                            <button class="action-btn border-none d-flex justify-content-center align-items-center "
                                 aria-label="Quick view"><i class="fa-regular fa-eye"></i></button>
                         </div>
                         <button class="add-to-cart-btn w-100">Add To Cart</button>
@@ -951,7 +964,7 @@
 
         <!-- View All Button -->
         <div class="text-center mt-5">
-            <a href="#" class="btn view-all-btn px-5 py-2">View All Products</a>
+            <a href="ProductCatalog.html" class="btn view-all-btn px-5 py-2">View All Products</a>
         </div>
 
         <hr class="mt-5">
@@ -998,7 +1011,7 @@
                     <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
                     <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
                     <div class="subscribe-form d-flex border-1 border-secondary">
-                        <input type="email" placeholder="Enter your email" class="border-0 px-2 py-2" />
+                        <input type="email" placeholder="Enter your email" class=" px-2 py-2" />
                         <button type="button" aria-label="Submit" class=" px-2 py-2">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -1081,8 +1094,14 @@
 
     <!-- Main Script -->
     <script src="Scripts/script.js"></script>
+    <script src="Scripts/DB.js"></script>
+
+    <!-- Jquery Slider -->
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
     <!-- Home Script -->
     <script src="Scripts/home.js"></script>
+    <script src="Scripts/cart.js"></script>
+    <script src="Scripts/ProductCatalogIndex.js"></script>
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 

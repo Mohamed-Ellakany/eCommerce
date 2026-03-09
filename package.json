@@ -2,8 +2,5 @@
   "name": "eCommerce",
   "lockfileVersion": 3,
   "requires": true,
-  "packages": {},
-  "scripts": {
-    "server": "npx json-server --watch db.json --port 3000"
-  }
+  "packages": {}
 }

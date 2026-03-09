@@ -229,6 +229,20 @@
         "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
       ],
       "sellerId": "9d115a16-c3a7-4179-991d-228d8c60a2a5"
+    },
+    {
+      "id": "b23f",
+      "name": "digital alarm",
+      "category": "electronics",
+      "price": 30,
+      "stock": 5,
+      "details": [
+        "digital alarm with red lights"
+      ],
+      "images": [
+        "https://i.ebayimg.com/images/g/iPUAAOSwUPdnHKT1/s-l1200.jpg"
+      ],
+      "sellerId": "9d115a16-c3a7-4179-991d-228d8c60a2a5"
     }
   ],
   "cart": [

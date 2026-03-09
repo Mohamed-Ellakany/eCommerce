@@ -17,12 +17,15 @@ aside ul li {
     cursor: pointer;
     font-size: 1.1rem;
     font-family: var(--mainFont);
-    color: #333;
+    
     padding: 0.65rem 0.75rem;
     margin: .3rem 0;
     border-radius: 8px;
     transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
     letter-spacing: 0.01em;
+}
+aside ul li a{
+    color: #333 !important;
 }
 
 aside ul li::after {
@@ -34,9 +37,13 @@ aside ul li::after {
 }
 
 aside ul li:hover {
-    color: var(--mainColor);
+    color: var(--mainColor) !important;
     background-color: rgba(219, 68, 68, 0.06);
     transform: translateX(3px);
+}
+aside ul li:hover a{
+    color: var(--mainColor) !important;
+
 }
 
 aside ul li:hover::after {
@@ -239,6 +246,7 @@ aside ul li.active {
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     transition: background 0.2s, color 0.2s;
+    border:none !important;
 }
 
 .action-btn:hover {
@@ -310,12 +318,16 @@ aside ul li.active {
     border-radius: 10px;
     border: 1px solid #d3cece !important;
 }
+.categText
+{
+    color:#000;
+}
 
 .categ i {
     font-size: 3rem;
 }
 
-.categ:hover {
+.categ:hover,.categ:hover a{
     background-color: #DB4444 !important;
     border: 1px solid #DB4444 !important;
     color: #fff !important;
