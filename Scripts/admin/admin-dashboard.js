@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", async function () {
+
+  const session = DB.getSession();
+  if (!session || (session.role !== "admin")) {
+    window.location.href = "../../index.html";
+  }
+  
   function logout() {
     localStorage.removeItem("shop_session");
     window.location.href = "../../login.html";

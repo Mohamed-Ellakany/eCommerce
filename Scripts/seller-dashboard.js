@@ -3,7 +3,7 @@ const BASE_URL = "https://e-commerce-server-xi.vercel.app";
 // ── AUTH CHECK ─────────────────────────────────────────────────
 const session = DB.getSession();
 if (!session || (session.role !== "seller" && session.role !== "admin")) {
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 }
 const SELLER_ID = session.id;
 
