@@ -151,6 +151,64 @@ async function confirmDelete(productId) {
     console.error("Error loading product for delete:", error);
     alert("Error loading product details");
   }
+  document.getElementById("product-count").textContent = products.length;
+}
+
+function renderFilteredProducts(products) {
+  const tbody = document.getElementById("products-tbody");
+
+  if (products.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No products found.</td></tr>`;
+    document.getElementById("product-count").textContent = 0;
+    return;
+  }
+
+  tbody.innerHTML = products
+    .map(
+      (p) => `
+        <tr>
+            <td class="py-3">
+                <div class="product-img-wrap">
+                    <img src="${p.images && p.images[0] ? p.images[0] : "Imgs/prod1.png"}"
+                         class="product-card"
+                         data-id="${p.id}"
+                         alt="${p.name}"
+                         style="height:180px; object-fit:contain; cursor:pointer;">
+                </div>
+            </td>
+            <td class="align-middle">${p.name}</td>
+            <td class="align-middle">$${p.price}</td>
+            <td class="align-middle">${p.stock}</td>
+        </tr>
+    `,
+    )
+    .join("");
+
+  document.getElementById("product-count").textContent = products.length;
+
+  document.querySelectorAll(".product-card").forEach((img) => {
+    img.addEventListener("click", async function () {
+      currentProductId = img.getAttribute("data-id");
+      const res = await fetch(`${BASE_URL}/products/${currentProductId}`);
+      const product = await res.json();
+
+      document.getElementById("modal-product-name").textContent = product.name;
+      document.getElementById("modal-product-price").textContent =
+        product.price;
+      document.getElementById("modal-product-stock").textContent =
+        product.stock;
+      document.getElementById("modal-product-description").textContent =
+        Array.isArray(product.details)
+          ? product.details.join(", ")
+          : product.details || "";
+      document.getElementById("modal-product-img").src =
+        product.images && product.images[0]
+          ? product.images[0]
+          : "Imgs/prod1.png";
+
+      productModal.show();
+    });
+  });
 }
 
 // ── DOM READY ──────────────────────────────────────────────────
@@ -362,3 +420,36 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial render
   renderProducts();
 });
+// SEARCH
+document
+  .getElementById("btn-search")
+  .addEventListener("click", async function () {
+    const query = document
+      .getElementById("search-input")
+      .value.trim()
+      .toLowerCase();
+    const res = await fetch(`${BASE_URL}/products`);
+    const allProducts = await res.json();
+    const filtered = allProducts.filter(
+      (p) => p.sellerId === SELLER_ID && p.name.toLowerCase().includes(query),
+    );
+    renderFilteredProducts(filtered);
+  });
+
+// Also search on Enter key
+document.getElementById("search-input").addEventListener("keyup", function (e) {
+  if (e.key === "Enter") {
+    document.getElementById("btn-search").click();
+  }
+});
+
+// Clear search when input is empty
+document
+  .getElementById("search-input")
+  .addEventListener("input", async function () {
+    if (this.value.trim() === "") {
+      renderProducts();
+    }
+  });
+
+renderProducts();
