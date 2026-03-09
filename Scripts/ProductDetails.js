@@ -65,3 +65,41 @@ minus.addEventListener("click", () => {
     number.textContent = count;
   }
 });
+
+let wishList=document.getElementById("wishList");
+wishList.addEventListener("click",()=>{
+wishList.classList.toggle("btn-danger");
+});
+
+const swiper = new Swiper(".relatedSwiper", {
+
+  slidesPerView: 4,
+  slidesPerGroup: 1,
+  spaceBetween: 25,
+
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+
+  breakpoints: {
+
+    0:{
+      slidesPerView:1
+    },
+
+    576:{
+      slidesPerView:2
+    },
+
+    768:{
+      slidesPerView:3
+    },
+
+    992:{
+      slidesPerView:4
+    }
+
+  }
+
+});
