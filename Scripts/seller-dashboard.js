@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = "https://e-commerce-server-xi.vercel.app";
 
 // ── AUTH CHECK ─────────────────────────────────────────────────
 const session = DB.getSession();
