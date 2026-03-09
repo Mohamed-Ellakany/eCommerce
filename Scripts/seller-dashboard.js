@@ -164,6 +164,35 @@ function renderFilteredProducts(products) {
   }
 }
 
+
+// ── NAVBAR ─────────────────────────────────────────────────────
+
+// Set user name from session
+const userNameEl = document.getElementById('user-name');
+if (userNameEl) {
+    userNameEl.textContent = session.name;
+    userNameEl.href = 'Profile.html'; // replace with profile page path when ready
+}
+
+// Home button
+const homeBtn = document.getElementById('home-btn');
+if (homeBtn) {
+    homeBtn.addEventListener('click', function() {
+        window.location.href = '../index.html';
+    });
+}
+
+// Logout
+const logoutBtn = document.getElementById('logout-btn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        DB.clearSession();
+        window.location.href = '../index.html';
+    });
+}
+
+
 // ── VIEW PRODUCT ───────────────────────────────────────────────
 async function viewProduct(productId) {
   try {
