@@ -161,7 +161,7 @@
 let allProducts=[];
 async function getProducts(){
 
-    let response = await fetch("http://localhost:3000/products");
+    let response = await fetch("https://e-commerce-server-xi.vercel.app/products");
 
     let data = await response.json();
 
