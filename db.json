@@ -59,10 +59,10 @@
       "name": "deda",
       "email": "adsfas@af.com",
       "password": "adsf@$#@%@^DSF+626",
-      "role": "customer",
+      "role": "seller",
       "address": "tanta",
       "createdAt": "2026-03-04T21:48:06.617Z",
-      "updatedAt": "2026-03-04T22:42:33.690Z"
+      "updatedAt": "2026-03-08T00:45:31.415Z"
     },
     {
       "id": "92077be9-a122-49eb-998f-107899bd6363",
@@ -215,6 +215,20 @@
         "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
       ],
       "sellerId": "3"
+    },
+    {
+      "id": "faf4",
+      "name": "alarm",
+      "category": "electronics",
+      "price": 50,
+      "stock": 1,
+      "details": [
+        "test 1"
+      ],
+      "images": [
+        "https://www.kff.org/wp-content/uploads/sites/2/2013/04/alarm-2-300.jpg"
+      ],
+      "sellerId": "9d115a16-c3a7-4179-991d-228d8c60a2a5"
     }
   ],
   "cart": [

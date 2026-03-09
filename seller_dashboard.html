@@ -53,6 +53,8 @@
 
 <body>
 
+    
+
 <!-- View Product Modal -->
 <div class="modal fade" id="productModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -147,44 +149,39 @@
     </div>
 </div>
 
-<!-- Top bar -->
-<nav class="w-100 bg-black text-light overflow-hidden d-flex justify-content-center align-items-center flex-wrap py-2">
-    <p class="my-auto text-center px-3 mb-0">Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-        <button class="bg-transparent text-light border-0 text-decoration-underline">Shop Now</button>
-    </p>
+
+
+<!-- Navbar -->
+<nav class="navbar px-4 py-3" style="background-color: #1a1a1a;">
+    <a class="btn btn-outline-light btn-sm" href="index.html">
+        <i ></i> Home
+    </a>
+    <span class="text-white fw-semibold text-center ms-3">Seller dashboard</span>
+    <span class="text-white fw-semibold text-center ms-3"> </span>
 </nav>
 
-<!-- Main navbar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
-    <div class="container-xl container-fluid d-flex align-items-center">
-        <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
-        <div class="d-flex align-items-center gap-3 order-lg-3">
-            <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px;">
-                <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search" placeholder="What are you looking for?" />
-                <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+<!-- Controls Row -->
+<div class="container-fluid px-4 py-3 border-bottom">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+
+        <!-- Left: product count card -->
+        <div class="card text-bg-primary mb-0" style="min-width:160px;">
+            <div class="card-body py-2 px-3">
+                <h4 class="mb-0 small text-center">Total Products</h4>
+                <h5 class="mb-0 fw-bold text-center" id="product-count">0</h5>
             </div>
-            <i class="fa-regular fa-heart fa-lg"></i>
-            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+        </div>
+
+        <!-- Middle: search -->
+        <div class="d-flex gap-2 flex-grow-1">
+            <input type="search" class="form-control" id="search-input" placeholder="Search your products...">
+            <button class="btn btn-outline-secondary" id="btn-search">
+                <i class="fas fa-search"></i> Search
             </button>
         </div>
-        <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#">Seller Dashboard</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<!-- Mobile Search -->
-<div class="d-lg-none d-md-none p-3 bg-light border-top">
-    <div class="position-relative w-100">
-        <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search" placeholder="What are you looking for?" />
-        <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+        
+
     </div>
 </div>
 
