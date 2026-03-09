@@ -8,7 +8,7 @@ Welcome to the **E-Commerce Platform Frontend** repository! This project is a fe
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 This project was built without any backend framework. The application purely utilizes:
 - **HTML5**: Semantic and accessible markup.
 - **CSS3**: Custom styling alongside comprehensive layouts.
@@ -19,7 +19,7 @@ This project was built without any backend framework. The application purely uti
 
 ---
 
-## ✨ Core Features
+## Core Features
 1. **User Authentication**: Secure Login and Registration system supporting different roles (`admin`, `seller`, `customer`).
 2. **Home Page**: Dynamic landing page showcasing featured products, categories, and promotions.
 3. **Product Catalog**: A comprehensive catalog to browse all available products.
@@ -32,7 +32,7 @@ This project was built without any backend framework. The application purely uti
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```text
 📦 eCommerce
  ┣ 📂 Imgs             # Static image assets used throughout the platform
@@ -66,7 +66,7 @@ This project was built without any backend framework. The application purely uti
 
 ---
 
-## 🗄️ Database Structure (`db.json`)
+## Database Structure (`db.json`)
 The application relies on mocked JSON data acting as a database. Below are the key endpoints and data schemas:
 
 ### 1. **Users (`/users`)**
@@ -138,7 +138,7 @@ Keeps track of customer purchases and total financial overviews.
 
 ---
 
-## 💻 Getting Started
+## Getting Started
 To run this project locally, simply clone the repository and open `index.html` in your favorite browser. No complex local server configuration or build tool is strictly required since it is a static frontend. 
 
 1. **Clone the repo:**
@@ -154,7 +154,3 @@ To run this project locally, simply clone the repository and open `index.html` i
 
 > **Note:** Make sure you have an active internet connection so the frontend can properly fetch data from the mocked Vercel backend.
 
----
-
-## 🤝 Contributing
-Contributions are always welcome. While the structure is vanilla, ensure any changes to `CSS` or `JS` files remain neatly categorized in their respective directories (`Styles/` and `Scripts/`). Ensure responsiveness is preserved across all viewport sizes using Bootstrap and custom media queries.
