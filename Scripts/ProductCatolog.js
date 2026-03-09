@@ -1,153 +1,183 @@
-let products=[
-    {
-    id:0,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    },
-     {
-    id:1,
-    name:"AK-900 Wired Keyboard",
-    price:190,
-    image:"Imgs/prod4.png",
-    category:"Electronics",
-    stock:8,
-    Details:"High performance AK-900 Wired Keyboard",
-    sellerId:1
-    },
-     {
-    id:2,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod3.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance IPS LCD Gaming Monitor",
-    sellerId:1
-    },
-     {
-    id:3,
-    name:"S-Series Comfort Chair",
-    price:400,
-    image:"Imgs/prod2.png",
-    category:"Electronics",
-    stock:3,
-    Details:"High performance S-Series Comfort Chair",
-    sellerId:1
-    },
-     {
-    id:4,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    },
-     {
-    id:5,
-    name:"IPS LCD Gaming Monitor",
-    price:160,
-    image:"Imgs/prod3.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance IPS LCD Gaming Monitor",
-    sellerId:1
-    },
-     {
-    id:6,
-    name:"HAK-900 Wired Keyboard",
-    price:160,
-    image:"Imgs/prod4.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance AK-900 Wired Keyboard",
-    sellerId:1
-    }, 
-    {
-    id:7,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }, {
-    id:8,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
-    , {
-    id:9,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
-    , {
-    id:10,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
-    , {
-    id:11,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
-    , {
-    id:12,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
-    , {
-    id:13,
-    name:"HAVIT HV-G92 Gamepad",
-    price:160,
-    image:"Imgs/prod1.png",
-    category:"Electronics",
-    stock:10,
-    Details:"High performance HAVIT HV-G92 Gamepad",
-    sellerId:1
-    }
+// this was the old static code when i stored product in an Array in local storage
 
 
 
-];
+// let products=[
+//     {
+//     id:0,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     },
+//      {
+//     id:1,
+//     name:"AK-900 Wired Keyboard",
+//     price:190,
+//     image:"Imgs/prod4.png",
+//     category:"Electronics",
+//     stock:8,
+//     Details:"High performance AK-900 Wired Keyboard",
+//     sellerId:1
+//     },
+//      {
+//     id:2,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod3.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance IPS LCD Gaming Monitor",
+//     sellerId:1
+//     },
+//      {
+//     id:3,
+//     name:"S-Series Comfort Chair",
+//     price:400,
+//     image:"Imgs/prod2.png",
+//     category:"Electronics",
+//     stock:3,
+//     Details:"High performance S-Series Comfort Chair",
+//     sellerId:1
+//     },
+//      {
+//     id:4,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     },
+//      {
+//     id:5,
+//     name:"IPS LCD Gaming Monitor",
+//     price:160,
+//     image:"Imgs/prod3.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance IPS LCD Gaming Monitor",
+//     sellerId:1
+//     },
+//      {
+//     id:6,
+//     name:"HAK-900 Wired Keyboard",
+//     price:160,
+//     image:"Imgs/prod4.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance AK-900 Wired Keyboard",
+//     sellerId:1
+//     }, 
+//     {
+//     id:7,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }, {
+//     id:8,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
+//     , {
+//     id:9,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
+//     , {
+//     id:10,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
+//     , {
+//     id:11,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
+//     , {
+//     id:12,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
+//     , {
+//     id:13,
+//     name:"HAVIT HV-G92 Gamepad",
+//     price:160,
+//     image:"Imgs/prod1.png",
+//     category:"Electronics",
+//     stock:10,
+//     Details:"High performance HAVIT HV-G92 Gamepad",
+//     sellerId:1
+//     }
 
-if(!localStorage.getItem("products")){
-    localStorage.setItem("products",JSON.stringify(products));
+
+
+// ];
+
+
+
+
+// if(!localStorage.getItem("products")){
+//     localStorage.setItem("products",JSON.stringify(products));
+// }
+// let allProducts=JSON.parse(localStorage.getItem("products"));
+
+
+
+//the new code to make products generic from external api
+let allProducts=[];
+async function getProducts(){
+
+    let response = await fetch("http://localhost:3000/products");
+
+    let data = await response.json();
+
+    allProducts = data;
+    
+
+    displayProducts(allProducts);
 }
 
-let allProducts=JSON.parse(localStorage.getItem("products"));
+getProducts();
+
+for (let i = 0; i < allProducts.length; i++) {
+    console.log(allProducts[i].images);
+    
+}
+
 var ProductCatologDiv=document.getElementById("ProductCatolog");
 
 
@@ -158,7 +188,7 @@ if(productList.length>0){
         ProductCatologDiv.innerHTML+=`  <div class="flash-product-card flex-shrink-0 pb-4 d-flex  flex-wrap  col-sm-6 col-md-4 col-lg-3">
                     <div class="product-img-wrap position-relative ">
                         <span class="discount-badge">-35%</span>
-                        <img src="${productList[i].image}" alt="${productList[i].name}" class="w-100">
+                        <img src="${productList[i].images[0]}" alt="${productList[i].name}" class="w-100">
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
                             <button class="action-btn" aria-label="Wishlist"><i
                                     class="fa-regular fa-heart"></i></button>
