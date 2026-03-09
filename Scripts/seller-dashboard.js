@@ -104,21 +104,21 @@ async function renderProducts() {
         await confirmDelete(currentProductId);
       });
     });
-    const countEl = document.getElementById('product-count');
-    if (countEl) countEl.textContent = products.length;
-  } catch (error) {
+document.getElementById('product-count').textContent = products.length;
+}catch (error) {
     console.error("Error loading products:", error);
     tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger py-4">Error loading products. Please try again.</td></tr>`;
   }
 }
 
+
 function renderFilteredProducts(products) {
+  try{
     const tbody = document.getElementById('products-tbody');
 
     if (products.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-4">No products found.</td></tr>`;
-        const countEl = document.getElementById('product-count');
-        if (countEl) countEl.textContent = 0;
+        tbody.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No products found.</td></tr>`;
+        document.getElementById('product-count').textContent = 0;
         return;
     }
 
@@ -130,43 +130,38 @@ function renderFilteredProducts(products) {
                          class="product-card"
                          data-id="${p.id}"
                          alt="${p.name}"
-                         style="height:80px; width:80px; object-fit:cover; cursor:pointer;">
+                         style="height:180px; object-fit:contain; cursor:pointer;">
                 </div>
             </td>
             <td class="align-middle">${p.name}</td>
             <td class="align-middle">$${p.price}</td>
             <td class="align-middle">${p.stock}</td>
-            <td class="align-middle">
-                <button class="btn btn-sm btn-outline-primary me-2 view-product" data-id="${p.id}">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger delete-product" data-id="${p.id}">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </td>
         </tr>
     `).join('');
 
-    const countEl = document.getElementById('product-count');
-    if (countEl) countEl.textContent = products.length;
+    document.getElementById('product-count').textContent = products.length;
 
-    // Add click handlers for view buttons
-    document.querySelectorAll(".view-product").forEach((btn) => {
-      btn.addEventListener("click", async function (e) {
-        e.stopPropagation();
-        currentProductId = this.getAttribute("data-id");
-        await viewProduct(currentProductId);
-      });
-    });
+    document.querySelectorAll('.product-card').forEach(img => {
+        img.addEventListener('click', async function() {
+            currentProductId = img.getAttribute('data-id');
+            const res     = await fetch(`${BASE_URL}/products/${currentProductId}`);
+            const product = await res.json();
 
-    // Add click handlers for delete buttons
-    document.querySelectorAll(".delete-product").forEach((btn) => {
-      btn.addEventListener("click", async function (e) {
-        e.stopPropagation();
-        currentProductId = this.getAttribute("data-id");
-        await confirmDelete(currentProductId);
-      });
+            document.getElementById('modal-product-name').textContent        = product.name;
+            document.getElementById('modal-product-price').textContent       = product.price;
+            document.getElementById('modal-product-stock').textContent       = product.stock;
+            document.getElementById('modal-product-description').textContent =
+                Array.isArray(product.details) ? product.details.join(', ') : product.details || '';
+            document.getElementById('modal-product-img').src =
+                product.images && product.images[0] ? product.images[0] : 'Imgs/prod1.png';
+
+            productModal.show();
+        });
     });
+  } catch (error) {
+    console.error("Error loading products:", error);
+    tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger py-4">Error loading products. Please try again.</td></tr>`;
+  }
 }
 
 // ── VIEW PRODUCT ───────────────────────────────────────────────
@@ -419,37 +414,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
     // SEARCH
-    const btnSearch = document.getElementById('btn-search');
-    if (btnSearch) {
-      btnSearch.addEventListener('click', async function() {
-          const query = document.getElementById('search-input').value.trim().toLowerCase();
-          const res = await fetch(`${BASE_URL}/products`);
-          const allProducts = await res.json();
-          const filtered = allProducts.filter(p => 
-              p.sellerId === SELLER_ID && 
-              p.name.toLowerCase().includes(query)
-          );
-          renderFilteredProducts(filtered);
-      });
+document.getElementById('btn-search').addEventListener('click', async function() {
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
+    const res = await fetch(`${BASE_URL}/products`);
+    const allProducts = await res.json();
+    const filtered = allProducts.filter(p => 
+        p.sellerId === SELLER_ID && 
+        p.name.toLowerCase().includes(query)
+    );
+    renderFilteredProducts(filtered);
+});
+
+// Also search on Enter key
+document.getElementById('search-input').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        document.getElementById('btn-search').click();
     }
+});
 
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      // Also search on Enter key
-      searchInput.addEventListener('keyup', function(e) {
-          if (e.key === 'Enter') {
-              document.getElementById('btn-search').click();
-          }
-      });
-
-      // Clear search when input is empty
-      searchInput.addEventListener('input', async function() {
-          if (this.value.trim() === '') {
-              renderProducts();
-          }
-      });
+// Clear search when input is empty
+document.getElementById('search-input').addEventListener('input', async function() {
+    if (this.value.trim() === '') {
+        renderProducts();
     }
+});
 
-    // Initial render
     renderProducts();
 });
+
