@@ -56,3 +56,25 @@ height: 2.5rem;
 background-color: var(--Lightgray);
 }
 
+
+
+.product-img{
+height:180px;
+overflow:hidden;
+}
+
+.product-img img{
+max-height:100%;
+object-fit:contain;
+}
+
+.product-card{
+cursor:pointer;
+}
+
+.related-bar{
+width:15px;
+height:30px;
+background:var(--mainColor);
+border-radius:3px;
+}
