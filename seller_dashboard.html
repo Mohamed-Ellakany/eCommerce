@@ -23,6 +23,12 @@
         border-radius: 4px;
     }
 
+    
+
+    .admin-logo {
+        color: var(--mainColor) !important;
+      }
+
     .img-wrap {
         background: #F5F5F5;
         border-radius: 4px;
@@ -53,6 +59,8 @@
 
 <body>
 
+    
+
 <!-- View Product Modal -->
 <div class="modal fade" id="productModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -79,7 +87,7 @@
     </div>
 </div>
 
-=<!-- Edit / Add Product Modal -->
+<!-- Edit / Add Product Modal -->
 <div class="modal fade" id="editmodal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -148,6 +156,84 @@
 
 
 
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><span class="admin-logo">Seller </span>
+          Dashboard
+        </a>
+        <!-- this button for collapse nav bar if navbar-expand specified in the nav bar  -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- ms-auto for pushing elements to the right of navbar -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                
+              >
+                my profile
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" >
+                <li>
+                  <a class="dropdown-item" id="user-name" href="Profile.html"
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" id="home-btn" href="index.html">home</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" id="logout-btn" href="#">logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<!-- Controls Row -->
+<div class="container-fluid px-4 py-3 border-bottom">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+
+        <!-- Left: product count card -->
+        <div class="card text-bg-primary mb-0" style="min-width:160px;">
+            <div class="card-body py-2 px-3">
+                <h4 class="mb-0 small text-center">Total Products</h4>
+                <h5 class="mb-0 fw-bold text-center" id="product-count">0</h5>
+            </div>
+        </div>
+
+        <!-- Middle: search -->
+        <div class="d-flex gap-2 flex-grow-1">
+            <input type="search" class="form-control" id="search-input" placeholder="Search your products...">
+            <button class="btn btn-outline-secondary" id="btn-search">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+
+        
+
+    </div>
+</div>
+
+
 <!-- Dashboard -->
 <div class="container py-4">
 
@@ -160,13 +246,14 @@
     </div>
 
     <!-- Products Table -->
-    <table class="table text-center">
+    <table class="table text-center w-100">
         <thead class="table-dark">
             <tr>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Stock</th>
+                <th>Edit/Delete</th>
             </tr>
         </thead>
         <tbody id="products-tbody">
@@ -175,6 +262,97 @@
     </table>
 
 </div>
+
+<!-- Footer -->
+    <footer class="pt-3">
+        <div class="container">
+            <div class="row g-4">
+
+                <div class="col-12 col-sm-6 col-lg-3 ">
+                    <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form d-flex border-1 border-secondary">
+                        <input type="email" placeholder="Enter your email" class=" px-2 py-2" />
+                        <button type="button"  class=" px-2 py-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Support</h6>
+                    <address>
+                        111 Bijoy sarani, Dhaka,<br />
+                        DH 1515, Bangladesh.<br />
+                        exclusive@gmail.com<br />
+                        +88015-88888-9999
+                    </address>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Account</h6>
+                    <a href="#">My Account</a>
+                    <a href="#">Login / Register</a>
+                    <a href="#">Cart</a>
+                    <a href="#">Wishlist</a>
+                    <a href="#">Shop</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms Of Use</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact</a>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Download App</h6>
+                    <p class="save-text mb-1">Save $3 with App New User Only</p>
+
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">GET IT ON</small>
+                                    <span class="text-white">Google Play</span>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">Download on the</small>
+                                    <span class="text-white">App Store</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+            <div class="container">
+                &copy; Copyright Rimel 2022. All right reserved
+            </div>
+        </div>
+    </footer>
 
 
 <script src="Scripts/DB.js"></script>
