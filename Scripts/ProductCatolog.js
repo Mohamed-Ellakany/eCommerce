@@ -6,6 +6,7 @@ async function getProducts(){
 
     let data = await response.json();
 
+
     allProducts = data;
     
 
