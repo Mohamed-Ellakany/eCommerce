@@ -160,40 +160,21 @@
             <div
               class="productPictures order-2 order-md-1 col-lg-2 col-md-3 d-flex flex-md-column align-items-center gap-3 mt-4"
             >
-              <div
-                class="Pic bg-light rounded d-flex justify-content-center align-items-center"
-              >
-                <img src="./Imgs/fav (1).png" class="img-fluid" alt="pic one" />
-              </div>
-              <div
-                class="Pic bg-light rounded d-flex justify-content-center align-items-center"
-              >
-                <img src="./Imgs/fav (2).png" class="img-fluid" alt="pic one" />
-              </div>
-              <div
-                class="Pic bg-light rounded d-flex justify-content-center align-items-center"
-              >
-                <img src="./Imgs/fav (3).png" class="img-fluid" alt="pic one" />
-              </div>
-              <div
-                class="Pic bg-light rounded d-flex justify-content-center align-items-center"
-              >
-                <img src="./Imgs/fav (4).png" class="img-fluid" alt="pic one" />
-              </div>
+           
             </div>
 
             <div
               class="CurrentDisplayedPictures order-1 order-md-2 col-12 col-lg-4 col-md-6 d-flex flex-row justify-content-center align-items-center bg-light p-3 mt-4 rounded"
             >
-              <img src="./Imgs/fav (4).png" class="img-fluid" alt="" />
+              
             </div>
 
             <div
               class="productDetails order-3 col-lg-5 p-3 me-1 justify-content-center align-items-center mt-3 ms-2 ms-lg-3"
             >
-              <h1 class="mb-1">HAVIT HV-G92 Gamepad</h1>
+              <h1 id="header" class="mb-1"></h1>
               <div class="d-flex gap-2 align-items-center mb-1">
-                <span class="price-new">$120</span>
+                <span id="p_price" class="price-new"></span>
               </div>
               <div class="d-flex align-items-center gap-1">
                 <div class="stars" style="color: #ffad33">
@@ -204,9 +185,8 @@
                 <span class="review-count">(88)</span>
               </div>
               <div class="p-2">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Maxime nesciunt corporis tenetur soluta fugit aliquam?
+                <p id="p_details">
+                  
                 </p>
                 <hr />
               </div>
@@ -291,294 +271,24 @@
               </div>
             </div>
           </div>
-          
-          <div class="container mt-5">
-            <div class="d-flex align-items-center mb-4">
-              <div class="related-bar me-2"></div>
-              <h5 class="mb-0">Related Items</h5>
-            </div>
-
-            <div class="swiper relatedSwiper">
-              <div class="swiper-wrapper">
-                <!-- product 1 -->
-                <div class="swiper-slide">
-                  <div class="product-card">
-                    <div
-                      class="product-img bg-light d-flex justify-content-center align-items-center"
-                    >
-                      <img src="./Imgs/prod1.png" class="img-fluid" />
-                    </div>
-
-                    <h6 class="mt-2">HAVIT HV-G92 Gamepad</h6>
-
-                    <div class="d-flex gap-2">
-                      <span class="text-danger">$120</span>
-                      <span class="text-decoration-line-through text-muted"
-                        >$160</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- product 2 -->
-                <div class="swiper-slide">
-                  <div class="product-card">
-                    <div
-                      class="product-img bg-light d-flex justify-content-center align-items-center"
-                    >
-                      <img src="./Imgs/prod2.png" class="img-fluid" />
-                    </div>
-
-                    <h6 class="mt-2">Gaming Keyboard</h6>
-
-                    <span class="text-danger">$90</span>
-                  </div>
-                </div>
-
-                <!-- product 3 -->
-                <div class="swiper-slide">
-                  <div class="product-card">
-                    <div
-                      class="product-img bg-light d-flex justify-content-center align-items-center"
-                    >
-                      <img src="./Imgs/prod3.png" class="img-fluid" />
-                    </div>
-
-                    <h6 class="mt-2">Gaming Monitor</h6>
-
-                    <span class="text-danger">$370</span>
-                  </div>
-                </div>
-
-                <!-- product 4 -->
-                <div class="swiper-slide">
-                  <div class="product-card">
-                    <div
-                      class="product-img bg-light d-flex justify-content-center align-items-center"
-                    >
-                      <img src="./Imgs/prod4.png" class="img-fluid" />
-                    </div>
-
-                    <h6 class="mt-2">RGB Cooler</h6>
-
-                    <span class="text-danger">$160</span>
-                  </div>
-                </div>
-
-                <!-- product 5 -->
-                <div class="swiper-slide">
-                  <div class="product-card">
-                    <div
-                      class="product-img bg-light d-flex justify-content-center align-items-center"
-                    >
-                      <img src="./Imgs/prod5.png" class="img-fluid" />
-                    </div>
-
-                    <h6 class="mt-2">Gaming Headset</h6>
-
-                    <span class="text-danger">$80</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- arrows -->
-              <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
-            </div>
-          </div>
+    
         
 
-          <section class="px-xl-5 px-5 py-5">
+          <section class="px-xl-5 px-5 py-5 mt-4>">
             <!-- Section Header -->
             <div class="d-flex align-items-center gap-3 mb-3">
               <span class="today-badge d-flex align-items-center gap-2">
                 <span class="badge-indicator d-inline-block"></span>
-                <span class="fw-semibold" style="color: #db4444"
+                <span class="fw-semibold h4" style="color: #db4444"
                   >Related Products</span
                 >
               </span>
             </div>
 
             <!-- Products Slider -->
-            <div class="flash-products-wrapper overflow-hidden">
-              <div class="flash-products d-flex gap-3" id="flashProductsTrack">
-                <!-- Product 1 -->
-                <div class="flash-product-card flex-shrink-0">
-                  <div class="product-img-wrap position-relative">
-                    <span class="discount-badge">-40%</span>
-                    <img
-                      src="Imgs/prod1.png"
-                      alt="HAVIT HV-G92 Gamepad"
-                      class="w-100"
-                    />
-                    <div
-                      class="product-actions position-absolute d-flex flex-column gap-2"
-                    >
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Wishlist"
-                      >
-                        <i class="fa-regular fa-heart"></i>
-                      </button>
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Quick view"
-                      >
-                        <i class="fa-regular fa-eye"></i>
-                      </button>
-                    </div>
-                    <button class="add-to-cart-btn w-100">Add To Cart</button>
-                  </div>
-                  <div class="pt-2">
-                    <p class="product-name mb-1">HAVIT HV-G92 Gamepad</p>
-                    <div class="d-flex gap-2 align-items-center mb-1">
-                      <span class="price-new">$120</span>
-                      <span class="price-old">$160</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-1">
-                      <div class="stars" style="color: #ffad33">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i>
-                      </div>
-                      <span class="review-count">(88)</span>
-                    </div>
-                  </div>
-                </div>
+             <div class="related-products-slider d-flex flex-wrap gap-3 overflow-auto justify-content-center mt-2 pt-1" id="relatedProducts">
 
-                <!-- Product 2 -->
-                <div class="flash-product-card flex-shrink-0">
-                  <div class="product-img-wrap position-relative">
-                    <span class="discount-badge">-35%</span>
-                    <img
-                      src="Imgs/prod4.png"
-                      alt="AK-900 Wired Keyboard"
-                      class="w-100"
-                    />
-                    <div
-                      class="product-actions position-absolute d-flex flex-column gap-2"
-                    >
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Wishlist"
-                      >
-                        <i class="fa-regular fa-heart"></i>
-                      </button>
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Quick view"
-                      >
-                        <i class="fa-regular fa-eye"></i>
-                      </button>
-                    </div>
-                    <button class="add-to-cart-btn w-100">Add To Cart</button>
-                  </div>
-                  <div class="pt-2">
-                    <p class="product-name mb-1">AK-900 Wired Keyboard</p>
-                    <div class="d-flex gap-2 align-items-center mb-1">
-                      <span class="price-new">$960</span>
-                      <span class="price-old">$1160</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-1">
-                      <div class="stars" style="color: #ffad33">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star-half-alt"></i>
-                      </div>
-                      <span class="review-count">(75)</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="flash-product-card flex-shrink-0">
-                  <div class="product-img-wrap position-relative">
-                    <span class="discount-badge">-30%</span>
-                    <img
-                      src="Imgs/prod3.png"
-                      alt="IPS LCD Gaming Monitor"
-                      class="w-100"
-                    />
-                    <div
-                      class="product-actions position-absolute d-flex flex-column gap-2"
-                    >
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Wishlist"
-                      >
-                        <i class="fa-regular fa-heart"></i>
-                      </button>
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Quick view"
-                      >
-                        <i class="fa-regular fa-eye"></i>
-                      </button>
-                    </div>
-                    <button class="add-to-cart-btn w-100">Add To Cart</button>
-                  </div>
-                  <div class="pt-2">
-                    <p class="product-name mb-1">IPS LCD Gaming Monitor</p>
-                    <div class="d-flex gap-2 align-items-center mb-1">
-                      <span class="price-new">$370</span>
-                      <span class="price-old">$400</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-1">
-                      <div class="stars" style="color: #ffad33">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i>
-                      </div>
-                      <span class="review-count">(99)</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="flash-product-card flex-shrink-0">
-                  <div class="product-img-wrap position-relative">
-                    <span class="discount-badge">-25%</span>
-                    <img
-                      src="Imgs/prod2.png"
-                      alt="S-Series Comfort Chair"
-                      class="w-100"
-                    />
-                    <div
-                      class="product-actions position-absolute d-flex flex-column gap-2"
-                    >
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Wishlist"
-                      >
-                        <i class="fa-regular fa-heart"></i>
-                      </button>
-                      <button
-                        class="action-btn d-flex justify-content-center align-items-center border-0"
-                        aria-label="Quick view"
-                      >
-                        <i class="fa-regular fa-eye"></i>
-                      </button>
-                    </div>
-                    <button class="add-to-cart-btn w-100">Add To Cart</button>
-                  </div>
-                  <div class="pt-2">
-                    <p class="product-name mb-1">S-Series Comfort Chair</p>
-                    <div class="d-flex gap-2 align-items-center mb-1">
-                      <span class="price-new">$375</span>
-                      <span class="price-old">$400</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-1">
-                      <div class="stars" style="color: #ffad33">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                        ><i class="fas fa-star"></i>
-                      </div>
-                      <span class="review-count">(99)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  </div>
 
             <hr class="mt-5" />
           </section>
