@@ -1,3 +1,4 @@
+
 let allProducts=[];
 async function getProducts(){
 
@@ -26,10 +27,15 @@ function displayProducts(productList){
  ProductCatologDiv.innerHTML = "";
 if(productList.length>0){
     for (let i = 0; i < productList.length; i++) {
-        ProductCatologDiv.innerHTML+=`  <div class="flash-product-card flex-shrink-0 pb-4 d-flex  flex-wrap  col-sm-6 col-md-4 col-lg-3">
+        ProductCatologDiv.innerHTML+=`  
+        <div 
+        class="flash-product-card flex-shrink-0 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3">
+
                     <div class="product-img-wrap position-relative ">
                         <span class="discount-badge">-35%</span>
+                        <a href="productDetails.html?id=${productList[i].id}">
                         <img src="${productList[i].images[0]}" alt="${productList[i].name}" class="w-100">
+                        </a>
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
                             <button class="action-btn" aria-label="Wishlist"><i
                                     class="fa-regular fa-heart"></i></button>
@@ -52,7 +58,8 @@ if(productList.length>0){
                             <span class="review-count">(75)</span>
                         </div>
                     </div>
-                </div>` ;
+                
+                </a>` ;
         
     }
 }else{
