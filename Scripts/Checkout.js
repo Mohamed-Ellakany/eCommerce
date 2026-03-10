@@ -136,6 +136,35 @@ function getFormData() {
 }
 
 
+// // ── Update product stock ──────────────────────────────────────────
+
+// async function updateStock(cart) {
+//   console.log("[Checkout] updateStock — start:", cart);
+
+//   const results = await Promise.allSettled(
+//     cart.map(async (item) => {
+//       // cart.js uses item.id as the product id
+//       const product = await DB.getProductById(item.id);
+//       if (!product) {
+//         console.warn(`[Checkout] updateStock — product "${item.id}" not found, skipping.`);
+//         return;
+//       }
+//       const currentStock = toNum(product.stock);
+//       const orderedQty = toNum(item.qty) || 1;
+//       const newStock = Math.max(0, currentStock - orderedQty);
+
+//       await DB.updateProduct(item.id, { stock: newStock });
+//       console.log(`[Checkout] updateStock — ✅ "${item.name}": stock ${currentStock} → ${newStock}`);
+//     })
+//   );
+
+//   results.forEach((r, i) => {
+//     if (r.status === "rejected")
+//       console.warn(`[Checkout] updateStock — ❌ item[${i}]:`, r.reason);
+//   });
+// }
+
+
 // ── Update product stock ──────────────────────────────────────────
 
 async function updateStock(cart) {
@@ -143,25 +172,35 @@ async function updateStock(cart) {
 
   const results = await Promise.allSettled(
     cart.map(async (item) => {
-      // cart.js uses item.id as the product id
-      const product = await DB.getProductById(item.id);
+      const productId = item.id;           // cart.js stores product id as item.id
+      const orderedQty = toNum(item.qty) || 1;
+
+      // Fetch fresh stock from server to avoid stale reads
+      const product = await DB.getProductById(productId);
       if (!product) {
-        console.warn(`[Checkout] updateStock — product "${item.id}" not found, skipping.`);
+        console.warn(`[Checkout] updateStock — product "${productId}" not found, skipping.`);
         return;
       }
+
       const currentStock = toNum(product.stock);
-      const orderedQty = toNum(item.qty) || 1;
       const newStock = Math.max(0, currentStock - orderedQty);
 
-      await DB.updateProduct(item.id, { stock: newStock });
-      console.log(`[Checkout] updateStock — ✅ "${item.name}": stock ${currentStock} → ${newStock}`);
+      await DB.updateProduct(productId, { stock: newStock });
+      console.log(
+        `[Checkout] updateStock — ✅ "${item.name}" (id: ${productId}): ` +
+        `stock ${currentStock} → ${newStock} (ordered: ${orderedQty})`
+      );
     })
   );
 
+  // Log any failures without throwing — stock errors shouldn't cancel a placed order
   results.forEach((r, i) => {
-    if (r.status === "rejected")
-      console.warn(`[Checkout] updateStock — ❌ item[${i}]:`, r.reason);
+    if (r.status === "rejected") {
+      console.warn(`[Checkout] updateStock — ❌ item[${i}] failed:`, r.reason);
+    }
   });
+
+  console.log("[Checkout] updateStock — done.");
 }
 
 
@@ -248,26 +287,27 @@ async function placeOrder() {
 // ── After successful order ────────────────────────────────────────
 
 async function onOrderSuccess(orderId, payment, cart) {
-  // 1. Update stock for each product
+  // 1. Decrement stock for every product in the order
   try {
     await updateStock(cart);
+    console.log("[Checkout] onOrderSuccess — stock updated successfully.");
   } catch (err) {
+    // Non-fatal: order is already saved, just log the warning
     console.warn("[Checkout] onOrderSuccess — stock update error:", err.message);
   }
 
-  // 2. Clear cart using Cart.clear() from cart.js
+  // 2. Clear local cart
   Cart.clear();
   console.log("[Checkout] onOrderSuccess — cart cleared via Cart.clear().");
 
-  // 3. Done
+  // 3. Notify user and redirect
   alert(
     `✅ Order placed successfully!\n` +
     `Order ID: ${orderId}\n` +
     `Payment: ${payment === "cod" ? "Cash on Delivery" : "Bank Transfer"}`
   );
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 }
-
 
 // ── Init ──────────────────────────────────────────────────────────
 renderCart();
