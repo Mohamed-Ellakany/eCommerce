@@ -204,7 +204,7 @@ relatedProductsDiv.innerHTML += `
   <div class="product-img-wrap position-relative">
 
     <span class="discount-badge">-40%</span>
-<a href="productDetails.html?id=${product.id}"> 
+<a href="../../pages/products/productDetails.html?id=${product.id}"> 
     <img src="${product.images[0]}" 
          alt="${product.name}" 
          class="w-100"/>
