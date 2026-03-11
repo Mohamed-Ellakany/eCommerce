@@ -1,33 +1,29 @@
+let allProducts = [];
+async function getProducts() {
+  let response = await fetch(
+    "https://e-commerce-server-xi.vercel.app/products",
+  );
 
-let allProducts=[];
-async function getProducts(){
+  let data = await response.json();
 
-    let response = await fetch("https://e-commerce-server-xi.vercel.app/products");
+  allProducts = data;
 
-    let data = await response.json();
-
-
-    allProducts = data;
-    
-
-    displayProducts(allProducts);
+  displayProducts(allProducts);
 }
 
 getProducts();
 
 for (let i = 0; i < allProducts.length; i++) {
-    console.log(allProducts[i].images);
-    
+  console.log(allProducts[i].images);
 }
 
-var ProductCatologDiv=document.getElementById("ProductCatolog");
+var ProductCatologDiv = document.getElementById("ProductCatolog");
 
-
-function displayProducts(productList){
- ProductCatologDiv.innerHTML = "";
-if(productList.length>0){
+function displayProducts(productList) {
+  ProductCatologDiv.innerHTML = "";
+  if (productList.length > 0) {
     for (let i = 0; i < productList.length; i++) {
-        ProductCatologDiv.innerHTML+=`  
+      ProductCatologDiv.innerHTML += `  
         <div 
         class="flash-product-card flex-shrink-0 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3">
 
@@ -42,7 +38,18 @@ if(productList.length>0){
                             <button class="action-btn" aria-label="Quick view"><i
                                     class="fa-regular fa-eye"></i></button>
                         </div>
-                        <button class="add-to-cart-btn w-100">Add To Cart</button>
+                        <button 
+                class="add-to-cart-btn w-100"
+                data-id="${productList[i].id}"
+                data-stock="${productList[i].stock}"
+                data-name="${productList[i].name}"
+                data-price="${productList[i].price}"
+                data-image="${productList[i].images[0]}"
+                data-category="${productList[i].category}"
+                data-sellerId="${productList[i].sellerId}"
+                >
+                Add To Cart
+              </button>
                     </div>
                     <div class="pt-2 ">
                         <p class="product-name mb-1">${productList[i].name}</p>
@@ -59,26 +66,24 @@ if(productList.length>0){
                         </div>
                     </div>
                 
-                </a>` ;
-        
+                </a>`;
     }
-}else{
-      ProductCatologDiv.innerHTML = 
-        `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
-}
+  } else {
+    ProductCatologDiv.innerHTML = `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
+  }
 }
 
 displayProducts(allProducts);
 
 // displayProducts(allProducts);
 
-var SearchInput=document.getElementById("SearchInput");
-SearchInput.addEventListener("keyup",searchByName);
+var SearchInput = document.getElementById("SearchInput");
+SearchInput.addEventListener("keyup", searchByName);
 
-
-function searchByName(){ 
-   
-    var SearchValue=SearchInput.value.toLowerCase();
-    let filteredProducts=allProducts.filter(product=>product.name.toLowerCase().includes(SearchValue));
-    displayProducts(filteredProducts);
+function searchByName() {
+  var SearchValue = SearchInput.value.toLowerCase();
+  let filteredProducts = allProducts.filter((product) =>
+    product.name.toLowerCase().includes(SearchValue),
+  );
+  displayProducts(filteredProducts);
 }
