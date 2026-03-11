@@ -126,7 +126,7 @@ async function prefillForm() {
     const user = await DB.findById(userId);
     if (!user) {
       alert("User not found. Redirecting to dashboard.");
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "../../pages/admin/admin-dashboard.html";
       return;
     }
 
@@ -236,7 +236,7 @@ document
       toast.show();
 
       setTimeout(() => {
-        window.location.href = "admin-dashboard.html";
+        window.location.href = "../../pages/admin/admin-dashboard.html";
       }, 1500);
     } catch (err) {
       console.error("Update user failed:", err);

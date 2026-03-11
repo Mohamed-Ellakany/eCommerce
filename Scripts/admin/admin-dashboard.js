@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   function logout() {
     localStorage.removeItem("shop_session");
-    window.location.href = "../../login.html";
+    window.location.href = "../../pages/Auth/login.html";
     console.log(this);
   }
 

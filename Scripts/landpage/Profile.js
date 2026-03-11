@@ -1,5 +1,5 @@
 const user = DB.getSession();
-if (!user) window.location.href = '../login.html';
+if (!user) window.location.href = '../../pages/Auth/login.html';
 
 function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 function fmtDate(iso) { if (!iso) return '—'; return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); }
@@ -33,5 +33,5 @@ if (user.role === 'seller') {
 
 document.getElementById('logoutBtn').addEventListener('click', function () {
   DB.clearSession();
-  window.location.href = '../login.html';
+  window.location.href = '../../pages/Auth/login.html';
 });
