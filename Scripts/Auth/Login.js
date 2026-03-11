@@ -6,10 +6,10 @@
 const session = DB.getSession();
 if (session) {
     window.location.href = session.role === 'admin'
-        ? '../pages/admin/admin-dashboard.html'
+        ? '../../pages/admin/admin-dashboard.html'
         : session.role === 'seller'
-            ? '../seller_dashboard.html'
-            : '../Profile.html';
+            ? '../../pages/seller/seller_dashboard.html'
+            : '../../pages/landpage/Profile.html';
 }
 
 const isValidEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
@@ -98,10 +98,10 @@ document.getElementById('loginBtn').addEventListener('click', async function () 
 
         setTimeout(() => {
             window.location.href = safeUser.role === 'admin'
-                ? '../pages/admin/admin-dashboard.html'
+                ? '../../pages/admin/admin-dashboard.html'
                 : safeUser.role === 'seller'
-                    ? '../seller_dashboard.html'
-                    : '../Profile.html';
+                    ? '../../pages/seller/seller_dashboard.html'
+                    : '../../pages/landpage/Profile.html';
         }, 500);
 
     } catch (err) {

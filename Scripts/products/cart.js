@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Wrap icon
       icon.style.cursor = "pointer";
       icon.addEventListener("click", () => {
-        location.href = "cart.html";
+        location.href = "../../pages/products/cart.html";
       });
     }
     // Add badge if not already present

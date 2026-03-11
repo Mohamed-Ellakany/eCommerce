@@ -19,7 +19,7 @@
 (function guardAuth() {
   const session = DB.getSession();
   if (!session) {
-    window.location.href = "../login.html";
+    window.location.href = "../../pages/Auth/login.html";
   }
 })();
 
@@ -213,7 +213,7 @@ async function placeOrder() {
   const session = DB.getSession();
   if (!session) {
     alert("Please log in to place an order.");
-    window.location.href = "login.html";
+    window.location.href = "../../pages/Auth/login.html";
     return;
   }
 
@@ -306,7 +306,7 @@ async function onOrderSuccess(orderId, payment, cart) {
     `Order ID: ${orderId}\n` +
     `Payment: ${payment === "cod" ? "Cash on Delivery" : "Bank Transfer"}`
   );
-  window.location.href = "../index.html";
+  window.location.href = "../../index.html";
 }
 
 // ── Init ──────────────────────────────────────────────────────────

@@ -1,4 +1,4 @@
-if (DB.getSession()) window.location.href = '../Profile.html';
+if (DB.getSession()) window.location.href = '../../pages/landpage/Profile.html';
 
 const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 const isValidName = (v) => v.trim().length >= 2;

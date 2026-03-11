@@ -33,7 +33,7 @@ if(productList.length>0){
 
                     <div class="product-img-wrap position-relative ">
                         <span class="discount-badge">-35%</span>
-                        <a href="productDetails.html?id=${productList[i].id}">
+                        <a href="../../pages/products/productDetails.html?id=${productList[i].id}">
                         <img src="${productList[i].images[0]}" alt="${productList[i].name}" class="w-100">
                         </a>
                         <div class="product-actions position-absolute d-flex flex-column gap-2">
