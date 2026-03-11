@@ -1,6 +1,6 @@
 function logout() {
   localStorage.removeItem("shop_session");
-  window.location.href = "../login.html";
+  window.location.href = "../pages/Auth/login.html";
 }
 
 function updateNavBadge() {
@@ -207,6 +207,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const profileLink = document.getElementById("profileLink");
     if (profileLink) {
       profileLink.textContent = "Profile";
+<<<<<<< HEAD
       profileLink.href = "Profile.html";
     }
 
@@ -215,6 +216,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const logoutBtn = document.getElementById("logout");
     if (logoutBtn) {
+=======
+      profileLink.href = "../pages/landpage/Profile.html";
+      const signUpLink = document.getElementById("signUp");
+      signUpLink.textContent = "";
+      const logoutBtn = document.getElementById("logout");
+>>>>>>> 790b838bf55b81e73f5ed85197fd5233adfa4adc
       logoutBtn.classList.remove("d-none");
       logoutBtn.addEventListener("click", logout);
     }

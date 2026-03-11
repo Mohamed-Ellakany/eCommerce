@@ -16,7 +16,16 @@
 // ══════════════════════════════════════════════════════════════════
 
 
+(function guardAuth() {
+  const session = DB.getSession();
+  if (!session) {
+    window.location.href = "../../pages/Auth/login.html";
+  }
+})();
+
 // ── Helpers ───────────────────────────────────────────────────────
+
+
 
 function formatUSD(n) {
   return "$" + Number(n).toLocaleString("en-US");
@@ -50,19 +59,19 @@ function renderCart() {
   if (!cart.length) {
     container.innerHTML = `<div class="empty-note">Your cart is empty.</div>`;
     document.getElementById("subtotal").textContent = "$0";
-    document.getElementById("total").textContent    = "$0";
+    document.getElementById("total").textContent = "$0";
     console.log("[Checkout] renderCart — cart is empty.");
     return;
   }
 
-  let html     = "";
+  let html = "";
   let subtotal = 0;
 
   cart.forEach(item => {
-    const price     = toNum(item.price);
-    const qty       = toNum(item.qty) || 1;
+    const price = toNum(item.price);
+    const qty = toNum(item.qty) || 1;
     const lineTotal = price * qty;
-    subtotal       += lineTotal;
+    subtotal += lineTotal;
 
     console.log(`[Checkout] renderCart — "${item.name}": $${price} × ${qty} = $${lineTotal}`);
 
@@ -79,7 +88,7 @@ function renderCart() {
 
   container.innerHTML = html;
   document.getElementById("subtotal").textContent = formatUSD(subtotal);
-  document.getElementById("total").textContent    = formatUSD(subtotal);
+  document.getElementById("total").textContent = formatUSD(subtotal);
   console.log("[Checkout] renderCart — subtotal:", formatUSD(subtotal));
 }
 
@@ -88,9 +97,9 @@ function renderCart() {
 
 function selectPayment(method) {
   document.getElementById("opt-bank").classList.toggle("active", method === "bank");
-  document.getElementById("opt-cod").classList.toggle("active",  method === "cod");
+  document.getElementById("opt-cod").classList.toggle("active", method === "cod");
   document.getElementById("radio-bank").checked = (method === "bank");
-  document.getElementById("radio-cod").checked  = (method === "cod");
+  document.getElementById("radio-cod").checked = (method === "cod");
   console.log("[Checkout] selectPayment:", method);
 }
 
@@ -99,16 +108,16 @@ function selectPayment(method) {
 
 function getFormData() {
   const fields = [
-    { id: "firstName",     label: "First Name"     },
+    { id: "firstName", label: "First Name" },
     { id: "streetAddress", label: "Street Address" },
-    { id: "city",          label: "Town / City"    },
-    { id: "phone",         label: "Phone Number"   },
-    { id: "email",         label: "Email Address"  },
+    { id: "city", label: "Town / City" },
+    { id: "phone", label: "Phone Number" },
+    { id: "email", label: "Email Address" },
   ];
 
   const data = {};
   for (const field of fields) {
-    const el    = document.getElementById(field.id);
+    const el = document.getElementById(field.id);
     const value = el ? el.value.trim() : "";
     if (!value) {
       console.warn("[Checkout] getFormData — missing:", field.label);
@@ -119,12 +128,41 @@ function getFormData() {
     data[field.id] = value;
   }
 
-  const apt      = document.getElementById("apartment");
+  const apt = document.getElementById("apartment");
   data.apartment = apt ? apt.value.trim() : "";
 
   console.log("[Checkout] getFormData:", data);
   return data;
 }
+
+
+// // ── Update product stock ──────────────────────────────────────────
+
+// async function updateStock(cart) {
+//   console.log("[Checkout] updateStock — start:", cart);
+
+//   const results = await Promise.allSettled(
+//     cart.map(async (item) => {
+//       // cart.js uses item.id as the product id
+//       const product = await DB.getProductById(item.id);
+//       if (!product) {
+//         console.warn(`[Checkout] updateStock — product "${item.id}" not found, skipping.`);
+//         return;
+//       }
+//       const currentStock = toNum(product.stock);
+//       const orderedQty = toNum(item.qty) || 1;
+//       const newStock = Math.max(0, currentStock - orderedQty);
+
+//       await DB.updateProduct(item.id, { stock: newStock });
+//       console.log(`[Checkout] updateStock — ✅ "${item.name}": stock ${currentStock} → ${newStock}`);
+//     })
+//   );
+
+//   results.forEach((r, i) => {
+//     if (r.status === "rejected")
+//       console.warn(`[Checkout] updateStock — ❌ item[${i}]:`, r.reason);
+//   });
+// }
 
 
 // ── Update product stock ──────────────────────────────────────────
@@ -134,25 +172,35 @@ async function updateStock(cart) {
 
   const results = await Promise.allSettled(
     cart.map(async (item) => {
-      // cart.js uses item.id as the product id
-      const product = await DB.getProductById(item.id);
+      const productId = item.id;           // cart.js stores product id as item.id
+      const orderedQty = toNum(item.qty) || 1;
+
+      // Fetch fresh stock from server to avoid stale reads
+      const product = await DB.getProductById(productId);
       if (!product) {
-        console.warn(`[Checkout] updateStock — product "${item.id}" not found, skipping.`);
+        console.warn(`[Checkout] updateStock — product "${productId}" not found, skipping.`);
         return;
       }
-      const currentStock = toNum(product.stock);
-      const orderedQty   = toNum(item.qty) || 1;
-      const newStock     = Math.max(0, currentStock - orderedQty);
 
-      await DB.updateProduct(item.id, { stock: newStock });
-      console.log(`[Checkout] updateStock — ✅ "${item.name}": stock ${currentStock} → ${newStock}`);
+      const currentStock = toNum(product.stock);
+      const newStock = Math.max(0, currentStock - orderedQty);
+
+      await DB.updateProduct(productId, { stock: newStock });
+      console.log(
+        `[Checkout] updateStock — ✅ "${item.name}" (id: ${productId}): ` +
+        `stock ${currentStock} → ${newStock} (ordered: ${orderedQty})`
+      );
     })
   );
 
+  // Log any failures without throwing — stock errors shouldn't cancel a placed order
   results.forEach((r, i) => {
-    if (r.status === "rejected")
-      console.warn(`[Checkout] updateStock — ❌ item[${i}]:`, r.reason);
+    if (r.status === "rejected") {
+      console.warn(`[Checkout] updateStock — ❌ item[${i}] failed:`, r.reason);
+    }
   });
+
+  console.log("[Checkout] updateStock — done.");
 }
 
 
@@ -165,7 +213,7 @@ async function placeOrder() {
   const session = DB.getSession();
   if (!session) {
     alert("Please log in to place an order.");
-    window.location.href = "login.html";
+    window.location.href = "../../pages/Auth/login.html";
     return;
   }
 
@@ -176,7 +224,7 @@ async function placeOrder() {
 
   // 3. Payment method
   const paymentEl = document.querySelector('input[name="payment"]:checked');
-  const payment   = paymentEl ? paymentEl.value : "cod";
+  const payment = paymentEl ? paymentEl.value : "cod";
   console.log("[Checkout] placeOrder — payment:", payment);
 
   // 4. Cart from Cart.getAll()
@@ -198,27 +246,27 @@ async function placeOrder() {
 
   // 6. Build order — map cart items to { productId, quantity }
   const orderData = {
-    userId:  session.id,
-    items:   cart.map(item => ({
+    userId: session.id,
+    items: cart.map(item => ({
       productId: item.id,          // cart.js stores product id as item.id
-      quantity:  toNum(item.qty) || 1,
+      quantity: toNum(item.qty) || 1,
     })),
     total,
-    status:  "pending",
+    status: "pending",
     payment,
     customer: {
-      name:    formData.firstName,
-      email:   formData.email,
-      phone:   formData.phone,
+      name: formData.firstName,
+      email: formData.email,
+      phone: formData.phone,
       address: [formData.streetAddress, formData.apartment, formData.city]
-                 .filter(Boolean).join(", "),
+        .filter(Boolean).join(", "),
     },
   };
   console.log("[Checkout] placeOrder — orderData:", orderData);
 
   // 7. Disable button
   const btn = document.querySelector(".btn-place");
-  btn.disabled    = true;
+  btn.disabled = true;
   btn.textContent = "Placing Order…";
 
   // 8. POST order via DB
@@ -230,7 +278,7 @@ async function placeOrder() {
   } catch (err) {
     console.error("[Checkout] placeOrder — ❌ failed:", err.message);
     alert("Something went wrong. Please try again.");
-    btn.disabled    = false;
+    btn.disabled = false;
     btn.textContent = "Place Order";
   }
 }
@@ -239,26 +287,27 @@ async function placeOrder() {
 // ── After successful order ────────────────────────────────────────
 
 async function onOrderSuccess(orderId, payment, cart) {
-  // 1. Update stock for each product
+  // 1. Decrement stock for every product in the order
   try {
     await updateStock(cart);
+    console.log("[Checkout] onOrderSuccess — stock updated successfully.");
   } catch (err) {
+    // Non-fatal: order is already saved, just log the warning
     console.warn("[Checkout] onOrderSuccess — stock update error:", err.message);
   }
 
-  // 2. Clear cart using Cart.clear() from cart.js
+  // 2. Clear local cart
   Cart.clear();
   console.log("[Checkout] onOrderSuccess — cart cleared via Cart.clear().");
 
-  // 3. Done
+  // 3. Notify user and redirect
   alert(
     `✅ Order placed successfully!\n` +
     `Order ID: ${orderId}\n` +
     `Payment: ${payment === "cod" ? "Cash on Delivery" : "Bank Transfer"}`
   );
-  window.location.href = "index.html";
+  window.location.href = "../../index.html";
 }
-
 
 // ── Init ──────────────────────────────────────────────────────────
 renderCart();

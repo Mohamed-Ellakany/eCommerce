@@ -51,7 +51,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
           ><span class="admin-logo">Admin </span>
@@ -70,33 +70,19 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- ms-auto for pushing elements to the right of navbar -->
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                my profile
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a class="dropdown-item" id="user-name" href="#"
-                    >Eslam Tarek</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../../index.html">home</a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" id="logout-btn" href="#">logout</a>
-                </li>
-              </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a class="nav-link" id="user-name" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">home</a>
+            </li>
+            <!-- Divider only shown in collapsed (mobile) view -->
+            <li class="nav-item d-sm-none">
+              <hr class="border-secondary my-1" />
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="logout-btn" href="#">logout</a>
             </li>
           </ul>
         </div>
@@ -112,7 +98,7 @@
             <a class="nav-link text-light active" href="#">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="../../seller_dashboard.html"
+            <a class="nav-link text-light" href="../seller/seller_dashboard.html"
               >Products</a
             >
           </li>
@@ -138,7 +124,7 @@
           <!-- Add User Button -->
           <button
             class="btn btn-success"
-            onclick="window.location.href = 'createuser.html'"
+            onclick="window.location.href = './createuser.html'"
           >
             &plus;
           </button>

@@ -195,7 +195,7 @@ document
       toast.show();
 
       setTimeout(() => {
-        window.location.href = "admin-dashboard.html";
+        window.location.href = "../../pages/admin/admin-dashboard.html";
       }, 1500);
     } catch (err) {
       console.error("Create user failed:", err);

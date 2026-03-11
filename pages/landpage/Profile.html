@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <!-- Main Style Sheet -->
-     <link rel="stylesheet" href="./Styles/style.css">
+     <link rel="stylesheet" href="../../Styles/style.css">
     <style>
         :root {
             --mainColor: #DB4444;
@@ -240,7 +240,7 @@
         <!-- Main navbar -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
             <div class="container-xl container-fluid d-flex align-items-center">
-                <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
+                <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="../../index.html">ONLINE SHOP</a>
         
                 <div class="d-flex align-items-center gap-3 order-lg-3">
                     <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
@@ -250,7 +250,7 @@
                     </div>
         
                     <!-- Cart icon with badge -->
-                    <div class="cart-nav-wrapper" onclick="location.href = 'cart.html'">
+                    <div class="cart-nav-wrapper" onclick="location.href = '../products/cart.html'">
                         <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
                         <span class="cart-badge" id="navCartCount">0</span>
                     </div>
@@ -267,19 +267,19 @@
                 <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="./index.html">Home</a>
+                            <a class="nav-link" href="../../index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./Contact.html">Contact</a>
+                            <a class="nav-link" href="../landpage/Contact.html">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./About.html">About</a>
+                            <a class="nav-link" href="../landpage/About.html">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="" id="profileLink"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./login.html" id="signUp">Sign Up</a>
+                            <a class="nav-link" href="../Auth/login.html" id="signUp">Sign Up</a>
                         </li>
                     </ul>
                 </div>
@@ -290,7 +290,7 @@
     <div class="container py-5">
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb" style="font-size:0.85rem;">
-                <li class="breadcrumb-item"><a href="./index.html" style="color:var(--mainColor);">Home</a></li>
+                <li class="breadcrumb-item"><a href="../../index.html" style="color:var(--mainColor);">Home</a></li>
                 <li class="breadcrumb-item active">My Profile</li>
             </ol>
         </nav>
@@ -366,7 +366,7 @@
                     <div class="d-flex gap-3 py-4 flex-wrap">
                         <button class="btn-main" id="logoutBtn"><i class="fa-solid fa-right-from-bracket me-2"></i>Log
                             Out</button>
-                        <a id="adminBtn" href="./pages/admin/admin-dashboard.html" class="btn btn-outline-danger d-none"
+                        <a id="adminBtn" href="../admin/admin-dashboard.html"  class="btn btn-outline-danger d-none"
                             style="border-radius:6px; font-size:0.9rem; padding:10px 24px;">
                             <i class="fa-solid fa-shield-halved me-1"></i> Admin Dashboard
                         </a>
@@ -429,10 +429,10 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./Scripts/DB.js"></script>
-    <script src="./Scripts/Profile.js"></script>
-    <script src="./Scripts/script.js"></script>
-    <script src="Scripts/cart.js"></script>
+    <script src="../../Scripts/DB.js"></script>
+    <script src="../../Scripts/landpage/Profile.js"></script>
+    <script src="../../Scripts/products/cart.js"></script>
+    <script src="../../Scripts/script.js"></script>
 
 </body>
 
