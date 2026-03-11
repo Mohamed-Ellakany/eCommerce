@@ -84,7 +84,100 @@ input::placeholder {
 }
 
 
+/* ══════════════════════════════════════════════════════════════════
+   Wishlist Toggle Button
+   Add these styles to your global stylesheet (e.g. style.css)
+   ══════════════════════════════════════════════════════════════════ */
 
+/* ── Base button ── */
+.wishlist-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #6c757d;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease,
+        box-shadow 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    padding: 0;
+}
+
+.wishlist-toggle-btn:hover {
+    background: #fff;
+    color: #dc3545;
+    transform: scale(1.12);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.25);
+}
+
+/* ── Wishlisted (active) state ── */
+.wishlist-toggle-btn.wishlisted {
+    background: #fff;
+    color: #dc3545;
+}
+
+.wishlist-toggle-btn.wishlisted i {
+    animation: wishlist-pop 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* ── Disabled state ── */
+.wishlist-toggle-btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ── Pop animation on add ── */
+@keyframes wishlist-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.45);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ── Nav wishlist wrapper (mirrors .cart-nav-wrapper) ── */
+.wishlist-nav-wrapper {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Nav wishlist badge ── */
+.wishlist-badge {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    background: #dc3545;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.68rem;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    display: none;
+    /* shown via JS when count > 0 */
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 4px;
+    pointer-events: none;
+}
 
 @keyframes fadeInDown {
     from {
