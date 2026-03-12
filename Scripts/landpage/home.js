@@ -131,9 +131,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   let allProducts = [];
 
   showLoadingStates();
+  async function getProducts() {
+    let response = await fetch(
+      "https://e-commerce-server-xi.vercel.app/products",
+    );
 
+    let data = await response.json();
+
+    return data;
+  }
   try {
-    allProducts = await DB.getProducts();
+    allProducts = await getProducts();
+    console.log("Products loaded: szsuifhzsghkfhg", allProducts);
   } catch (err) {
     console.error("Failed to load products:", err);
     showErrorMessage("Failed to load products. Please refresh the page.");
