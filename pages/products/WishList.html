@@ -16,13 +16,13 @@
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Main style sheet -->
-    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="../../Styles/style.css">
     <!-- Wishlist specific style -->
-    <link rel="stylesheet" href="Styles/wishlist.css">
+    <link rel="stylesheet" href="../../Styles/wishlist.css">
     <!-- Home style reused for cards -->
-    <link rel="stylesheet" href="Styles/Home.css">
+    <link rel="stylesheet" href="../../Styles/Home.css">
     <!-- Media queries -->
-    <link rel="stylesheet" href="Styles/media.css">
+    <link rel="stylesheet" href="../../Styles/media.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
         <div class="container-xl container-fluid d-flex align-items-center">
-            <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="index.html">ONLINE SHOP</a>
+            <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="/index.html">ONLINE SHOP</a>
     
             <div class="d-flex align-items-center gap-3 order-lg-3">
                 <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
@@ -41,7 +41,7 @@
                 </div>
     
                 <!-- Cart icon with badge -->
-                <div class="cart-nav-wrapper" onclick="location.href='cart.html'" role="button" aria-label="Cart"
+                <div class="cart-nav-wrapper" onclick="location.href='../products/cart.html'" role="button" aria-label="Cart"
                     style="cursor:pointer;">
                     <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
                     <span class="cart-badge" id="navCartCount">0</span>
@@ -65,21 +65,23 @@
             <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="./index.html">Home</a>
+                        <a class="nav-link" href="/index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./Contact.html">Contact</a>
+                        <a class="nav-link" href="../landpage/Contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./About.html">About</a>
+                        <a class="nav-link" href="../landpage/About.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./ProductCatalog.html">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="" id="profileLink"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./login.html" id="signUp">Sign Up</a>
+                        <a class="nav-link" href="../Auth/login.html" id="signUp">LogIn</a>
                     </li>
-                    <!-- Optional: also add Wishlist link in mobile menu -->
                     <li class="nav-item d-lg-none">
                         <a class="nav-link" href="./wishlist.html">
                             <i class="fa-solid fa-heart text-danger me-1"></i> Wishlist
@@ -109,27 +111,25 @@
                         Wishlist</h1>
                     <p class="text-secondary mt-2 mb-0"><span id="wishlistCount">0</span> items saved</p>
                 </div>
-                <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                    <button class="btn btn-outline-danger btn-sm" id="clearWishlistBtn" type="button"><i
-                            class="fa-regular fa-trash-can me-1"></i>Clear wishlist</button>
-                </div>
+              
             </div>
 
             <!-- wishlist items grid -->
             <div class="row g-4" id="wishlistGrid"></div>
 
             <!-- empty state -->
-            <div class="row d-none" id="emptyWishlistRow">
-                <div class="col-12 text-center py-5">
-                    <div class="py-5">
-                        <i class="fa-regular fa-heart fa-4x text-secondary opacity-50 mb-3"></i>
-                        <h3 class="fw-light">Your wishlist is empty</h3>
-                        <p class="text-secondary">Save your favorite items to see them here.</p>
-                        <a href="index.html" class="btn btn-danger px-5 mt-2"><i
-                                class="fa-solid fa-arrow-left me-2"></i>Continue shopping</a>
-                    </div>
+        <div class="row d-none" id="emptyWishlistRow">
+            <div class="col-12 wishlist-empty">
+                <div class="wishlist-empty-icon">
+                    <i class="fa-regular fa-heart"></i>
                 </div>
+                <h3>Your wishlist is empty</h3>
+                <p>Save your favorite items to see them here.</p>
+                <a href="../products/ProductCatalog.html" class="btn btn-danger px-5">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping
+                </a>
             </div>
+        </div>
         </div>
     </main>
 
@@ -211,146 +211,13 @@
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
 
     <!-- Main scripts - Order is important -->
-    <script src="Scripts/DB.js"></script>
-    <script src="Scripts/script.js"></script>
-    <script src="Scripts/cart.js"></script>
-    <script src="Scripts/ProductCatalogIndex.js"></script>
-    <script src="Scripts/home.js"></script>
-    <script src="Scripts/wishList.js" ></script>
-    <script src="Scripts/script.js"></script>
+<script src="../../Scripts/DB.js"></script>
+<script src="../../Scripts/script.js"></script>
+<script src="../../Scripts/products/cart.js"></script>
 
+<script src="../../Scripts/products/wishList.js"></script>
 
-    <!-- Wishlist custom CSS -->
-    <style>
-        .cart-nav-wrapper {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: #dc3545;
-            color: white;
-            border-radius: 50%;
-            padding: 0.2rem 0.5rem;
-            font-size: 0.7rem;
-            font-weight: bold;
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .wishlist-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: none;
-            box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.03);
-        }
-
-        .wishlist-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img-top-wrapper {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f9fafb;
-            padding: 1rem;
-            position: relative;
-        }
-
-        .card-img-top-wrapper img {
-            max-height: 160px;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-        }
-
-        .btn-outline-danger i,
-        .btn-danger i {
-            pointer-events: none;
-        }
-
-        footer a {
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: #fff !important;
-        }
-
-        .subscribe-form input {
-            background: transparent;
-            border: 1px solid #6c757d;
-            color: white;
-            width: 100%;
-            outline: none;
-        }
-
-        .subscribe-form button {
-            background: transparent;
-            border: 1px solid #6c757d;
-            border-left: none;
-            color: white;
-        }
-
-        .app-badge {
-            background: #1e1e1e;
-            border-radius: 6px;
-        }
-
-        .social-icons a {
-            width: 36px;
-            height: 36px;
-            background: #2e2e2e;
-            color: white;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-icons a:hover {
-            background: #dc3545;
-        }
-
-        .login-prompt {
-            background-color: #fff3f3;
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid #ffcdcd;
-        }
-         /* Wishlist nav wrapper — mirrors .cart-nav-wrapper */
-    .wishlist-nav-wrapper {
-        position: relative;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .wishlist-badge {
-        position: absolute;
-        top: -20px;
-        right: -10px;
-        background: #dc3545;
-        color: white;
-        border-radius: 50%;
-        padding: 0.2rem 0.45rem;
-        font-size: 0.7rem;
-        font-weight: 700;
-        min-width: 20px;
-        text-align: center;
-        line-height: 1.2;
-        /* Hidden when count is 0 */
-        display: none;
-    }
-    </style>
-
+    
  
 </body>
 
