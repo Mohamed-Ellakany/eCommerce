@@ -1,7 +1,7 @@
 // ══════════════════════════════════════════════════════════════════
 //  db.js  —  API-backed "Database" using JSON Server
 //
-//  JSON Server running at http://localhost:3000 (Deployed by Vercel)
+//  JSON Server running at https://e-commerce-server-xi.vercel.app (Deployed by Vercel)
 //  Endpoints: /users, /products, /cart, /orders
 //
 //  shop_session → { id, name, email, role, address, createdAt }  (localStorage only, no password)
@@ -9,7 +9,7 @@
 //  Roles: "admin" | "seller" | "customer"
 // ══════════════════════════════════════════════════════════════════
 
-API_URL = "http://localhost:3000";
+API_URL = "https://e-commerce-server-xi.vercel.app";
 
 const DB = {
   // ══════════════════════════════════════════════════════════════
