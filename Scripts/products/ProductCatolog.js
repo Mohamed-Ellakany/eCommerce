@@ -4,11 +4,25 @@ async function getProducts() {
     "https://e-commerce-server-xi.vercel.app/products",
   );
 
+  let params = new URLSearchParams(window.location.search);
+  let categoryFromURL = params.get("category");
+
   let data = await response.json();
 
-  allProducts = data;
+  let filteredProducts;
 
-  displayProducts(allProducts);
+    allProducts = data;
+
+if(categoryFromURL){
+    filteredProducts = allProducts.filter(p => p.category.toLowerCase() === categoryFromURL.toLocaleLowerCase());
+}else{
+    filteredProducts = allProducts;
+}
+
+
+
+
+  displayProducts(filteredProducts);
 }
 
 getProducts();
@@ -73,19 +87,62 @@ function displayProducts(productList) {
   }
 }
 
-displayProducts(allProducts);
+// displayProducts(allProducts);
 
 // displayProducts(allProducts);
 
-var SearchInput = document.getElementById("SearchInput");
-SearchInput.addEventListener("keyup", searchByName);
 
-function searchByName() {
-  var SearchValue = SearchInput.value.toLowerCase();
-  let filteredProducts = allProducts.filter((product) =>
-    product.name.toLowerCase().includes(SearchValue),
-  );
-  displayProducts(filteredProducts);
+let filtersButtons = document.querySelectorAll(".filter-btn");
+
+filtersButtons.forEach(btn=>{
+  btn.addEventListener("click", function(){
+
+    filtersButtons.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    currentCategory = this.dataset.category.toLowerCase();
+
+    applyFilters();
+
+  });
+});
+
+
+let SearchInput = document.getElementById("SearchInput");
+
+SearchInput.addEventListener("keyup", function(){
+
+  currentSearch = this.value.toLowerCase();
+
+  applyFilters();
+
+});
+
+let currentCategory = "all";
+let currentSearch = "";
+
+
+function applyFilters(){
+
+  let filtered = allProducts;
+
+  // category filter
+  if(currentCategory !== "all"){
+    filtered = filtered.filter(p =>
+      p.category.toLowerCase() === currentCategory
+    );
+  }
+
+  // search filter
+  if(currentSearch !== ""){
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(currentSearch)
+    );
+  }
+
+  displayProducts(filtered);
+  console.log("hello")
+
 }
 
-
+applyFilters();
