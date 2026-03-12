@@ -131,18 +131,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   let allProducts = [];
 
   showLoadingStates();
-  async function getProducts() {
-    let response = await fetch(
-      "https://e-commerce-server-xi.vercel.app/products",
-    );
 
-    let data = await response.json();
-
-    return data;
-  }
   try {
-    allProducts = await getProducts();
-    console.log("Products loaded: szsuifhzsghkfhg", allProducts);
+    allProducts = await DB.getProducts();
   } catch (err) {
     console.error("Failed to load products:", err);
     showErrorMessage("Failed to load products. Please refresh the page.");
@@ -278,6 +269,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           <span class="review-count">(${product.stock || 0})</span>
         </div>
       </div>`;
+    console.log("Creating card for product:", card);
 
     return card;
   }
