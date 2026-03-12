@@ -201,6 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = btn.parentElement?.parentElement;
 
       if (card) {
+        console.log(
+          "Scraping product data from card for",
+          btn.dataset,
+          card.dataset,
+        );
         const nameEl = card.querySelector(".product-name")?.textContent;
         const priceEl = card.querySelector(
           '.price-new, .price, [class*="price"]',
@@ -213,10 +218,10 @@ document.addEventListener("DOMContentLoaded", () => {
           price: priceEl
             ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, "")) || 0
             : 0,
-          stock: parseInt(card.dataset.stock) || 10,
+          stock: parseInt(btn.dataset.stock) || 10,
           images: imgEl ? [imgEl.src] : ["https://via.placeholder.com/80"],
-          category: card.dataset.category || "",
-          sellerId: card.dataset.sellerId || "",
+          category: btn.dataset.category || "",
+          sellerId: btn.dataset.sellerid || "",
         };
       } else {
         // Ultimate fallback
@@ -237,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function openModal(product) {
+    console.log("Opening modal for product:", product);
     const maxStock = product.stock || 1;
     document.getElementById("modalProductName").textContent = product.name;
     document.getElementById("modalProductPrice").textContent =
