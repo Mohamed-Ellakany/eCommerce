@@ -28,12 +28,17 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+
   <!-- Main Style Sheet CDN -->
   <link rel="stylesheet" href="../../Styles/style.css" />
   <!-- Home Style -->
   <link rel="stylesheet" href="../../Styles/Home.css" />
+  <link rel="stylesheet" href="../../Styles/ProductCatolog.css" />
+
   <!-- Media Queries -->
-  <link rel="stylesheet" href="../../Styles/media.css" />
+  <link rel="stylesheet" href="Styles/media.css" />
+  <link rel="stylesheet" href="./Styles/ProductCatolog.css">
+
 
   <body>
     <header>
@@ -161,11 +166,19 @@
         <input
           id="SearchInput"
           type="search"
-          class="w-50 rounded-2 p-2 m-2 border-1 focus-ring-primary focus-ring border-info text-center"
+          class="w-50 rounded-2 p-2 m-2 mb-0  border-1 focus-ring-primary focus-ring border-info text-center"
           placeholder="Search about your product"
         />
       </div>
 
+      <div class="category-filter container text-center mt-4">
+
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="phones">Electronics</button>
+    <button class="filter-btn" data-category="laptops">Fashion</button>
+    <!-- <button class="filter-btn" data-category="clothes">Clothes</button> -->
+
+</div>
       <div
         id="ProductCatolog"
         class="row d-flex flex-wrap p-2 m-2 align-items-center justify-content-center"
