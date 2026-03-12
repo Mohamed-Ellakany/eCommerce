@@ -203,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!btn) return;
 
     const card = btn.parentElement?.parentElement;
+    console.log(btn.dataset);
     let product = null;
 
     if (card) {
@@ -319,7 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cartToastMsg").textContent =
       `"${_currentProduct.name}" added to cart!`;
     bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 2500 }).show();
-
     _currentProduct = null;
   });
 });
