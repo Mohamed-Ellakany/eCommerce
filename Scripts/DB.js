@@ -275,5 +275,8 @@ const DB = {
     if (!res.ok) throw new Error(`deleteOrder failed: ${res.status}`);
     console.log("[DB] deleteOrder:", id);
     return true;
-  },
-};
+
+    return res.json();
+  }
+  ,
+}
