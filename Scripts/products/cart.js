@@ -218,22 +218,22 @@ document.addEventListener("DOMContentLoaded", () => {
           price: priceEl
             ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, "")) || 0
             : 0,
-          stock: parseInt(btn.dataset.stock) || 10,
+          stock: parseInt(btn.dataset.stock),
           images: imgEl ? [imgEl.src] : ["https://via.placeholder.com/80"],
           category: btn.dataset.category || "",
           sellerId: btn.dataset.sellerid || "",
         };
       } else {
         // Ultimate fallback
-        product = {
-          id: "product_" + Date.now(),
-          name: "Product",
-          price: 0,
-          stock: 10,
-          images: ["https://via.placeholder.com/80"],
-          category: "",
-          sellerId: "",
-        };
+        // product = {
+        //   id: "product_" + Date.now(),
+        //   name: "Product",
+        //   price: 0,
+        //   stock: 10,
+        //   images: ["https://via.placeholder.com/80"],
+        //   category: "",
+        //   sellerId: "",
+        // };
       }
     }
 
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openModal(product) {
     console.log("Opening modal for product:", product);
-    const maxStock = product.stock || 1;
+    const maxStock = product.stock;
     document.getElementById("modalProductName").textContent = product.name;
     document.getElementById("modalProductPrice").textContent =
       `$${parseFloat(product.price).toFixed(2)}`;
