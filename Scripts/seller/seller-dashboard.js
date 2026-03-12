@@ -3,7 +3,7 @@ const BASE_URL = "https://e-commerce-server-xi.vercel.app";
 // ── AUTH CHECK ─────────────────────────────────────────────────
 const session = DB.getSession();
 if (!session || (session.role !== "seller" && session.role !== "admin")) {
-  window.location.href = "../index.html";
+  window.location.href = "../../index.html";
 }
 const SELLER_ID = session.id;
 
@@ -212,13 +212,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const userNameEl = document.getElementById("user-name");
   if (userNameEl) {
     userNameEl.textContent = session.name;
-    userNameEl.href = "Profile.html";
+    userNameEl.href = "../../pages/landpage/Profile.html";
   }
 
   const homeBtn = document.getElementById("home-btn");
   if (homeBtn) {
     homeBtn.addEventListener("click", function () {
-      window.location.href = "../index.html";
+      window.location.href = "../../index.html";
     });
   }
 
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
     logoutBtn.addEventListener("click", function (e) {
       e.preventDefault();
       DB.clearSession();
-      window.location.href = "../index.html";
+      window.location.href = "../../index.html";
     });
   }
 

@@ -9,10 +9,9 @@
 //  Roles: "admin" | "seller" | "customer"
 // ══════════════════════════════════════════════════════════════════
 
- API_URL = "https://e-commerce-server-xi.vercel.app";
+API_URL = "https://e-commerce-server-xi.vercel.app";
 
 const DB = {
-
   // ══════════════════════════════════════════════════════════════
   //  SESSION  (localStorage only)
   // ══════════════════════════════════════════════════════════════
@@ -32,7 +31,6 @@ const DB = {
     console.log("[DB] clearSession");
   },
 
-
   // ══════════════════════════════════════════════════════════════
   //  USERS
   // ══════════════════════════════════════════════════════════════
@@ -47,7 +45,7 @@ const DB = {
 
   async findByEmail(email) {
     const res = await fetch(
-      `${API_URL}/users?email=${encodeURIComponent(email.toLowerCase().trim())}`
+      `${API_URL}/users?email=${encodeURIComponent(email.toLowerCase().trim())}`,
     );
     if (!res.ok) throw new Error(`findByEmail failed: ${res.status}`);
     const users = await res.json();
@@ -101,7 +99,6 @@ const DB = {
     console.log("[DB] deleteUser:", id);
     return true;
   },
-
 
   // ══════════════════════════════════════════════════════════════
   //  PRODUCTS
@@ -157,16 +154,13 @@ const DB = {
     return true;
   },
 
-
   // ══════════════════════════════════════════════════════════════
   //  CART
   //  Cart item shape: { id, userId, productId, quantity }
   // ══════════════════════════════════════════════════════════════
 
   async getCart(userId) {
-    const url = userId
-      ? `${API_URL}/cart?userId=${userId}`
-      : `${API_URL}/cart`;
+    const url = userId ? `${API_URL}/cart?userId=${userId}` : `${API_URL}/cart`;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`getCart failed: ${res.status}`);
     const data = await res.json();
@@ -200,7 +194,9 @@ const DB = {
   },
 
   async removeFromCart(cartItemId) {
-    const res = await fetch(`${API_URL}/cart/${cartItemId}`, { method: "DELETE" });
+    const res = await fetch(`${API_URL}/cart/${cartItemId}`, {
+      method: "DELETE",
+    });
     if (!res.ok) throw new Error(`removeFromCart failed: ${res.status}`);
     console.log("[DB] removeFromCart:", cartItemId);
     return true;
@@ -209,11 +205,15 @@ const DB = {
   async clearCart(userId) {
     // Fetch all cart items for user then delete each one
     const items = await this.getCart(userId);
-    console.log("[DB] clearCart — deleting", items.length, "items for userId:", userId);
-    await Promise.all(items.map(item => this.removeFromCart(item.id)));
+    console.log(
+      "[DB] clearCart — deleting",
+      items.length,
+      "items for userId:",
+      userId,
+    );
+    await Promise.all(items.map((item) => this.removeFromCart(item.id)));
     console.log("[DB] clearCart — done for userId:", userId);
   },
-
 
   // ══════════════════════════════════════════════════════════════
   //  ORDERS
@@ -275,5 +275,7 @@ const DB = {
     if (!res.ok) throw new Error(`deleteOrder failed: ${res.status}`);
     console.log("[DB] deleteOrder:", id);
     return true;
+
+    return res.json();
   },
 };

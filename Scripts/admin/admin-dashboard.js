@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", async function () {
-
   const session = DB.getSession();
-  if (!session || (session.role !== "admin")) {
+  if (!session || session.role !== "admin") {
     window.location.href = "../../index.html";
   }
-  
+
   function logout() {
     localStorage.removeItem("shop_session");
-    window.location.href = "../../login.html";
+    window.location.href = "../../pages/Auth/login.html";
     console.log(this);
   }
 
   const usersContainer = document.getElementById("users");
   const searchInput = document.querySelector("input[type='text']");
   const searchBtn = document.querySelector(".btn-outline-secondary");
-
+  const userName = document.getElementById("user-name");
+  userName.textContent = session.name;
   // ── Delete modal elements ─────────────────────────────────────
   const deleteModal = new bootstrap.Modal(
     document.getElementById("deleteModal"),

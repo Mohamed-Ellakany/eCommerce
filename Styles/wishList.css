@@ -1,0 +1,129 @@
+.cart-nav-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.wishlist-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.03);
+}
+
+.wishlist-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top-wrapper {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+    padding: 1rem;
+    position: relative;
+}
+
+.card-img-top-wrapper img {
+    max-height: 160px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.btn-outline-danger i,
+.btn-danger i {
+    pointer-events: none;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #fff !important;
+}
+
+.subscribe-form input {
+    background: transparent;
+    border: 1px solid #6c757d;
+    color: white;
+    width: 100%;
+    outline: none;
+}
+
+.subscribe-form button {
+    background: transparent;
+    border: 1px solid #6c757d;
+    border-left: none;
+    color: white;
+}
+
+.app-badge {
+    background: #1e1e1e;
+    border-radius: 6px;
+}
+
+.social-icons a {
+    width: 36px;
+    height: 36px;
+    background: #2e2e2e;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icons a:hover {
+    background: #dc3545;
+}
+
+.login-prompt {
+    background-color: #fff3f3;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid #ffcdcd;
+}
+
+/* Wishlist nav wrapper — mirrors .cart-nav-wrapper */
+.wishlist-nav-wrapper {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wishlist-badge {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+    line-height: 1.2;
+    /* Hidden when count is 0 */
+    display: none;
+}
+
