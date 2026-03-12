@@ -25,7 +25,7 @@ function displayProducts(productList) {
     for (let i = 0; i < productList.length; i++) {
       ProductCatologDiv.innerHTML += `  
         <div 
-        class="flash-product-card flex-shrink-0 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3">
+        class="flash-product-card flex-shrink-0 pb-4   flex-wrap  col-sm-6 col-md-4 col-lg-3">
 
                     <div class="product-img-wrap position-relative ">
                         <span class="discount-badge">-35%</span>
@@ -87,3 +87,5 @@ function searchByName() {
   );
   displayProducts(filteredProducts);
 }
+
+
