@@ -1,19 +1,17 @@
 let allProducts = [];
 async function getProducts() {
-  let response = await fetch(
-    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
+  const response = await fetch(
+    "https://json-server-for-ecomerce-app-cst.vercel.app/products"
   );
 
+  const data = await response.json();
+  allProducts = data;
   let params = new URLSearchParams(window.location.search);
   let categoryFromURL = params.get("category");
 
-    let response = await fetch(
-      "https://json-server-for-ecomerce-app-cst.vercel.app/products",
-    );
-
   let filteredProducts;
 
-  allProducts = data;
+
 
   if (categoryFromURL) {
     filteredProducts = allProducts.filter(
@@ -82,10 +80,11 @@ function displayProducts(productList) {
                     </div>
                 
                 </a>`;
+        
+        
+      }
   WL.initButtons();
-        
-        
-    }
+      
   } else {
     ProductCatologDiv.innerHTML = `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
   }
