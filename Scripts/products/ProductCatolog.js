@@ -2,7 +2,9 @@
 let allProducts=[];
 async function getProducts(){
 
-    let response = await fetch("https://e-commerce-server-xi.vercel.app/products");
+    let response = await fetch(
+      "https://json-server-for-ecomerce-app-cst.vercel.app/products",
+    );
 
     let data = await response.json();
 
@@ -27,7 +29,9 @@ function displayProducts(productList){
  ProductCatologDiv.innerHTML = "";
 if(productList.length>0){
     for (let i = 0; i < productList.length; i++) {
-        ProductCatologDiv.innerHTML+=`  
+    const inStock = (productList[i].stock || 0) > 0;
+
+        ProductCatologDiv.innerHTML += `  
         <div 
         class="flash-product-card flex-shrink-0 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3">
 
@@ -36,13 +40,22 @@ if(productList.length>0){
                         <a href="../../pages/products/productDetails.html?id=${productList[i].id}">
                         <img src="${productList[i].images[0]}" alt="${productList[i].name}" class="w-100">
                         </a>
-                        <div class="product-actions position-absolute d-flex flex-column gap-2">
-                            <button class="action-btn" aria-label="Wishlist"><i
-                                    class="fa-regular fa-heart"></i></button>
-                            <button class="action-btn" aria-label="Quick view"><i
-                                    class="fa-regular fa-eye"></i></button>
-                        </div>
-                        <button class="add-to-cart-btn w-100">Add To Cart</button>
+                         <div class="product-actions position-absolute d-flex flex-column gap-2">
+
+                   <div class="product-actions position-absolute d-flex flex-column gap-2">
+          <button class="wishlist-toggle-btn action-btn border-none d-flex justify-content-center align-items-center"
+                  aria-label="Add to wishlist" title="Add to wishlist"
+                  data-product-id="${productList[i].id}">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+              </div>
+
+             <button class="add-to-cart-btn w-100" data-id="${productList[i].id}" ${!inStock ? "disabled" : ""}
+               style="${!inStock ? "opacity:.5;cursor:not-allowed;" : ""}">
+               ${inStock ? "Add To Cart" : "Out of Stock"}
+             </button>
+
                     </div>
                     <div class="pt-2 ">
                         <p class="product-name mb-1">${productList[i].name}</p>
@@ -59,7 +72,9 @@ if(productList.length>0){
                         </div>
                     </div>
                 
-                </a>` ;
+                </a>`;
+  WL.initButtons();
+        
         
     }
 }else{
