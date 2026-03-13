@@ -287,7 +287,7 @@ document
       alertEl.textContent = "✓ Account created! Redirecting to your profile…";
       alertEl.classList.remove("d-none");
 
-      setTimeout(() => (window.location.href = "profile.html"), 1400);
+      setTimeout(() => (window.location.href = "../../pages/landpage/Profile.html"), 1400);
     } catch (error) {
       console.error("Registration error:", error);
       alertEl.className = "alert alert-danger py-2 mb-3";
