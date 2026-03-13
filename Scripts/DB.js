@@ -9,7 +9,7 @@
 //  Roles: "admin" | "seller" | "customer"
 // ══════════════════════════════════════════════════════════════════
 
-API_URL = "https://e-commerce-server-xi.vercel.app";
+API_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
 
 const DB = {
   // ══════════════════════════════════════════════════════════════

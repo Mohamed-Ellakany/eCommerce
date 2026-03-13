@@ -1,7 +1,7 @@
 let allProducts = [];
 async function getProducts() {
   let response = await fetch(
-    "https://e-commerce-server-xi.vercel.app/products",
+    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
   );
 
   let params = new URLSearchParams(window.location.search);
@@ -11,16 +11,15 @@ async function getProducts() {
 
   let filteredProducts;
 
-    allProducts = data;
+  allProducts = data;
 
-if(categoryFromURL){
-    filteredProducts = allProducts.filter(p => p.category.toLowerCase() === categoryFromURL.toLocaleLowerCase());
-}else{
+  if (categoryFromURL) {
+    filteredProducts = allProducts.filter(
+      (p) => p.category.toLowerCase() === categoryFromURL.toLocaleLowerCase(),
+    );
+  } else {
     filteredProducts = allProducts;
-}
-
-
-
+  }
 
   displayProducts(filteredProducts);
 }
@@ -91,58 +90,49 @@ function displayProducts(productList) {
 
 // displayProducts(allProducts);
 
-
 let filtersButtons = document.querySelectorAll(".filter-btn");
 
-filtersButtons.forEach(btn=>{
-  btn.addEventListener("click", function(){
-
-    filtersButtons.forEach(b => b.classList.remove("active"));
+filtersButtons.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    filtersButtons.forEach((b) => b.classList.remove("active"));
     this.classList.add("active");
 
     currentCategory = this.dataset.category.toLowerCase();
 
     applyFilters();
-
   });
 });
 
-
 let SearchInput = document.getElementById("SearchInput");
 
-SearchInput.addEventListener("keyup", function(){
-
+SearchInput.addEventListener("keyup", function () {
   currentSearch = this.value.toLowerCase();
 
   applyFilters();
-
 });
 
 let currentCategory = "all";
 let currentSearch = "";
 
-
-function applyFilters(){
-
+function applyFilters() {
   let filtered = allProducts;
 
   // category filter
-  if(currentCategory !== "all"){
-    filtered = filtered.filter(p =>
-      p.category.toLowerCase() === currentCategory
+  if (currentCategory !== "all") {
+    filtered = filtered.filter(
+      (p) => p.category.toLowerCase() === currentCategory,
     );
   }
 
   // search filter
-  if(currentSearch !== ""){
-    filtered = filtered.filter(p =>
-      p.name.toLowerCase().includes(currentSearch)
+  if (currentSearch !== "") {
+    filtered = filtered.filter((p) =>
+      p.name.toLowerCase().includes(currentSearch),
     );
   }
 
   displayProducts(filtered);
-  console.log("hello")
-
+  console.log("hello");
 }
 
 applyFilters();
