@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Online Shop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <style>
+      :root {
+        --mainColor: #db4444;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .top-banner {
+        background: #000;
+        color: #fff;
+      }
+
+      .login-wrapper {
+        max-width: 860px;
+        min-height: 520px;
+        border: 1px solid #e8e8e8;
+        overflow: hidden;
+      }
+
+      .image-panel {
+        flex: 1;
+        background: #cbe4e8;
+      }
+
+      .image-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .form-panel {
+        flex: 1;
+      }
+
+      .form-panel h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+      }
+
+      .form-group input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        font-size: 0.9rem;
+        color: #333;
+        outline: none;
+        background: transparent;
+        padding: 8px 0;
+        transition: border-color 0.2s;
+      }
+
+      .form-group input::placeholder {
+        color: #aaa;
+      }
+
+      .form-group input:focus {
+        border-bottom-color: var(--mainColor);
+      }
+
+      .form-group input.is-invalid {
+        border-bottom-color: var(--mainColor);
+      }
+
+      .invalid-msg {
+        display: none;
+        color: var(--mainColor);
+        font-size: 0.78rem;
+        margin-top: 4px;
+      }
+
+      .form-group.has-error .invalid-msg {
+        display: block;
+      }
+
+      .btn-login {
+        background: var(--mainColor);
+        padding: 12px 40px;
+        font-size: 0.95rem;
+        cursor: pointer;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        transition: opacity 0.2s;
+      }
+
+      .btn-login:hover {
+        opacity: 0.88;
+      }
+
+      .forgot-link {
+        color: var(--mainColor);
+        font-size: 0.85rem;
+      }
+
+      footer {
+        background: #1a1a2e;
+        color: #ccc;
+      }
+
+      footer h6 {
+        font-weight: 600;
+      }
+
+      footer a {
+        display: block;
+        color: #ccc;
+        text-decoration: none;
+        margin-bottom: 8px;
+      }
+
+      footer a:hover {
+        color: #fff;
+      }
+
+      footer address {
+        color: #aaa;
+        font-size: 0.85rem;
+      }
+
+      .subscribe-form {
+        border: 1px solid #555;
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+      }
+
+      .subscribe-form input {
+        background: transparent;
+        border: none;
+        color: #fff;
+        padding: 8px 12px;
+        flex: 1;
+        outline: none;
+        font-size: 0.85rem;
+      }
+
+      .subscribe-form input::placeholder {
+        color: #888;
+      }
+
+      .subscribe-form button {
+        background: transparent;
+        border: none;
+        color: #ccc;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      .social-icons a {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #555;
+        color: #ccc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+        text-decoration: none;
+      }
+
+      .social-icons a:hover {
+        background: var(--mainColor);
+        border-color: var(--mainColor);
+        color: #fff;
+      }
+
+      .app-badge {
+        border: 1px solid #555;
+        border-radius: 6px;
+      }
+
+      @media (max-width: 767px) {
+        .login-wrapper {
+          flex-direction: column;
+          max-width: 420px;
+          min-height: auto;
+        }
+
+        .image-panel {
+          display: none !important;
+        }
+
+        .form-panel {
+          padding: 40px 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <!-- Main navbar -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
+        <div class="container-xl container-fluid d-flex align-items-center">
+          <!-- Brand -->
+          <a
+            class="navbar-brand fw-bold fs-4 me-auto me-lg-0"
+            href="../../index.html"
+            >ONLINE SHOP</a
+          >
+
+          <div
+            class="collapse navbar-collapse ms-xl-5 ps-xl-5 w-100"
+            id="navbarSupportedContent"
+          >
+            <ul
+              class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0"
+            >
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="../../index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../landpage/Contact.html">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../landpage/About.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="" id="profileLink"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      class="container d-flex justify-content-center align-items-center py-4"
+    >
+      <div class="login-wrapper d-flex w-100 rounded-3 m-4">
+        <div
+          class="image-panel d-none d-md-flex align-items-center justify-content-center"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&q=80"
+            alt="Shopping"
+          />
+        </div>
+        <div
+          class="form-panel d-flex justify-content-center flex-column py-4 px-5"
+        >
+          <h2 class="text-black mb-2">Log in to Exclusive</h2>
+          <p class="mb-5" style="color: #555; font-size: 0.9rem">
+            Enter your details below
+          </p>
+
+          <!-- Demo credentials hint -->
+          <div
+            class="alert py-2 mb-4"
+            style="
+              background: #fff8e1;
+              border: 1px solid #ffe082;
+              font-size: 0.78rem;
+              border-radius: 6px;
+            "
+          >
+            <strong>Demo Admin:</strong> admin@shop.com / Admin@1234
+          </div>
+
+          <div
+            id="loginAlert"
+            class="alert alert-danger d-none py-2 mb-3"
+            style="font-size: 0.85rem"
+          ></div>
+
+          <div class="form-group mb-4" id="emailGroup">
+            <input
+              id="loginEmail"
+              type="text"
+              placeholder="Email Address"
+              autocomplete="username"
+            />
+            <span class="invalid-msg" id="emailError"
+              >Please enter a valid email.</span
+            >
+          </div>
+          <div class="form-group mb-4" id="passwordGroup">
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Password"
+              autocomplete="current-password"
+            />
+            <span class="invalid-msg" id="passwordError"
+              >Password is required.</span
+            >
+          </div>
+          <div class="actions d-flex align-items-center gap-4 mt-3">
+            <button class="btn-login" id="loginBtn">Log In</button>
+            <a href="#" class="forgot-link text-decoration-none"
+              >Forget Password?</a
+            >
+          </div>
+          <p class="mt-4 mb-0" style="font-size: 0.85rem; color: #555">
+            Don't have an account?
+            <a href="./Register.html" style="color: var(--mainColor)"
+              >Sign Up</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../Scripts/DB.js"></script>
+    <script src="../../Scripts/Auth/Login.js"></script>
+    <script src="../../Scripts/script.js"></script>
+  </body>
+</html>

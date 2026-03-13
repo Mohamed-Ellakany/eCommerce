@@ -8,6 +8,16 @@ body {
 :root {
     --mainFont: 'Franklin Gothic Medium';
     --mainColor: #DB4444;
+    --green: #00e94d;
+        --Lightgray : #F5F5F5;
+    --dark: #0a0a0a;
+    --dark2: #111111;
+        --main-hover: #b62e2e;
+        --dark-bg: #0b1120;
+        --text-muted: #6c757d;
+        --border-light: #e9ecef;
+        --transition: all 0.3s ease;
+
 }
 
 header nav p {
@@ -22,7 +32,30 @@ header nav p {
     font-family: var(--mainFont);
 }
 
+.navbar i {
+    cursor: pointer;
+}
+ .cart-nav-wrapper {
+     position: relative;
+     cursor: pointer;
+ }
 
+ .cart-badge {
+     position: absolute;
+     top: -8px;
+     right: -8px;
+     background: #db4444;
+     color: #fff;
+     font-size: 10px;
+     font-weight: 700;
+     width: 18px;
+     height: 18px;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     line-height: 1;
+ }
 input::placeholder {
     font-size: 14px;
 }
@@ -52,7 +85,100 @@ input::placeholder {
 }
 
 
+/* ══════════════════════════════════════════════════════════════════
+   Wishlist Toggle Button
+   Add these styles to your global stylesheet (e.g. style.css)
+   ══════════════════════════════════════════════════════════════════ */
 
+/* ── Base button ── */
+.wishlist-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #6c757d;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease,
+        box-shadow 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    padding: 0;
+}
+
+.wishlist-toggle-btn:hover {
+    background: #fff;
+    color: #dc3545;
+    transform: scale(1.12);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.25);
+}
+
+/* ── Wishlisted (active) state ── */
+.wishlist-toggle-btn.wishlisted {
+    background: #fff;
+    color: #dc3545;
+}
+
+.wishlist-toggle-btn.wishlisted i {
+    animation: wishlist-pop 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* ── Disabled state ── */
+.wishlist-toggle-btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ── Pop animation on add ── */
+@keyframes wishlist-pop {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.45);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ── Nav wishlist wrapper (mirrors .cart-nav-wrapper) ── */
+.wishlist-nav-wrapper {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Nav wishlist badge ── */
+.wishlist-badge {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    background: #dc3545;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.68rem;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    display: none;
+    /* shown via JS when count > 0 */
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0 4px;
+    pointer-events: none;
+}
 
 @keyframes fadeInDown {
     from {
@@ -70,133 +196,133 @@ input::placeholder {
 
 
 footer {
-            background-color: #000000;
-            color: #c0c0c0;
-            font-size: 0.875rem;
-        }
+    background-color: #000000;
+    color: #c0c0c0;
+    font-size: 0.875rem;
+}
 
-        footer h6 {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+footer h6 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
 
-        footer p,
-        footer address {
-            font-size: 0.825rem;
-            color: #aaaaaa;
-            line-height: 1.8;
-        }
+footer p,
+footer address {
+    font-size: 0.825rem;
+    color: #aaaaaa;
+    line-height: 1.8;
+}
 
-        footer a {
-            color: #aaaaaa;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.2s ease;
-        }
+footer a {
+    color: #aaaaaa;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.2s ease;
+}
 
-        footer a:hover {
-            color: var(--mainColor);
-        }
+footer a:hover {
+    color: var(--mainColor);
+}
 
-        footer .subscribe-label {
-            font-size: 0.78rem;
+footer .subscribe-label {
+    font-size: 0.78rem;
 
-        }
+}
 
-        footer .subscribe-form {
-            border-radius: 4px;
-            overflow: hidden;
-            background: #1a1a1a;
-        }
+footer .subscribe-form {
+    border-radius: 4px;
+    overflow: hidden;
+    background: #1a1a1a;
+}
 
-        footer .subscribe-form input {
-            background: transparent;
-            outline: none;
-            color: #ccc;
+footer .subscribe-form input {
+    background: transparent;
+    outline: none;
+    color: #ccc;
 
-            font-size: 0.8rem;
-            flex: 1;
-        }
+    font-size: 0.8rem;
+    flex: 1;
+}
 
-        footer .subscribe-form input::placeholder {
-            color: #555;
-        }
+footer .subscribe-form input::placeholder {
+    color: #555;
+}
 
-        footer .subscribe-form button {
-            background: transparent;
-            border: none;
-            border-left: 1px solid #333;
-            color: #aaa;
-            cursor: pointer;
-            transition: color 0.2s, background 0.2s;
-        }
+footer .subscribe-form button {
+    background: transparent;
+    border: none;
+    border-left: 1px solid #333;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+}
 
-        footer .subscribe-form button:hover {
-            background: var(--mainColor);
+footer .subscribe-form button:hover {
+    background: var(--mainColor);
 
-            border-left-color: var(--mainColor);
-        }
+    border-left-color: var(--mainColor);
+}
 
-        footer .app-badges {
-            flex-direction: column;
-        }
+footer .app-badges {
+    flex-direction: column;
+}
 
-        footer .app-badge {
-
-
-            border-radius: 6px;
-            border: 1px solid transparent;
-            background: #1a1a1a;
-            transition: border-color 0.2s, background 0.2s;
-            width: fit-content;
-        }
-
-        footer .app-badge:hover {
-            border: 1px solid var(--mainColor);
-            background: #222;
-        }
-
-        footer .app-badge i {
-            font-size: 1.4rem;
-            color: #ccc;
-        }
-
-        footer .app-badge .badge-text small {
-
-            font-size: 0.65rem;
-
-            line-height: 1;
-        }
-
-        footer .app-badge .badge-text span {
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
+footer .app-badge {
 
 
-        footer .social-icons a {
-            width: 34px;
-            height: 34px;
-            border: 1px solid #333;
-            color: #aaa;
-            font-size: 0.9rem;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: #1a1a1a;
+    transition: border-color 0.2s, background 0.2s;
+    width: fit-content;
+}
 
-        .social-icons a:hover {
-            background: var(--mainColor);
-            border-color: var(--mainColor);
-            color: #fff;
-        }
+footer .app-badge:hover {
+    border: 1px solid var(--mainColor);
+    background: #222;
+}
 
-        footer .footer-bottom {
+footer .app-badge i {
+    font-size: 1.4rem;
+    color: #ccc;
+}
 
-            font-size: 0.78rem;
+footer .app-badge .badge-text small {
 
-        }
+    font-size: 0.65rem;
 
-        footer .save-text {
-            font-size: 0.72rem;
-            color: #777;
-        }
+    line-height: 1;
+}
+
+footer .app-badge .badge-text span {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+
+footer .social-icons a {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #333;
+    color: #aaa;
+    font-size: 0.9rem;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.social-icons a:hover {
+    background: var(--mainColor);
+    border-color: var(--mainColor);
+    color: #fff;
+}
+
+footer .footer-bottom {
+
+    font-size: 0.78rem;
+
+}
+
+footer .save-text {
+    font-size: 0.72rem;
+    color: #777;
+}
