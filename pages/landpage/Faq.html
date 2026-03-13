@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Online Market</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../Imgs/online-shop.png">
+</head>
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!--BootStrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
+    integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Animation library CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<style>
+    :root {
+        --primary: #DB4444;
+        --dark: #1a1a1a;
+        --footer-bg: #1a1a2e;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #fff;
+        color: #333;
+    }
+
+    /* ── Navbar ── */
+    .cart-nav-wrapper,
+    .wishlist-nav-wrapper {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .cart-badge,
+    .wishlist-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 10px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb-section {
+        padding: 14px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .breadcrumb-item a {
+        color: #777;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #333;
+        font-weight: 500;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        color: #aaa;
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+        padding: 50px 0 30px;
+    }
+
+    .section-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .badge-indicator {
+        display: inline-block;
+        width: 16px;
+        height: 36px;
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    .section-label {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 15px;
+    }
+
+    .page-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1a1a1a;
+    }
+
+    /* ── FAQ Cards ── */
+    .faq-search-bar {
+        max-width: 540px;
+        position: relative;
+    }
+
+    .faq-search-bar input {
+        border-radius: 30px;
+        padding: 12px 48px 12px 22px;
+        border: 1.5px solid #e0e0e0;
+        width: 100%;
+        font-size: 14px;
+        outline: none;
+        transition: border-color .2s;
+    }
+
+    .faq-search-bar input:focus {
+        border-color: var(--primary);
+    }
+
+    .faq-search-bar i {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+    }
+
+    .faq-category-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 36px;
+    }
+
+    .faq-tab {
+        padding: 8px 22px;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 30px;
+        background: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .2s;
+        color: #555;
+    }
+
+    .faq-tab.active,
+    .faq-tab:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #fff;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: #fff5f5;
+        color: var(--primary);
+        box-shadow: none;
+        font-weight: 600;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border-color: transparent;
+    }
+
+    .accordion-button::after {
+        filter: none;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        filter: none;
+    }
+
+    .accordion-item {
+        border: 1.5px solid #f0f0f0;
+        border-radius: 10px !important;
+        margin-bottom: 14px;
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        border-radius: 10px !important;
+        font-size: 15px;
+        font-weight: 500;
+        color: #222;
+        padding: 18px 24px;
+    }
+
+    .accordion-body {
+        color: #666;
+        font-size: 14.5px;
+        line-height: 1.75;
+        padding: 0 24px 18px;
+    }
+
+    /* ── Contact CTA ── */
+    .faq-cta {
+        background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+        border-radius: 16px;
+        padding: 48px 36px;
+        text-align: center;
+        margin: 60px 0;
+        border: 1.5px solid #ffd5d5;
+    }
+
+    .faq-cta h3 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+    }
+
+    .faq-cta p {
+        color: #777;
+        margin-bottom: 24px;
+        font-size: 15px;
+    }
+
+    .btn-primary-red {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        transition: opacity .2s;
+    }
+
+    .btn-primary-red:hover {
+        opacity: .88;
+        color: #fff;
+    }
+
+    /* ── Services ── */
+    .service-icon {
+        width: 64px;
+        height: 64px;
+        background: #222;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px;
+        font-size: 22px;
+        color: #fff;
+    }
+
+    .service-title {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .service-desc {
+        font-size: 13px;
+        color: #777;
+    }
+
+    /* ── Footer ── */
+    footer {
+        background: var(--footer-bg);
+        color: #bbb;
+        font-size: 14px;
+    }
+
+    footer a {
+        display: block;
+        color: #bbb;
+        text-decoration: none;
+        margin-bottom: 10px;
+        transition: color .2s;
+    }
+
+    footer a:hover {
+        color: #fff;
+    }
+
+    .subscribe-form {
+        display: flex;
+        border: 1px solid #555;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .subscribe-form input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: #fff;
+        outline: none;
+        font-size: 13px;
+    }
+
+    .subscribe-form button {
+        background: transparent;
+        border: none;
+        color: #bbb;
+        padding: 0 12px;
+        cursor: pointer;
+    }
+
+    .social-icons a {
+        width: 34px;
+        height: 34px;
+        background: rgba(255, 255, 255, .08);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 0;
+        transition: background .2s;
+        text-decoration: none;
+    }
+
+    .social-icons a:hover {
+        background: var(--primary);
+    }
+
+    .app-badge {
+        border: 1px solid #444;
+        border-radius: 6px;
+    }
+</style>
+
+<body>
+
+    <header>
+        <!-- Top banner -->
+        <nav
+            class="w-100 bg-black text-light overflow-hidden d-flex justify-content-center align-items-center flex-wrap py-2">
+            <p class="my-auto text-center px-3 mb-0">Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+                <button class="bg-transparent text-light text-decoration-underline border-0">Shop Now</button>
+            </p>
+        </nav>
+
+        <!-- Main navbar -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
+            <div class="container-xl container-fluid d-flex align-items-center">
+                <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="../../index.html">ONLINE SHOP</a>
+
+                <div class="d-flex align-items-center gap-3 order-lg-3">
+                    <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
+                        <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
+                            placeholder="What are you looking for?" aria-label="Search" />
+                        <i
+                            class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+                    </div>
+                    <div class="cart-nav-wrapper" onclick="location.href='../products/cart.html'">
+                        <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
+                        <span class="cart-badge" id="navCartCount">0</span>
+                    </div>
+                    <div class="wishlist-nav-wrapper" onclick="location.href='../products/wishlist.html'" role="button"
+                        style="cursor:pointer;">
+                        <i class="fa-solid fa-heart fa-xl text-danger-emphasis"></i>
+                        <span class="wishlist-badge" id="navWishlistCount">0</span>
+                    </div>
+                    <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../Auth/login.html">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Search -->
+        <div class="d-lg-none d-md-none p-3 bg-light border-top">
+            <div class="position-relative w-100">
+                <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
+                    placeholder="What are you looking for?" />
+                <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section px-xl-5 px-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                <li class="breadcrumb-item active">FAQ</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="px-xl-5 px-4">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="section-badge">
+                <span class="badge-indicator"></span>
+                <span class="section-label">Help Center</span>
+            </div>
+            <h1 class="page-title">Frequently Asked Questions</h1>
+            <p class="text-muted mt-2" style="max-width:560px;">Find quick answers to the most common questions about
+                our store, orders, shipping, and more.</p>
+
+            <!-- Search -->
+            <div class="faq-search-bar mt-4">
+                <input type="text" id="faqSearch" placeholder="Search your question..." />
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="faq-category-tabs" id="faqTabs">
+            <button class="faq-tab active" data-cat="all">All</button>
+            <button class="faq-tab" data-cat="orders">Orders</button>
+            <button class="faq-tab" data-cat="shipping">Shipping</button>
+            <button class="faq-tab" data-cat="returns">Returns & Refunds</button>
+            <button class="faq-tab" data-cat="payment">Payment</button>
+            <button class="faq-tab" data-cat="account">Account</button>
+        </div>
+
+        <!-- Accordion -->
+        <div class="accordion" id="faqAccordion">
+
+            <!-- Orders -->
+            <div class="accordion-item" data-cat="orders">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        <i class="fas fa-box me-3 text-danger"></i> How do I place an order?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Browse our catalog, add items to your cart, and proceed to checkout. You
+                        can check out as a guest or log in to your account for a faster experience. You'll receive a
+                        confirmation email once your order is placed successfully.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="orders">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq2">
+                        <i class="fas fa-search me-3 text-danger"></i> How can I track my order?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Once your order is shipped, you'll receive a tracking number via email.
+                        You can use this number on our website under "My Account → Orders" or on the courier's website
+                        to track your shipment in real time.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="orders">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq3">
+                        <i class="fas fa-edit me-3 text-danger"></i> Can I modify or cancel my order?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Orders can be modified or cancelled within 1 hour of placement. After
+                        that, the order enters processing and changes may not be possible. Please contact our support
+                        team as soon as possible if you need to make changes.</div>
+                </div>
+            </div>
+
+            <!-- Shipping -->
+            <div class="accordion-item" data-cat="shipping">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq4">
+                        <i class="fas fa-truck me-3 text-danger"></i> How long does shipping take?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Standard shipping takes 5–7 business days. Express delivery takes 1–3
+                        business days. Same-day delivery is available in select cities. Estimated delivery time is shown
+                        at checkout based on your location.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="shipping">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq5">
+                        <i class="fas fa-dollar-sign me-3 text-danger"></i> Is free shipping available?
+                    </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes! We offer free standard shipping on all orders over $140. Orders
+                        below this threshold have a flat shipping fee depending on your location. During sales events,
+                        free shipping thresholds may be reduced.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="shipping">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq6">
+                        <i class="fas fa-globe me-3 text-danger"></i> Do you ship internationally?
+                    </button>
+                </h2>
+                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, we ship to over 50 countries worldwide. International shipping
+                        times vary between 7–21 business days depending on the destination. Additional customs duties
+                        and taxes may apply and are the buyer's responsibility.</div>
+                </div>
+            </div>
+
+            <!-- Returns -->
+            <div class="accordion-item" data-cat="returns">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq7">
+                        <i class="fas fa-undo me-3 text-danger"></i> What is your return policy?
+                    </button>
+                </h2>
+                <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">We accept returns within 30 days of delivery. Items must be unused, in
+                        original packaging, with all tags attached. Sale items and personal care products are
+                        non-returnable. To start a return, go to My Account → Orders → Request Return.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="returns">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq8">
+                        <i class="fas fa-money-bill-wave me-3 text-danger"></i> How long do refunds take?
+                    </button>
+                </h2>
+                <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Once we receive and inspect your returned item, refunds are processed
+                        within 3–5 business days. The amount will be credited to your original payment method. Bank
+                        processing times may add an additional 2–5 days.</div>
+                </div>
+            </div>
+
+            <!-- Payment -->
+            <div class="accordion-item" data-cat="payment">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq9">
+                        <i class="fas fa-credit-card me-3 text-danger"></i> What payment methods do you accept?
+                    </button>
+                </h2>
+                <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">We accept all major credit and debit cards (Visa, Mastercard, Amex),
+                        PayPal, Apple Pay, Google Pay, and bank transfers. All transactions are secured with SSL
+                        encryption for your safety.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="payment">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq10">
+                        <i class="fas fa-lock me-3 text-danger"></i> Is my payment information safe?
+                    </button>
+                </h2>
+                <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Absolutely. We never store your full card details on our servers. All
+                        payments are processed through PCI-DSS compliant payment gateways. We use industry-standard
+                        SSL/TLS encryption to protect all data transmitted on our platform.</div>
+                </div>
+            </div>
+
+            <!-- Account -->
+            <div class="accordion-item" data-cat="account">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq11">
+                        <i class="fas fa-user me-3 text-danger"></i> How do I create an account?
+                    </button>
+                </h2>
+                <div id="faq11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Click "Sign Up" in the top navigation bar. Fill in your name, email, and
+                        password. You'll receive a verification email — click the link to activate your account. You can
+                        also sign up using your Google or Facebook account.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-cat="account">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq12">
+                        <i class="fas fa-key me-3 text-danger"></i> I forgot my password. What should I do?
+                    </button>
+                </h2>
+                <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Click "Login" then select "Forgot Password". Enter your registered email
+                        and we'll send you a password reset link. The link is valid for 30 minutes. If you don't receive
+                        the email, check your spam folder or contact our support team.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+        <div class="faq-cta">
+            <i class="fas fa-headset fa-2x mb-3" style="color:var(--primary)"></i>
+            <h3>Still have questions?</h3>
+            <p>Our friendly support team is available 24/7 and ready to help you.</p>
+            <a href="Contact.html" class="btn-primary-red">Contact Support</a>
+        </div>
+
+    </main>
+
+    <!-- Services -->
+    <section class="py-5 px-3 px-md-5">
+        <div class="row text-center g-4">
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+                <div class="service-icon"><i class="fas fa-truck"></i></div>
+                <p class="service-title">FREE AND FAST DELIVERY</p>
+                <p class="service-desc">Free delivery for all orders over $140</p>
+            </div>
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-between">
+                <div class="service-icon"><i class="fas fa-headset"></i></div>
+                <p class="service-title">24/7 CUSTOMER SERVICE</p>
+                <p class="service-desc">Friendly 24/7 customer support</p>
+            </div>
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+                <div class="service-icon"><i class="fa-solid fa-money-bill"></i></div>
+                <p class="service-title">MONEY BACK GUARANTEE</p>
+                <p class="service-desc">We return money within 30 days</p>
+            </div>
+        </div>
+    </section>
+    <hr class="mx-5" />
+
+    <!-- Footer -->
+    <footer class="pt-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form border border-secondary">
+                        <input type="email" placeholder="Enter your email" class="px-2 py-2" />
+                        <button type="button" aria-label="Submit" class="px-2 py-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Support</h6>
+                    <address>
+                        111 Bijoy sarani, Dhaka,<br />DH 1515, Bangladesh.<br />
+                        exclusive@gmail.com<br />+88015-88888-9999
+                    </address>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Account</h6>
+                    <a href="../landpage/Profile.html">My Account</a>
+                    <a href="../Auth/login.html">Login / Register</a>
+                    <a href="../products/cart.html">Cart</a>
+                    <a href="../products/WishList.html">Wishlist</a>
+                    <a href="../products/ProductCatalog.html">Shop</a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+                    <a href="./PrivacyPolice.html">Privacy Policy</a>
+                    <a href="./TermsOfUse.html">Terms Of Use</a>
+                    <a href="./Faq.html">FAQ</a>
+                    <a href="./Contact.html">Contact</a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Download App</h6>
+                    <p class="mb-1">Save $3 with App New User Only</p>
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div><small class="d-block text-secondary mb-1">GET IT ON</small><span
+                                        class="text-white">Google Play</span></div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div><small class="d-block text-secondary mb-1">Download on the</small><span
+                                        class="text-white">App Store</span></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+            <div class="container">&copy; Copyright Rimel 2022. All right reserved</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tab filtering
+        document.querySelectorAll('.faq-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const cat = this.dataset.cat;
+                document.querySelectorAll('#faqAccordion .accordion-item').forEach(item => {
+                    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+                });
+            });
+        });
+
+        // Search filtering
+        document.getElementById('faqSearch').addEventListener('input', function () {
+            const q = this.value.toLowerCase();
+            document.querySelectorAll('#faqAccordion .accordion-item').forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,39 +1,48 @@
+let allProducts = [];
+async function getProducts() {
+  let response = await fetch(
+    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
+  );
 
-let allProducts=[];
-async function getProducts(){
+  let params = new URLSearchParams(window.location.search);
+  let categoryFromURL = params.get("category");
 
     let response = await fetch(
       "https://json-server-for-ecomerce-app-cst.vercel.app/products",
     );
 
-    let data = await response.json();
+  let filteredProducts;
 
+  allProducts = data;
 
-    allProducts = data;
-    
+  if (categoryFromURL) {
+    filteredProducts = allProducts.filter(
+      (p) => p.category.toLowerCase() === categoryFromURL.toLocaleLowerCase(),
+    );
+  } else {
+    filteredProducts = allProducts;
+  }
 
-    displayProducts(allProducts);
+  displayProducts(filteredProducts);
 }
 
 getProducts();
 
 for (let i = 0; i < allProducts.length; i++) {
-    console.log(allProducts[i].images);
-    
+  console.log(allProducts[i].images);
 }
 
-var ProductCatologDiv=document.getElementById("ProductCatolog");
+var ProductCatologDiv = document.getElementById("ProductCatolog");
 
-
-function displayProducts(productList){
- ProductCatologDiv.innerHTML = "";
-if(productList.length>0){
+function displayProducts(productList) {
+  ProductCatologDiv.innerHTML = "";
+  if (productList.length > 0) {
     for (let i = 0; i < productList.length; i++) {
     const inStock = (productList[i].stock || 0) > 0;
 
         ProductCatologDiv.innerHTML += `  
         <div 
-        class="flash-product-card flex-shrink-0 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3">
+        class="flash-product-card flex-shrink-0 pb-4   flex-wrap  col-sm-6 col-md-4 col-lg-3">
 
                     <div class="product-img-wrap position-relative ">
                         <span class="discount-badge">-35%</span>
@@ -77,23 +86,58 @@ if(productList.length>0){
         
         
     }
-}else{
-      ProductCatologDiv.innerHTML = 
-        `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
+  } else {
+    ProductCatologDiv.innerHTML = `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
+  }
 }
-}
-
-displayProducts(allProducts);
 
 // displayProducts(allProducts);
 
-var SearchInput=document.getElementById("SearchInput");
-SearchInput.addEventListener("keyup",searchByName);
+// displayProducts(allProducts);
 
+let filtersButtons = document.querySelectorAll(".filter-btn");
 
-function searchByName(){ 
-   
-    var SearchValue=SearchInput.value.toLowerCase();
-    let filteredProducts=allProducts.filter(product=>product.name.toLowerCase().includes(SearchValue));
-    displayProducts(filteredProducts);
+filtersButtons.forEach((btn) => {
+  btn.addEventListener("click", function () {
+    filtersButtons.forEach((b) => b.classList.remove("active"));
+    this.classList.add("active");
+
+    currentCategory = this.dataset.category.toLowerCase();
+
+    applyFilters();
+  });
+});
+
+let SearchInput = document.getElementById("SearchInput");
+
+SearchInput.addEventListener("keyup", function () {
+  currentSearch = this.value.toLowerCase();
+
+  applyFilters();
+});
+
+let currentCategory = "all";
+let currentSearch = "";
+
+function applyFilters() {
+  let filtered = allProducts;
+
+  // category filter
+  if (currentCategory !== "all") {
+    filtered = filtered.filter(
+      (p) => p.category.toLowerCase() === currentCategory,
+    );
+  }
+
+  // search filter
+  if (currentSearch !== "") {
+    filtered = filtered.filter((p) =>
+      p.name.toLowerCase().includes(currentSearch),
+    );
+  }
+
+  displayProducts(filtered);
+  console.log("hello");
 }
+
+applyFilters();

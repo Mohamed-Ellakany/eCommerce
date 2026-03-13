@@ -1,21 +1,35 @@
 // ══════════════════════════════════════════════════════════════════
 //  Checkout.js  —  Cart rendering + Order placement
-//  Depends on: db.js + cart.js  (both must be loaded first)
+//  Depends on: DB.js + cart.js  (both must be loaded first)
 //
-//  Cart source: Cart.getAll() from cart.js  (localStorage key: "user_cart")
-//  Cart item shape: { id, name, price, qty, images: [...], stock, category, sellerId }
+//  Cart item shape (from cart.js):
+//    { id, name, price, qty, images: [...], stock, category, sellerId }
 //
-//  Order shape:
+//  New Order shape:
 //  {
-//    id:       string (timestamp),
-//    userId:   string,
-//    items:    [{ productId, quantity }],
-//    total:    number,
-//    status:   "pending"
+//    id          : string (timestamp),
+//    date        : ISO string,
+//    customer    : { userId, name, email, address },
+//    paymentMethod: string,
+//    totalPrice  : number,
+//    status      : "pending",
+//    suborders   : [
+//      {
+//        id          : string  ("<orderId>-<sellerId>"),
+//        parentOrderId: string,
+//        sellerId    : string,
+//        date        : ISO string,
+//        customer    : { userId, name, email, address },
+//        products    : [{ productId, name, price, quantity, image }],
+//        paymentMethod: string,
+//        subTotal    : number,
+//        status      : "pending"
+//      }
+//    ]
 //  }
 // ══════════════════════════════════════════════════════════════════
 
-
+// ── Auth guard ────────────────────────────────────────────────────
 (function guardAuth() {
   const session = DB.getSession();
   if (!session) {
@@ -25,10 +39,14 @@
 
 // ── Helpers ───────────────────────────────────────────────────────
 
-
-
 function formatUSD(n) {
-  return "$" + Number(n).toLocaleString("en-US");
+  return (
+    "$" +
+    Number(n).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  );
 }
 
 function toNum(v) {
@@ -36,44 +54,40 @@ function toNum(v) {
   return isNaN(n) ? 0 : n;
 }
 
-// images is an array in cart.js: { images: ["url1", "url2"] }
+// Resolves first image from array or string; returns <img> or placeholder div
 function resolveImage(images, name) {
   const src = Array.isArray(images) ? images[0] : images;
   if (!src) return `<div class="item-placeholder">📦</div>`;
-  const isUrl = src.startsWith("http") || src.startsWith("/") || src.startsWith("data:");
+  const isUrl =
+    src.startsWith("http") || src.startsWith("/") || src.startsWith("data:");
   return isUrl
-    ? `<img src="${src}" alt="${name}" />`
+    ? `<img src="${src}" alt="${name}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'item-placeholder\\'>📦</div>'" />`
     : `<div class="item-placeholder">${src}</div>`;
 }
 
-
-// ── Render cart using Cart.getAll() ──────────────────────────────
+// ── Render cart ───────────────────────────────────────────────────
 
 function renderCart() {
-  // Cart.getAll() from cart.js — reads localStorage "user_cart"
   const cart = Cart.getAll();
-  console.log("[Checkout] renderCart — cart from Cart.getAll():", cart);
+  console.log("[Checkout] renderCart — cart:", cart);
 
   const container = document.getElementById("cart-items");
 
   if (!cart.length) {
     container.innerHTML = `<div class="empty-note">Your cart is empty.</div>`;
-    document.getElementById("subtotal").textContent = "$0";
-    document.getElementById("total").textContent = "$0";
-    console.log("[Checkout] renderCart — cart is empty.");
+    document.getElementById("subtotal").textContent = "$0.00";
+    document.getElementById("total").textContent = "$0.00";
     return;
   }
 
   let html = "";
   let subtotal = 0;
 
-  cart.forEach(item => {
+  cart.forEach((item) => {
     const price = toNum(item.price);
     const qty = toNum(item.qty) || 1;
     const lineTotal = price * qty;
     subtotal += lineTotal;
-
-    console.log(`[Checkout] renderCart — "${item.name}": $${price} × ${qty} = $${lineTotal}`);
 
     html += `
       <div class="cart-item">
@@ -89,25 +103,25 @@ function renderCart() {
   container.innerHTML = html;
   document.getElementById("subtotal").textContent = formatUSD(subtotal);
   document.getElementById("total").textContent = formatUSD(subtotal);
-  console.log("[Checkout] renderCart — subtotal:", formatUSD(subtotal));
 }
 
-
-// ── Payment method toggle ─────────────────────────────────────────
+// ── Payment toggle ────────────────────────────────────────────────
 
 function selectPayment(method) {
-  document.getElementById("opt-bank").classList.toggle("active", method === "bank");
-  document.getElementById("opt-cod").classList.toggle("active", method === "cod");
-  document.getElementById("radio-bank").checked = (method === "bank");
-  document.getElementById("radio-cod").checked = (method === "cod");
-  console.log("[Checkout] selectPayment:", method);
+  document
+    .getElementById("opt-bank")
+    .classList.toggle("active", method === "bank");
+  document
+    .getElementById("opt-cod")
+    .classList.toggle("active", method === "cod");
+  document.getElementById("radio-bank").checked = method === "bank";
+  document.getElementById("radio-cod").checked = method === "cod";
 }
 
-
-// ── Validate form ─────────────────────────────────────────────────
+// ── Form validation ───────────────────────────────────────────────
 
 function getFormData() {
-  const fields = [
+  const required = [
     { id: "firstName", label: "First Name" },
     { id: "streetAddress", label: "Street Address" },
     { id: "city", label: "Town / City" },
@@ -116,11 +130,10 @@ function getFormData() {
   ];
 
   const data = {};
-  for (const field of fields) {
+  for (const field of required) {
     const el = document.getElementById(field.id);
     const value = el ? el.value.trim() : "";
     if (!value) {
-      console.warn("[Checkout] getFormData — missing:", field.label);
       alert(`Please fill in: ${field.label}`);
       el && el.focus();
       return null;
@@ -130,86 +143,99 @@ function getFormData() {
 
   const apt = document.getElementById("apartment");
   data.apartment = apt ? apt.value.trim() : "";
-
-  console.log("[Checkout] getFormData:", data);
   return data;
 }
 
+// ── Build suborders by grouping cart items per sellerId ───────────
 
-// // ── Update product stock ──────────────────────────────────────────
+function buildSuborders(cart, orderId, customerInfo, paymentMethod, date) {
+  // Group items by sellerId
+  const sellerMap = {};
 
-// async function updateStock(cart) {
-//   console.log("[Checkout] updateStock — start:", cart);
+  cart.forEach((item) => {
+    const sellerId = String(item.sellerId || "unknown");
+    if (!sellerMap[sellerId]) sellerMap[sellerId] = [];
+    sellerMap[sellerId].push(item);
+  });
 
-//   const results = await Promise.allSettled(
-//     cart.map(async (item) => {
-//       // cart.js uses item.id as the product id
-//       const product = await DB.getProductById(item.id);
-//       if (!product) {
-//         console.warn(`[Checkout] updateStock — product "${item.id}" not found, skipping.`);
-//         return;
-//       }
-//       const currentStock = toNum(product.stock);
-//       const orderedQty = toNum(item.qty) || 1;
-//       const newStock = Math.max(0, currentStock - orderedQty);
+  return Object.entries(sellerMap).map(([sellerId, items]) => {
+    const products = items.map((item) => ({
+      productId: item.id,
+      name: item.name,
+      price: toNum(item.price),
+      quantity: toNum(item.qty) || 1,
+      image: Array.isArray(item.images)
+        ? item.images[0] || ""
+        : item.images || "",
+    }));
 
-//       await DB.updateProduct(item.id, { stock: newStock });
-//       console.log(`[Checkout] updateStock — ✅ "${item.name}": stock ${currentStock} → ${newStock}`);
-//     })
-//   );
+    const subTotal = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
 
-//   results.forEach((r, i) => {
-//     if (r.status === "rejected")
-//       console.warn(`[Checkout] updateStock — ❌ item[${i}]:`, r.reason);
-//   });
-// }
+    return {
+      id: `${orderId}-${sellerId}`,
+      parentOrderId: orderId,
+      sellerId,
+      date,
+      customer: customerInfo,
+      products,
+      paymentMethod,
+      subTotal: Math.round(subTotal * 100) / 100,
+      status: "pending",
+    };
+  });
+}
 
-
-// ── Update product stock ──────────────────────────────────────────
+// ── Stock update ──────────────────────────────────────────────────
 
 async function updateStock(cart) {
-  console.log("[Checkout] updateStock — start:", cart);
+  console.log("[Checkout] updateStock — cart items received:", cart);
 
   const results = await Promise.allSettled(
     cart.map(async (item) => {
-      const productId = item.id;           // cart.js stores product id as item.id
-      const orderedQty = toNum(item.qty) || 1;
+      // cart.js may store the product id as item.id or item.productId
+      const productId = item.productId || item.id;
+      const qty = toNum(item.qty) || 1;
 
-      // Fetch fresh stock from server to avoid stale reads
+      console.log(
+        `[Checkout] updateStock — looking up product id: "${productId}" for "${item.name}"`,
+      );
+
       const product = await DB.getProductById(productId);
+
       if (!product) {
-        console.warn(`[Checkout] updateStock — product "${productId}" not found, skipping.`);
+        console.warn(
+          `[Checkout] updateStock — ❌ product "${productId}" not found in DB. Skipping.`,
+        );
         return;
       }
 
       const currentStock = toNum(product.stock);
-      const newStock = Math.max(0, currentStock - orderedQty);
+      const newStock = Math.max(0, currentStock - qty);
+
+      console.log(
+        `[Checkout] updateStock — PATCHING "${item.name}" (id: ${productId}): stock ${currentStock} → ${newStock}`,
+      );
 
       await DB.updateProduct(productId, { stock: newStock });
+
       console.log(
-        `[Checkout] updateStock — ✅ "${item.name}" (id: ${productId}): ` +
-        `stock ${currentStock} → ${newStock} (ordered: ${orderedQty})`
+        `[Checkout] updateStock — ✅ "${item.name}" stock updated to ${newStock}`,
       );
-    })
+    }),
   );
 
-  // Log any failures without throwing — stock errors shouldn't cancel a placed order
   results.forEach((r, i) => {
-    if (r.status === "rejected") {
-      console.warn(`[Checkout] updateStock — ❌ item[${i}] failed:`, r.reason);
-    }
+    if (r.status === "rejected")
+      console.error(`[Checkout] updateStock — ❌ item[${i}] threw:`, r.reason);
   });
 
   console.log("[Checkout] updateStock — done.");
 }
 
-
 // ── Place Order ───────────────────────────────────────────────────
 
 async function placeOrder() {
-  console.log("[Checkout] placeOrder — triggered.");
-
-  // 1. Session check
+  // 1. Session
   const session = DB.getSession();
   if (!session) {
     alert("Please log in to place an order.");
@@ -220,61 +246,78 @@ async function placeOrder() {
   // 2. Validate form
   const formData = getFormData();
   if (!formData) return;
-  console.log("[Checkout] placeOrder — form:", formData);
 
   // 3. Payment method
   const paymentEl = document.querySelector('input[name="payment"]:checked');
-  const payment = paymentEl ? paymentEl.value : "cod";
-  console.log("[Checkout] placeOrder — payment:", payment);
+  const paymentValue = paymentEl ? paymentEl.value : "cod";
+  const paymentMethod =
+    paymentValue === "cod" ? "Cash on Delivery" : "Bank Transfer";
 
-  // 4. Cart from Cart.getAll()
+  // 4. Cart
   const cart = Cart.getAll();
   if (!cart.length) {
     alert("Your cart is empty. Please add items before placing an order.");
-    console.warn("[Checkout] placeOrder — empty cart, blocked.");
     return;
   }
-  console.log("[Checkout] placeOrder — cart:", cart);
 
-  // 5. Calculate total — same logic as renderCart
-  const total = cart.reduce((sum, item) => {
-    const lineTotal = toNum(item.price) * (toNum(item.qty) || 1);
-    console.log(`[Checkout] placeOrder — "${item.name}": $${item.price} × ${item.qty} = $${lineTotal}`);
-    return sum + lineTotal;
-  }, 0);
-  console.log("[Checkout] placeOrder — total:", formatUSD(total));
+  // 5. Build shared data
+  const orderId = Date.now().toString();
+  const date = new Date().toISOString();
 
-  // 6. Build order — map cart items to { productId, quantity }
-  const orderData = {
+  const address = [formData.streetAddress, formData.apartment, formData.city]
+    .filter(Boolean)
+    .join(", ");
+
+  const customerInfo = {
     userId: session.id,
-    items: cart.map(item => ({
-      productId: item.id,          // cart.js stores product id as item.id
-      quantity: toNum(item.qty) || 1,
-    })),
-    total,
-    status: "pending",
-    payment,
-    customer: {
-      name: formData.firstName,
-      email: formData.email,
-      phone: formData.phone,
-      address: [formData.streetAddress, formData.apartment, formData.city]
-        .filter(Boolean).join(", "),
-    },
+    name: formData.firstName,
+    email: formData.email,
+    address,
   };
-  console.log("[Checkout] placeOrder — orderData:", orderData);
 
-  // 7. Disable button
+  // 6. Total price
+  const totalPrice =
+    Math.round(
+      cart.reduce(
+        (sum, item) => sum + toNum(item.price) * (toNum(item.qty) || 1),
+        0,
+      ) * 100,
+    ) / 100;
+
+  // 7. Build suborders (grouped by sellerId)
+  const suborders = buildSuborders(
+    cart,
+    orderId,
+    customerInfo,
+    paymentMethod,
+    date,
+  );
+
+  // 8. Assemble full order matching DB shape
+  const orderData = {
+    id: orderId,
+    date,
+    customer: customerInfo,
+    paymentMethod,
+    totalPrice,
+    status: "pending",
+    suborders,
+  };
+
+  console.log(
+    "[Checkout] placeOrder — orderData:",
+    JSON.stringify(orderData, null, 2),
+  );
+
+  // 9. Disable button
   const btn = document.querySelector(".btn-place");
   btn.disabled = true;
   btn.textContent = "Placing Order…";
 
-  // 8. POST order via DB
   try {
     const saved = await DB.placeOrder(orderData);
-    console.log("[Checkout] placeOrder — ✅ order saved:", saved);
-    await onOrderSuccess(saved.id, payment, cart);
-
+    console.log("[Checkout] placeOrder — ✅ saved:", saved);
+    await onOrderSuccess(saved.id, paymentMethod, cart);
   } catch (err) {
     console.error("[Checkout] placeOrder — ❌ failed:", err.message);
     alert("Something went wrong. Please try again.");
@@ -283,28 +326,28 @@ async function placeOrder() {
   }
 }
 
+// ── Post-order success ────────────────────────────────────────────
 
-// ── After successful order ────────────────────────────────────────
+async function onOrderSuccess(orderId, paymentMethod, cart) {
+  console.log("[Checkout] onOrderSuccess — cart passed to stock update:", cart);
 
-async function onOrderSuccess(orderId, payment, cart) {
-  // 1. Decrement stock for every product in the order
   try {
     await updateStock(cart);
-    console.log("[Checkout] onOrderSuccess — stock updated successfully.");
+    console.log("[Checkout] onOrderSuccess — ✅ stock update complete.");
   } catch (err) {
-    // Non-fatal: order is already saved, just log the warning
-    console.warn("[Checkout] onOrderSuccess — stock update error:", err.message);
+    console.warn(
+      "[Checkout] onOrderSuccess — stock update error:",
+      err.message,
+    );
   }
 
-  // 2. Clear local cart
   Cart.clear();
-  console.log("[Checkout] onOrderSuccess — cart cleared via Cart.clear().");
+  console.log("[Checkout] onOrderSuccess — cart cleared.");
 
-  // 3. Notify user and redirect
   alert(
     `✅ Order placed successfully!\n` +
-    `Order ID: ${orderId}\n` +
-    `Payment: ${payment === "cod" ? "Cash on Delivery" : "Bank Transfer"}`
+      `Order ID: ${orderId}\n` +
+      `Payment: ${paymentMethod}`,
   );
   window.location.href = "../../index.html";
 }

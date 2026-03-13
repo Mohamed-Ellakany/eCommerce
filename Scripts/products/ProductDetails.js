@@ -47,7 +47,11 @@ async function getRelatedProducts(category){
 
 
 
+
 function displayProductDetails(_product){
+
+document.getElementById("productName").textContent = _product.name;
+
 
   let productPictures=document.getElementsByClassName("productPictures")[0];
   for (let i = 0; i < _product.images.length; i++) {
@@ -130,14 +134,47 @@ sizes.forEach(size => {
   });
 });
 
+
+let sizeDiv=document.getElementById("SizeDiv");
+if(_product.category!="Electronics"){
+  sizeDiv.innerHTML=` <span class="me-3 fw-bold">Size:</span>
+
+                <button class="sz size-btn btn btn-outline-danger btn-sm me-2">
+                  XS
+                </button>
+                <button class="sz size-btn btn btn-outline-danger btn-sm me-2">
+                  S
+                </button>
+                <button class="sz size-btn btn btn-outline-danger btn-sm me-2">
+                  M
+                </button>
+                <button class="sz size-btn btn btn-outline-danger btn-sm me-2">
+                  L
+                </button>
+                <button class="sz size-btn btn btn-outline-danger btn-sm">
+                  XL
+                </button>` ;
+}
+
+
 let plus = document.querySelector(".plus");
 let number = document.querySelector(".border-start");
 
 let count = 1;
 
 plus.addEventListener("click", () => {
+  if(_product.stock==0){
+    number.textContent = 0;
+    plus.setAttribute("disabled","true");
+    
+  }else if(count>=_product.stock){
+    plus.setAttribute("disabled","true");
+  }else{  
   count++;
   number.textContent = count;
+
+  }
+  console.log(count);
 });
   
   const buyNowBtn = document.querySelector(".btn.btn-danger.px-4, .btn.btn-danger.px-lg-5");
@@ -157,6 +194,9 @@ minus.addEventListener("click", () => {
   if (count > 1) {
     count--;
     number.textContent = count;
+    if(count<_product.stock){
+      plus.removeAttribute("disabled");
+    }
   }
 });
 

@@ -277,6 +277,5 @@ const DB = {
     return true;
 
     return res.json();
-  }
-  ,
-}
+  },
+};

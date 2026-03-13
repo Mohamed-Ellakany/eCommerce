@@ -218,7 +218,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       ? `<span class="discount-badge">-30%</span>`
       : "";
     const addToCartBtn = showAddToCart
-      ? `<button class="add-to-cart-btn w-100" data-id="${product.id}" ${!inStock ? "disabled" : ""}
+      ? `<button class="add-to-cart-btn w-100" data-id="${product.id}" 
+                data-stock="${product.stock}"
+                data-name="${product.name}"
+                data-price="${product.price}"
+                data-image="${product.images[0]}"
+                data-category="${product.category}"
+                data-sellerId="${product.sellerId}" ${!inStock ? "disabled" : ""}
                style="${!inStock ? "opacity:.5;cursor:not-allowed;" : ""}">
                ${inStock ? "Add To Cart" : "Out of Stock"}
              </button>`
@@ -263,6 +269,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           <span class="review-count">(${product.stock || 0})</span>
         </div>
       </div>`;
+    console.log("Creating card for product:", card);
 
     return card;
   }
@@ -281,26 +288,26 @@ document.addEventListener("DOMContentLoaded", async function () {
   // ============================================
   // CART
   // ============================================
-  document.addEventListener("click", async function (e) {
-    const btn = e.target.closest(".add-to-cart-btn");
-    if (!btn || btn.disabled) return;
+  // document.addEventListener("click", async function (e) {
+  //   const btn = e.target.closest(".add-to-cart-btn");
+  //   if (!btn || btn.disabled) return;
 
-    const productId = btn.dataset.id;
-    const product = allProducts.find((p) => String(p.id) === String(productId));
-    if (!product) return;
+  //   const productId = btn.dataset.id;
+  //   const product = allProducts.find((p) => String(p.id) === String(productId));
+  //   if (!product) return;
 
-    Cart.add(product, 1);
+  //   Cart.add(product, 1);
 
-    const original = btn.innerHTML;
-    btn.innerHTML = `<i class="fas fa-check me-1"></i> Added!`;
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.disabled = false;
-    }, 1200);
+  //   const original = btn.innerHTML;
+  //   btn.innerHTML = `<i class="fas fa-check me-1"></i> Added!`;
+  //   btn.disabled = true;
+  //   setTimeout(() => {
+  //     btn.innerHTML = original;
+  //     btn.disabled = false;
+  //   }, 1200);
 
-    showToast(`"${product.name}" added to cart!`, "success");
-  });
+  //   // showToast(`"${product.name}" added to cart!`, "success");
+  // });
 
   // ============================================
   // QUICK VIEW MODAL

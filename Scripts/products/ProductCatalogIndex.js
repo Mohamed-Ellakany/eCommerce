@@ -55,7 +55,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
               <button 
                 class="add-to-cart-btn w-100"
-                data-id="${product.id}">
+                data-id="${product.id}"
+                data-stock="${product.stock}"
+                data-name="${product.name}"
+                data-price="${product.price}"
+                data-image="${product.images[0]}"
+                data-category="${product.category}"
+                data-sellerId="${product.sellerId}"
+                >
                 Add To Cart
               </button>
 
@@ -136,7 +143,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-
     }
   });
 });
