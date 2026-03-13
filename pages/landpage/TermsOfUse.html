@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms Of Use - Online Market</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../Imgs/online-shop.png">
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css"
+    integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<style>
+    :root {
+        --primary: #DB4444;
+        --footer-bg: #1a1a2e;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #fff;
+        color: #333;
+    }
+
+    .cart-nav-wrapper,
+    .wishlist-nav-wrapper {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .cart-badge,
+    .wishlist-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 10px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .breadcrumb-section {
+        padding: 14px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .breadcrumb-item a {
+        color: #777;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #333;
+        font-weight: 500;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        color: #aaa;
+    }
+
+    /* Page layout */
+    .page-wrapper {
+        display: flex;
+        gap: 48px;
+        align-items: flex-start;
+        padding: 50px 0 60px;
+    }
+
+    /* TOC Sidebar */
+    .toc-sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 24px;
+    }
+
+    .toc-sidebar h6 {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #aaa;
+        margin-bottom: 16px;
+    }
+
+    .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc-list li {
+        margin-bottom: 4px;
+    }
+
+    .toc-list a {
+        display: block;
+        padding: 8px 14px;
+        border-radius: 8px;
+        color: #555;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all .2s;
+        border-left: 3px solid transparent;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+        background: #fff5f5;
+        color: var(--primary);
+        border-left-color: var(--primary);
+    }
+
+    /* Content */
+    .content-area {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .section-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .badge-indicator {
+        display: inline-block;
+        width: 16px;
+        height: 36px;
+        background: var(--primary);
+        border-radius: 4px;
+    }
+
+    .section-label {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 15px;
+    }
+
+    .page-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1a1a1a;
+    }
+
+    .last-updated {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff5f5;
+        color: var(--primary);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 14px;
+        margin-bottom: 36px;
+    }
+
+    .terms-section {
+        margin-bottom: 48px;
+        scroll-margin-top: 24px;
+    }
+
+    .terms-section h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f5f5f5;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .terms-section h2 .section-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .terms-section p {
+        color: #555;
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 14px;
+    }
+
+    .terms-section ul {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .terms-section ul li {
+        padding: 8px 0 8px 24px;
+        position: relative;
+        color: #555;
+        font-size: 15px;
+        line-height: 1.7;
+        border-bottom: 1px solid #f8f8f8;
+    }
+
+    .terms-section ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 18px;
+        width: 8px;
+        height: 8px;
+        background: var(--primary);
+        border-radius: 50%;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+        border-left: 4px solid var(--primary);
+        border-radius: 0 10px 10px 0;
+        padding: 18px 22px;
+        margin: 20px 0;
+        color: #555;
+        font-size: 14.5px;
+        line-height: 1.75;
+    }
+
+    .contact-box {
+        background: #f8f8f8;
+        border-radius: 14px;
+        padding: 28px 30px;
+        margin-top: 16px;
+    }
+
+    .contact-box h5 {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 14px;
+        color: #1a1a1a;
+    }
+
+    .contact-box a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .contact-box a:hover {
+        text-decoration: underline;
+    }
+
+    /* Services */
+    .service-icon {
+        width: 64px;
+        height: 64px;
+        background: #222;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px;
+        font-size: 22px;
+        color: #fff;
+    }
+
+    .service-title {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .service-desc {
+        font-size: 13px;
+        color: #777;
+    }
+
+    /* Footer */
+    footer {
+        background: var(--footer-bg);
+        color: #bbb;
+        font-size: 14px;
+    }
+
+    footer a {
+        display: block;
+        color: #bbb;
+        text-decoration: none;
+        margin-bottom: 10px;
+        transition: color .2s;
+    }
+
+    footer a:hover {
+        color: #fff;
+    }
+
+    .subscribe-form {
+        display: flex;
+        border: 1px solid #555;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .subscribe-form input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: #fff;
+        outline: none;
+        font-size: 13px;
+    }
+
+    .subscribe-form button {
+        background: transparent;
+        border: none;
+        color: #bbb;
+        padding: 0 12px;
+        cursor: pointer;
+    }
+
+    .social-icons a {
+        width: 34px;
+        height: 34px;
+        background: rgba(255, 255, 255, .08);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 0;
+        transition: background .2s;
+        text-decoration: none;
+    }
+
+    .social-icons a:hover {
+        background: var(--primary);
+    }
+
+    .app-badge {
+        border: 1px solid #444;
+        border-radius: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .page-wrapper {
+            flex-direction: column;
+        }
+
+        .toc-sidebar {
+            width: 100%;
+            position: static;
+        }
+    }
+</style>
+
+<body>
+
+    <header>
+        <nav
+            class="w-100 bg-black text-light overflow-hidden d-flex justify-content-center align-items-center flex-wrap py-2">
+            <p class="my-auto text-center px-3 mb-0">Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+                <button class="bg-transparent text-light text-decoration-underline border-0">Shop Now</button>
+            </p>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
+            <div class="container-xl container-fluid d-flex align-items-center">
+                <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="../../index.html">ONLINE SHOP</a>
+                <div class="d-flex align-items-center gap-3 order-lg-3">
+                    <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
+                        <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
+                            placeholder="What are you looking for?" />
+                        <i
+                            class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+                    </div>
+                    <div class="cart-nav-wrapper" onclick="location.href='../products/cart.html'">
+                        <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
+                        <span class="cart-badge" id="navCartCount">0</span>
+                    </div>
+                    <div class="wishlist-nav-wrapper" onclick="location.href='../products/wishlist.html'"
+                        style="cursor:pointer;">
+                        <i class="fa-solid fa-heart fa-xl text-danger-emphasis"></i>
+                        <span class="wishlist-badge" id="navWishlistCount">0</span>
+                    </div>
+                    <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../Auth/login.html">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="d-lg-none d-md-none p-3 bg-light border-top">
+            <div class="position-relative w-100">
+                <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
+                    placeholder="What are you looking for?" />
+                <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section px-xl-5 px-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+                <li class="breadcrumb-item active">Terms Of Use</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="px-xl-5 px-4">
+        <div class="page-wrapper">
+
+            <!-- TOC Sidebar -->
+            <nav class="toc-sidebar d-none d-lg-block">
+                <h6>On This Page</h6>
+                <ul class="toc-list">
+                    <li><a href="#acceptance" class="active">1. Acceptance of Terms</a></li>
+                    <li><a href="#use">2. Use of the Website</a></li>
+                    <li><a href="#accounts">3. User Accounts</a></li>
+                    <li><a href="#orders">4. Orders & Payments</a></li>
+                    <li><a href="#intellectual">5. Intellectual Property</a></li>
+                    <li><a href="#privacy">6. Privacy</a></li>
+                    <li><a href="#disclaimer">7. Disclaimer</a></li>
+                    <li><a href="#limitation">8. Limitation of Liability</a></li>
+                    <li><a href="#termination">9. Termination</a></li>
+                    <li><a href="#changes">10. Changes to Terms</a></li>
+                    <li><a href="#contact-terms">11. Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <!-- Content -->
+            <div class="content-area">
+                <div class="section-badge">
+                    <span class="badge-indicator"></span>
+                    <span class="section-label">Legal</span>
+                </div>
+                <h1 class="page-title">Terms Of Use</h1>
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i> Last updated: January 1, 2024
+                </div>
+
+                <div class="highlight-box">
+                    Please read these Terms of Use carefully before using our website or making any purchases. By
+                    accessing or using Online Shop, you agree to be bound by these terms. If you do not agree, please do
+                    not use our services.
+                </div>
+
+                <section class="terms-section" id="acceptance">
+                    <h2><span class="section-num">1</span> Acceptance of Terms</h2>
+                    <p>By accessing, browsing, or using the Online Shop website ("the Site"), you acknowledge that you
+                        have read, understood, and agree to be bound by these Terms of Use and all applicable laws and
+                        regulations. These terms constitute a legally binding agreement between you and Online Shop.</p>
+                    <p>If you are using the Site on behalf of an organization, you represent that you have authority to
+                        bind that organization to these terms.</p>
+                </section>
+
+                <section class="terms-section" id="use">
+                    <h2><span class="section-num">2</span> Use of the Website</h2>
+                    <p>You agree to use this website only for lawful purposes and in a manner that does not infringe on
+                        the rights of others. You must not:</p>
+                    <ul>
+                        <li>Use the site in any way that violates applicable local, national, or international laws or
+                            regulations</li>
+                        <li>Transmit unsolicited or unauthorized advertising or promotional material</li>
+                        <li>Attempt to gain unauthorized access to any part of the site or its related systems</li>
+                        <li>Use any automated tools, bots, or scrapers to extract data from the site without written
+                            permission</li>
+                        <li>Transmit any data that contains viruses, trojans, worms, or any other harmful software</li>
+                        <li>Engage in any conduct that restricts or inhibits any other person's use or enjoyment of the
+                            site</li>
+                    </ul>
+                </section>
+
+                <section class="terms-section" id="accounts">
+                    <h2><span class="section-num">3</span> User Accounts</h2>
+                    <p>To access certain features, you may be required to create an account. You are responsible for
+                        maintaining the confidentiality of your account credentials and for all activities that occur
+                        under your account.</p>
+                    <ul>
+                        <li>You must provide accurate, current, and complete information during registration</li>
+                        <li>You are solely responsible for all activities performed under your account</li>
+                        <li>You must notify us immediately of any unauthorized use of your account</li>
+                        <li>We reserve the right to suspend or terminate accounts that violate these terms</li>
+                        <li>One person may not maintain more than one active account</li>
+                    </ul>
+                </section>
+
+                <section class="terms-section" id="orders">
+                    <h2><span class="section-num">4</span> Orders & Payments</h2>
+                    <p>By placing an order on our site, you are making an offer to purchase the selected products. We
+                        reserve the right to accept or decline any order at our sole discretion.</p>
+                    <ul>
+                        <li>All prices are displayed in USD and are subject to change without notice</li>
+                        <li>Payment must be received in full before orders are processed and shipped</li>
+                        <li>We reserve the right to cancel orders if pricing errors occur</li>
+                        <li>Sales tax will be applied where required by law</li>
+                        <li>Orders may be subject to verification checks before processing</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <i class="fas fa-info-circle me-2"></i> If your order is declined or cancelled, any payment
+                        already collected will be refunded within 5–7 business days.
+                    </div>
+                </section>
+
+                <section class="terms-section" id="intellectual">
+                    <h2><span class="section-num">5</span> Intellectual Property</h2>
+                    <p>All content on this website — including but not limited to text, images, logos, graphics, product
+                        descriptions, and software — is the property of Online Shop or its content suppliers and is
+                        protected by applicable intellectual property laws.</p>
+                    <ul>
+                        <li>You may not reproduce, distribute, or create derivative works without our written permission
+                        </li>
+                        <li>Product images and descriptions are for informational purposes only</li>
+                        <li>Trademarks displayed on the site belong to their respective owners</li>
+                        <li>User-submitted content grants us a non-exclusive license to use, display, and distribute it
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="terms-section" id="privacy">
+                    <h2><span class="section-num">6</span> Privacy</h2>
+                    <p>Your privacy is important to us. Our use of your personal data is governed by our <a
+                            href="PrivacyPolicy.html"
+                            style="color:var(--primary);text-decoration:none;font-weight:600;">Privacy Policy</a>, which
+                        is incorporated into these Terms of Use by reference. By using our site, you consent to the data
+                        practices described in the Privacy Policy.</p>
+                </section>
+
+                <section class="terms-section" id="disclaimer">
+                    <h2><span class="section-num">7</span> Disclaimer of Warranties</h2>
+                    <p>The site and its content are provided on an "as is" and "as available" basis without any
+                        warranties of any kind, either express or implied. We do not warrant that:</p>
+                    <ul>
+                        <li>The site will be uninterrupted, timely, secure, or error-free</li>
+                        <li>The information provided is accurate, complete, or current</li>
+                        <li>The site or its servers are free of viruses or other harmful components</li>
+                        <li>Product colors and specifications will exactly match what is displayed on screen</li>
+                    </ul>
+                </section>
+
+                <section class="terms-section" id="limitation">
+                    <h2><span class="section-num">8</span> Limitation of Liability</h2>
+                    <p>To the fullest extent permitted by law, Online Shop shall not be liable for any indirect,
+                        incidental, special, consequential, or punitive damages arising from your use of the site or any
+                        products purchased through it. Our total liability shall not exceed the amount paid by you for
+                        the specific product giving rise to the claim.</p>
+                </section>
+
+                <section class="terms-section" id="termination">
+                    <h2><span class="section-num">9</span> Termination</h2>
+                    <p>We reserve the right to suspend or terminate your access to the site at any time, without notice,
+                        if you violate these Terms of Use or for any other reason at our sole discretion. Upon
+                        termination, all provisions of these terms that by their nature should survive will continue to
+                        apply.</p>
+                </section>
+
+                <section class="terms-section" id="changes">
+                    <h2><span class="section-num">10</span> Changes to Terms</h2>
+                    <p>We may revise these Terms of Use at any time by updating this page. Changes are effective
+                        immediately upon posting. Your continued use of the site after any changes constitutes
+                        acceptance of the revised terms. We encourage you to review these terms periodically.</p>
+                </section>
+
+                <section class="terms-section" id="contact-terms">
+                    <h2><span class="section-num">11</span> Contact Us</h2>
+                    <p>If you have any questions or concerns about these Terms of Use, please reach out to us:</p>
+                    <div class="contact-box">
+                        <h5>Online Shop Legal Team</h5>
+                        <p class="mb-2"><i class="fas fa-envelope me-2 text-danger"></i><a
+                                href="mailto:legal@onlineshop.com">legal@onlineshop.com</a></p>
+                        <p class="mb-2"><i class="fas fa-phone me-2 text-danger"></i> +88015-88888-9999</p>
+                        <p class="mb-0"><i class="fas fa-map-marker-alt me-2 text-danger"></i> 111 Bijoy sarani, Dhaka,
+                            DH 1515, Bangladesh</p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Services -->
+    <section class="py-5 px-3 px-md-5">
+        <div class="row text-center g-4">
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+                <div class="service-icon"><i class="fas fa-truck"></i></div>
+                <p class="service-title">FREE AND FAST DELIVERY</p>
+                <p class="service-desc">Free delivery for all orders over $140</p>
+            </div>
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-between">
+                <div class="service-icon"><i class="fas fa-headset"></i></div>
+                <p class="service-title">24/7 CUSTOMER SERVICE</p>
+                <p class="service-desc">Friendly 24/7 customer support</p>
+            </div>
+            <div class="col-12 col-sm-4 d-flex flex-column align-items-center justify-content-center">
+                <div class="service-icon"><i class="fa-solid fa-money-bill"></i></div>
+                <p class="service-title">MONEY BACK GUARANTEE</p>
+                <p class="service-desc">We return money within 30 days</p>
+            </div>
+        </div>
+    </section>
+    <hr class="mx-5" />
+
+    <!-- Footer -->
+    <footer class="pt-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form border border-secondary">
+                        <input type="email" placeholder="Enter your email" class="px-2 py-2" />
+                        <button type="button" aria-label="Submit" class="px-2 py-2"><i
+                                class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Support</h6>
+                    <address>111 Bijoy sarani, Dhaka,<br />DH 1515,
+                        Bangladesh.<br />exclusive@gmail.com<br />+88015-88888-9999</address>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Account</h6>
+                    <a href="../landpage/Profile.html">My Account</a>
+                    <a href="../Auth/login.html">Login / Register</a>
+                    <a href="../products/cart.html">Cart</a>
+                    <a href="../products/WishList.html">Wishlist</a>
+                    <a href="../products/ProductCatalog.html">Shop</a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-2">
+                    <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+                    <a href="./PrivacyPolice.html">Privacy Policy</a>
+                    <a href="./TermsOfUse.html">Terms Of Use</a>
+                    <a href="./Faq.html">FAQ</a>
+                    <a href="./Contact.html">Contact</a>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <h6 class="text-white fs-4 mb-3">Download App</h6>
+                    <p class="mb-1">Save $3 with App New User Only</p>
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div><small class="d-block text-secondary mb-1">GET IT ON</small><span
+                                        class="text-white">Google Play</span></div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div><small class="d-block text-secondary mb-1">Download on the</small><span
+                                        class="text-white">App Store</span></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
+            <div class="container">&copy; Copyright Rimel 2022. All right reserved</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Highlight active TOC link on scroll
+        const sections = document.querySelectorAll('.terms-section');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+            tocLinks.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        });
+    </script>
+</body>
+
+</html>
