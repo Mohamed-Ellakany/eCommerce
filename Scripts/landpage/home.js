@@ -269,6 +269,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           <span class="review-count">(${product.stock || 0})</span>
         </div>
       </div>`;
+    console.log("Creating card for product:", card);
 
     return card;
   }

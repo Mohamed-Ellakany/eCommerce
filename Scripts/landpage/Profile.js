@@ -28,7 +28,7 @@ if (user.role === 'admin') {
 }
 
 if (user.role === 'seller') {
-  document.getElementById('sellerBtn')?.classList.remove('d-none');
+  document.getElementById('sellerBtn').style.display="block";
 }
 
 document.getElementById('logoutBtn').addEventListener('click', function () {
