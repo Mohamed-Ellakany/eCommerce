@@ -166,84 +166,6 @@
             color: #888;
             margin-top: 2px;
         }
-
-        footer {
-            background: #1a1a2e;
-            color: #ccc;
-        }
-
-        footer h6 {
-            font-weight: 600;
-        }
-
-        footer a {
-            display: block;
-            color: #ccc;
-            text-decoration: none;
-            margin-bottom: 8px;
-        }
-
-        footer a:hover {
-            color: #fff;
-        }
-
-        footer address {
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-
-        .subscribe-form {
-            border: 1px solid #555;
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-        }
-
-        .subscribe-form input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding: 8px 12px;
-            flex: 1;
-            outline: none;
-            font-size: 0.85rem;
-        }
-
-        .subscribe-form input::placeholder {
-            color: #888;
-        }
-
-        .subscribe-form button {
-            background: transparent;
-            border: none;
-            color: #ccc;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-
-        .social-icons a {
-            width: 36px;
-            height: 36px;
-            border: 1px solid #555;
-            color: #ccc;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0;
-            text-decoration: none;
-        }
-
-        .social-icons a:hover {
-            background: var(--mainColor);
-            border-color: var(--mainColor);
-            color: #fff;
-        }
-
-        .app-badge {
-            border: 1px solid #555;
-            border-radius: 6px;
-        }
     </style>
 </head>
 
@@ -404,55 +326,94 @@
         </div>
     </div>
 
-    <footer class="pt-4 mt-2">
+    <!-- Footer -->
+    <footer class="pt-3">
         <div class="container">
             <div class="row g-4">
-                <div class="col-12 col-sm-6 col-lg-3">
+
+                <div class="col-12 col-sm-6 col-lg-3 ">
                     <h6 class="text-white fs-4 mb-3">Exclusive</h6>
-                    <p class="mb-1 text-white">Subscribe</p>
-                    <p class="mb-2 text-secondary" style="font-size:0.85rem">Get 10% off your first order</p>
-                    <div class="subscribe-form"><input type="email" placeholder="Enter your email" /><button
-                            type="button"><i class="fa-solid fa-paper-plane"></i></button></div>
+                    <p class="mb-1" style="color:#fff; font-weight:500;">Subscribe</p>
+                    <p class="subscribe-label mb-2 text-secondary">Get 10% off your first order</p>
+                    <div class="subscribe-form d-flex border-1 border-secondary">
+                        <input type="email" placeholder="Enter your email" class="border-0 px-2 py-2" />
+                        <button type="button" aria-label="Submit" class=" px-2 py-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
+
                 <div class="col-12 col-sm-6 col-lg-2">
                     <h6 class="text-white fs-4 mb-3">Support</h6>
-                    <address>111 Bijoy sarani, Dhaka,<br />DH 1515,
-                        Bangladesh.<br />exclusive@gmail.com<br />+88015-88888-9999</address>
+                    <address>
+                        111 Bijoy sarani, Dhaka,<br />
+                        DH 1515, Bangladesh.<br />
+                        exclusive@gmail.com<br />
+                        +88015-88888-9999
+                    </address>
                 </div>
+
                 <div class="col-12 col-sm-6 col-lg-2">
                     <h6 class="text-white fs-4 mb-3">Account</h6>
-                    <a href="../landpage/Profile.html">My Account</a><a href="../products/cart.html">Cart</a><a href="../products/WishList.html">Wishlist</a><a href="../products/ProductCatalog.html">Shop</a>
+                    <a href="./Profile.html">My Account</a>
+                    <a href="../Auth/login.html">Login / Register</a>
+                    <a href="../products/cart.html">Cart</a>
+                    <a href="../products/WishList.html">Wishlist</a>
+                    <a href="../products/ProductCatalog.html">Shop</a>
                 </div>
+
                 <div class="col-12 col-sm-6 col-lg-2">
                     <h6 class="text-white fs-4 mb-3">Quick Link</h6>
-                    <a href="./PrivacyPolice.html">Privacy Policy</a><a href="./TermsOfUse.html">Terms Of Use</a><a href="./Faq.html">FAQ</a><a href="./Contact.html">Contact</a>
+                    <a href="./PrivacyPolice.html">Privacy Policy</a>
+                    <a href="./TermsOfUse.html">Terms Of Use</a>
+                    <a href="./Faq.html">FAQ</a>
+                    <a href="./Contact.html">Contact</a>
                 </div>
+
                 <div class="col-12 col-sm-6 col-lg-3">
                     <h6 class="text-white fs-4 mb-3">Download App</h6>
-                    <div class="d-flex gap-2 mb-3">
-                        <a href="#"
-                            class="app-badge text-white text-decoration-none d-flex align-items-center gap-2 px-2 py-2"><i
-                                class="fa-brands fa-google-play fs-4"></i>
-                            <div><small class="d-block text-secondary">GET IT ON</small><span>Google Play</span></div>
-                        </a>
-                        <a href="#"
-                            class="app-badge text-white text-decoration-none d-flex align-items-center gap-2 px-2 py-2"><i
-                                class="fa-brands fa-apple fs-4"></i>
-                            <div><small class="d-block text-secondary">Download on the</small><span>App Store</span>
-                            </div>
-                        </a>
+                    <p class="save-text mb-1">Save $3 with App New User Only</p>
+
+                    <div class="d-flex gap-3 align-items-start mb-3">
+                        <div class="app-badges d-flex gap-2 mt-1">
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-google-play fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">GET IT ON</small>
+                                    <span class="text-white">Google Play</span>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
+                                <i class="fa-brands fa-apple fs-4"></i>
+                                <div class="badge-text">
+                                    <small class="d-block text-secondary mb-1">Download on the</small>
+                                    <span class="text-white">App Store</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="social-icons d-flex gap-2">
-                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+
+                    <div class="social-icons d-flex gap-2 mt-2">
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0 "><i
+                                class="fa-brands fa-linkedin"></i></a>
                     </div>
                 </div>
+
             </div>
         </div>
+
         <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
-            <div class="container">&copy; Copyright Rimel 2022. All rights reserved</div>
+            <div class="container">
+                &copy; Copyright Rimel 2022. All right reserved
+            </div>
         </div>
     </footer>
 
