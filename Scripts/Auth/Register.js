@@ -1,11 +1,9 @@
-if (DB.getSession()) window.location.href = '../../pages/landpage/Profile.html';
+if (DB.getSession()) window.location.href = "../../pages/landpage/Profile.html";
 
 const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
 const isValidName = (v) => v.trim().length >= 2;
 const isValidPass = (v) => v.length >= 8 && /[a-zA-Z]/.test(v) && /\d/.test(v);
 const isValidAddr = (v) => v.trim().length >= 10;
-
-
 
 function setError(gId, eId, msg) {
   const g = document.getElementById(gId);
@@ -56,10 +54,10 @@ document.getElementById("regPassword").addEventListener("input", function () {
     isValidPass(v)
       ? clearError("passwordGroup")
       : setError(
-        "passwordGroup",
-        "passwordError",
-        "Min 8 chars, include a letter and a number.",
-      );
+          "passwordGroup",
+          "passwordError",
+          "Min 8 chars, include a letter and a number.",
+        );
   } else clearError("passwordGroup");
 
   const c = document.getElementById("regConfirm").value;
@@ -75,10 +73,10 @@ document.getElementById("regName").addEventListener("input", function () {
   isValidName(this.value)
     ? clearError("nameGroup")
     : setError(
-      "nameGroup",
-      "nameError",
-      "Full name must be at least 2 characters.",
-    );
+        "nameGroup",
+        "nameError",
+        "Full name must be at least 2 characters.",
+      );
 });
 
 document.getElementById("regEmail").addEventListener("input", function () {
@@ -86,10 +84,10 @@ document.getElementById("regEmail").addEventListener("input", function () {
   isValidEmail(this.value)
     ? clearError("emailGroup")
     : setError(
-      "emailGroup",
-      "emailError",
-      "Please enter a valid email address.",
-    );
+        "emailGroup",
+        "emailError",
+        "Please enter a valid email address.",
+      );
 });
 
 document.getElementById("regConfirm").addEventListener("input", function () {
@@ -105,10 +103,10 @@ document.getElementById("regAddress").addEventListener("input", function () {
   isValidAddr(this.value)
     ? clearError("addressGroup")
     : setError(
-      "addressGroup",
-      "addressError",
-      "Address must be at least 10 characters.",
-    );
+        "addressGroup",
+        "addressError",
+        "Address must be at least 10 characters.",
+      );
 });
 
 function makeToggle(btnId, inputId) {
@@ -177,7 +175,6 @@ document
 
     let valid = true;
 
-    // Clear previous errors
     [
       "nameGroup",
       "emailGroup",
@@ -188,7 +185,6 @@ document
     alertEl.className = "alert d-none py-2 mb-3";
     termsErr.classList.add("d-none");
 
-    // Validate form
     if (!isValidName(name)) {
       setError(
         "nameGroup",
@@ -246,7 +242,6 @@ document
     }
 
     try {
-      // Check if email already exists in the API
       const emailExists = await checkEmailExists(email);
 
       if (emailExists) {
@@ -259,11 +254,13 @@ document
         return;
       }
 
-      // Create new user object
       const newUser = {
         id: crypto.randomUUID
           ? crypto.randomUUID()
-          : "user_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
+          : "user_" +
+            Date.now() +
+            "_" +
+            Math.random().toString(36).substr(2, 9),
 
         name: name.trim(),
         email: email.toLowerCase(),
@@ -287,7 +284,10 @@ document
       alertEl.textContent = "✓ Account created! Redirecting to your profile…";
       alertEl.classList.remove("d-none");
 
-      setTimeout(() => (window.location.href = "../../pages/landpage/Profile.html"), 1400);
+      setTimeout(
+        () => (window.location.href = "../../pages/landpage/Profile.html"),
+        1400,
+      );
     } catch (error) {
       console.error("Registration error:", error);
       alertEl.className = "alert alert-danger py-2 mb-3";

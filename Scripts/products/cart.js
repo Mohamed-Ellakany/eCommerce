@@ -1,15 +1,8 @@
-/**
- * cart.js  –  shared cart utility
- * Storage key: user_cart  (localStorage)
- *
- * Product schema expected:
- * { id, name, category, price, stock, images: [...], sellerId }
- */
+
 
 const Cart = (() => {
   const KEY = "user_cart";
 
-  /** @returns {Array} current cart items */
   function getAll() {
     try {
       return JSON.parse(localStorage.getItem(KEY)) || [];
@@ -22,18 +15,16 @@ const Cart = (() => {
     localStorage.setItem(KEY, JSON.stringify(cart));
   }
 
-  /** Find one item by product id */
   function getItem(id) {
     return getAll().find((i) => String(i.id) === String(id)) || null;
   }
 
   /**
    * Add a product to the cart.
-   * @param {Object} product  – full product object
-   * @param {number} qty      – quantity to add (default 1)
+   * @param {Object} product  
+   * @param {number} qty     
    */
   function add(product, qty = 1) {
-    // ── Block if out of stock ──────────────────────────────────────
     const stock = parseInt(product.stock) || 0;
     if (stock <= 0) {
       console.warn(`[Cart] add — "${product.name}" is out of stock. Blocked.`);
@@ -57,7 +48,6 @@ const Cart = (() => {
     _updateBadges();
   }
 
-  /** Set an item's quantity (removes it if qty <= 0) */
   function updateQty(id, qty) {
     let cart = getAll();
     if (qty <= 0) {
@@ -70,24 +60,20 @@ const Cart = (() => {
     _updateBadges();
   }
 
-  /** Remove item by id */
   function remove(id) {
     save(getAll().filter((i) => i.id !== id));
     _updateBadges();
   }
 
-  /** Empty the cart */
   function clear() {
     localStorage.removeItem(KEY);
     _updateBadges();
   }
 
-  /** Total quantity across all items */
   function totalQty() {
     return getAll().reduce((s, i) => s + i.qty, 0);
   }
 
-  /** Update all cart badges on the page */
   function _updateBadges() {
     const count = totalQty();
     document.querySelectorAll(".cart-badge, #navCartCount").forEach((el) => {
@@ -96,18 +82,13 @@ const Cart = (() => {
     });
   }
 
-  // Run on load to sync badge
   document.addEventListener("DOMContentLoaded", _updateBadges);
 
   return { getAll, getItem, add, updateQty, remove, clear, totalQty };
 })();
 
-/* ══════════════════════════════════════════════
-   Add-to-Cart Modal  (injected once per page)
-   Requires Bootstrap 5 JS to be loaded.
-══════════════════════════════════════════════ */
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Inject modal HTML
   if (!document.getElementById("addToCartModal")) {
     document.body.insertAdjacentHTML(
       "beforeend",
@@ -169,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  // Inject navbar badge style + click handler for cart icons without href
   document.querySelectorAll(".fa-cart-shopping").forEach((icon) => {
     const wrapper = icon.closest("a, .cart-nav-wrapper");
     if (!wrapper) {
@@ -195,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ── Wire up Add-to-Cart buttons ──────────────────────────────────
   let _currentProduct = null;
 
   document.addEventListener("click", (e) => {
@@ -231,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     openModal(product);
   });
 
-  // ── Open modal ───────────────────────────────────────────────────
   function openModal(product) {
     const stock = parseInt(product.stock) || 0;
     const outOfStock = stock <= 0;
@@ -243,12 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
       (product.images && product.images[0]) || "";
     document.getElementById("modalProductImg").alt = product.name;
 
-    // Stock label — red if out of stock, muted green if available
     const stockEl = document.getElementById("modalProductStock");
     stockEl.textContent = outOfStock ? "Out of stock" : `In stock: ${stock}`;
     stockEl.className = outOfStock ? "text-danger fw-semibold" : "text-success";
 
-    // Qty controls
     const qtyInput = document.getElementById("modalQtyInput");
     const decBtn = document.getElementById("modalQtyDec");
     const incBtn = document.getElementById("modalQtyInc");
@@ -256,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const outMsg = document.getElementById("modalOutOfStockMsg");
 
     if (outOfStock) {
-      // Disable everything quantity-related
       qtyInput.value = 0;
       qtyInput.disabled = true;
       decBtn.disabled = true;
@@ -280,22 +255,20 @@ document.addEventListener("DOMContentLoaded", () => {
     new bootstrap.Modal(document.getElementById("addToCartModal")).show();
   }
 
-  // ── Qty controls ─────────────────────────────────────────────────
   document.getElementById("modalQtyDec").addEventListener("click", () => {
     const inp = document.getElementById("modalQtyInput");
     const stock = parseInt(inp.max) || 0;
-    if (stock <= 0) return; // out of stock — no-op
+    if (stock <= 0) return;
     if (parseInt(inp.value) > 1) inp.value = parseInt(inp.value) - 1;
   });
 
   document.getElementById("modalQtyInc").addEventListener("click", () => {
     const inp = document.getElementById("modalQtyInput");
     const stock = parseInt(inp.max) || 0;
-    if (stock <= 0) return; // out of stock — no-op
+    if (stock <= 0) return;
     if (parseInt(inp.value) < stock) inp.value = parseInt(inp.value) + 1;
   });
 
-  // ── Confirm add ──────────────────────────────────────────────────
   document.getElementById("modalConfirmBtn").addEventListener("click", () => {
     if (!_currentProduct) return;
 

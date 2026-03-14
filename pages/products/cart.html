@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="../../Styles/media.css" />
 
   <style>
-    /* ── Cart-specific styles ── */
     body {
       background: #f8f9fa;
     }
@@ -37,7 +36,7 @@
       font-weight: 500;
     }
 
-    /* Table */
+
     .cart-table {
       background: #fff;
       border-radius: 8px;
@@ -79,7 +78,7 @@
       font-size: 0.95rem;
     }
 
-    /* Quantity spinner */
+
     .qty-control {
       display: inline-flex;
       align-items: center;
@@ -115,7 +114,6 @@
       outline: none;
     }
 
-    /* Remove button */
     .btn-remove {
       background: none;
       border: none;
@@ -129,7 +127,7 @@
       color: #a00;
     }
 
-    /* Summary card */
+
     .summary-card {
       background: #fff;
       border-radius: 8px;
@@ -183,7 +181,7 @@
       background: #b33;
     }
 
-    /* Empty state */
+
     #emptyCart {
       display: none;
     }
@@ -193,12 +191,12 @@
       color: #ccc;
     }
 
-    /* Toast */
+
     .toast-container {
       z-index: 9999;
     }
 
-    /* Mobile */
+
     @media (max-width: 767px) {
       .cart-table thead {
         display: none;
@@ -471,11 +469,11 @@
   <!-- Cart page logic -->
   <script>
     (function () {
-      // ── Coupons table ──
+
       const COUPONS = { SAVE10: 10, SHOP20: 20, FIRST15: 15 };
       let appliedDiscount = 0;
 
-      // ── Render ──
+
       function render() {
         const cart = Cart.getAll();
         const isEmpty = cart.length === 0;
@@ -546,7 +544,7 @@
       }
 
       function bindRowEvents() {
-        // Decrease
+
         document.querySelectorAll(".qty-dec").forEach((btn) => {
           btn.addEventListener("click", () => {
             const id = btn.dataset.id;
@@ -558,7 +556,7 @@
             }
           });
         });
-        // Increase
+
         document.querySelectorAll(".qty-inc").forEach((btn) => {
           btn.addEventListener("click", () => {
             const id = btn.dataset.id;
@@ -570,7 +568,7 @@
             } else toast("Maximum stock reached", "warning");
           });
         });
-        // Direct input
+
         document.querySelectorAll(".qty-input").forEach((input) => {
           input.addEventListener("change", () => {
             const id = input.dataset.id;
@@ -582,7 +580,7 @@
             render();
           });
         });
-        // Remove
+
         document.querySelectorAll(".btn-remove").forEach((btn) => {
           btn.addEventListener("click", () => {
             Cart.remove(btn.dataset.id);
@@ -592,7 +590,7 @@
         });
       }
 
-      // Clear cart
+
       document
         .getElementById("clearCartBtn")
         .addEventListener("click", () => {
@@ -602,7 +600,7 @@
           }
         });
 
-      // Coupon
+
       document
         .getElementById("applyCouponBtn")
         .addEventListener("click", () => {
@@ -626,7 +624,7 @@
           updateSummary(Cart.getAll());
         });
 
-      // Toast helper
+
       function toast(msg, type = "success") {
         const el = document.getElementById("cartToast");
         el.className = `toast align-items-center text-white bg-${type} border-0`;
@@ -634,7 +632,7 @@
         bootstrap.Toast.getOrCreateInstance(el, { delay: 2000 }).show();
       }
 
-      // Init
+
       render();
     })();
   </script>

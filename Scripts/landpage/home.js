@@ -1,6 +1,3 @@
-// ============================================
-// SIDEBAR TOGGLE FUNCTIONALITY
-// ============================================
 const toggleBtn = document.getElementById("sidebarToggle");
 const sidebarMenu = document.getElementById("sidebarMenu");
 const closeBtn = document.getElementById("sidebarClose");
@@ -47,9 +44,6 @@ window.addEventListener("resize", () => {
   }
 });
 
-// ============================================
-// FLASH SALE COUNTDOWN TIMER
-// ============================================
 const targetDate = new Date();
 targetDate.setDate(targetDate.getDate() + 3);
 
@@ -81,9 +75,6 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ============================================
-// SLIDER LOGIC
-// ============================================
 function initializeSliders() {
   const sections = document.querySelectorAll(".flash-sales");
 
@@ -120,9 +111,6 @@ function initializeSliders() {
   });
 }
 
-// ============================================
-// HOME PAGE
-// ============================================
 document.addEventListener("DOMContentLoaded", async function () {
   const flashTrack = document.getElementById("flashProductsTrack");
   const exploreTrack = document.getElementById("exploreProductsTrack");
@@ -145,15 +133,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     renderBestSelling(bestSellingGrid, allProducts.slice(0, 4));
   if (exploreTrack) renderExploreProducts(exploreTrack, allProducts);
 
-  // ✅ Init wishlist buttons AFTER cards are in the DOM
   await WL.initButtons();
 
   initializeSliders();
   initializeSearch(allProducts, exploreTrack);
 
-  // ============================================
-  // RENDER FUNCTIONS
-  // ============================================
   function renderFlashSales(container, products) {
     container.innerHTML = "";
     if (!products.length) {
@@ -284,33 +268,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     return html;
   }
 
-  // ============================================
-  // CART
-  // ============================================
-  // document.addEventListener("click", async function (e) {
-  //   const btn = e.target.closest(".add-to-cart-btn");
-  //   if (!btn || btn.disabled) return;
-
-  //   const productId = btn.dataset.id;
-  //   const product = allProducts.find((p) => String(p.id) === String(productId));
-  //   if (!product) return;
-
-  //   Cart.add(product, 1);
-
-  //   const original = btn.innerHTML;
-  //   btn.innerHTML = `<i class="fas fa-check me-1"></i> Added!`;
-  //   btn.disabled = true;
-  //   setTimeout(() => {
-  //     btn.innerHTML = original;
-  //     btn.disabled = false;
-  //   }, 1200);
-
-  //   // showToast(`"${product.name}" added to cart!`, "success");
-  // });
-
-  // ============================================
-  // QUICK VIEW MODAL
-  // ============================================
   document.addEventListener("click", function (e) {
     const btn = e.target.closest(".quick-view-btn");
     if (!btn) return;
@@ -331,7 +288,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const oldPrice = (price * 1.3).toFixed(2);
     const stars = buildStars(4);
 
-    // Build thumbnail strip if multiple images
     const thumbs =
       images.length > 1
         ? images
@@ -455,7 +411,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     );
     modal.show();
 
-    // Thumbnail switcher
     document.querySelectorAll("#quickViewModal .qv-thumb").forEach((thumb) => {
       thumb.addEventListener("click", () => {
         const mainImg = document.getElementById("qvMainImg");
@@ -473,7 +428,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
 
-    // Qty selector
     let qty = 1;
     document.querySelectorAll("#quickViewModal .qv-qty-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -484,7 +438,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
 
-    // Override cart add to use qty
     const cartBtn = document.querySelector("#quickViewModal .add-to-cart-btn");
     if (cartBtn) {
       cartBtn.addEventListener("click", (e) => {
@@ -501,7 +454,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     }
 
-    // Wishlist button
     const wlBtn = document.querySelector(
       "#quickViewModal .wishlist-toggle-btn",
     );
@@ -514,7 +466,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         e.stopPropagation();
         await WL.toggle(wlBtn, product.id);
 
-        // Sync all matching card buttons on the page
         document
           .querySelectorAll(
             `.wishlist-toggle-btn[data-product-id="${product.id}"]:not(#quickViewModal *)`,
@@ -526,9 +477,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  // ============================================
-  // SEARCH
-  // ============================================
   function initializeSearch(products, exploreTrack) {
     document.querySelectorAll("input[type='search']").forEach((input) => {
       input.addEventListener(
@@ -547,7 +495,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           if (exploreTrack) {
             renderExploreProducts(exploreTrack, filtered);
 
-            // ✅ Re-init wishlist buttons after re-render
             await WL.initButtons();
 
             const noResults = document.getElementById("noSearchResults");
@@ -570,9 +517,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  // ============================================
-  // UTILITIES
-  // ============================================
   function showLoadingStates() {
     [flashTrack, exploreTrack, bestSellingGrid].filter(Boolean).forEach((c) => {
       c.innerHTML = `
@@ -612,5 +556,4 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// Initialize sliders on page load
 document.addEventListener("DOMContentLoaded", initializeSliders);

@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════════════
-   Role hint
-═══════════════════════════════════════════════════ */
+
 const roleHints = {
   admin: "Admins have full access to the dashboard.",
   seller: "Sellers can manage products and orders.",
@@ -11,9 +9,7 @@ document.getElementById("userRole").addEventListener("change", function () {
   document.getElementById("roleHint").textContent = roleHints[this.value] || "";
 });
 
-/* ═══════════════════════════════════════════════════
-   Password – show / hide toggle
-═══════════════════════════════════════════════════ */
+
 document
   .getElementById("togglePassword")
   .addEventListener("click", function () {
@@ -28,10 +24,7 @@ document
       : "none";
   });
 
-/* ═══════════════════════════════════════════════════
-   Password – live custom validation
-   (only active when the field has a value)
-═══════════════════════════════════════════════════ */
+
 const PW_RULES = [
   { id: "rule-length", test: (v) => v.length >= 8 },
   { id: "rule-upper", test: (v) => /[A-Z]/.test(v) },
@@ -89,7 +82,6 @@ pwInput.addEventListener("input", function () {
   const passed = evaluatePasswordRules(val);
   updateStrengthBar(passed, val.length > 0);
 
-  // Password is optional on update: only invalid if something was typed but rules fail
   if (val.length === 0 || passed === PW_RULES.length) {
     this.setCustomValidity("");
   } else {
@@ -108,12 +100,10 @@ pwInput.addEventListener("input", function () {
   }
 });
 
-/* ═══════════════════════════════════════════════════
-   Pre-fill form from DB using ?id= URL param
-═══════════════════════════════════════════════════ */
+
 const params = new URLSearchParams(window.location.search);
 const userId = params.get("id");
-let origEmail = ""; // store original email to allow "no change" on email field
+let origEmail = "";
 
 async function prefillForm() {
   if (!userId) {
@@ -136,7 +126,6 @@ async function prefillForm() {
     document.getElementById("userEmail").value = user.email;
     document.getElementById("userAddress").value = user.address;
 
-    // Set role dropdown
     const roleEl = document.getElementById("userRole");
     roleEl.value = user.role;
     document.getElementById("roleHint").textContent =
@@ -149,19 +138,14 @@ async function prefillForm() {
 
 prefillForm();
 
-/* ═══════════════════════════════════════════════════
-   Helpers
-═══════════════════════════════════════════════════ */
+
 async function isEmailTakenByOther(email) {
-  // Allow the user to keep their own email without a "taken" error
   if (email.toLowerCase() === origEmail) return false;
   const user = await DB.findByEmail(email);
   return user !== null;
 }
 
-/* ═══════════════════════════════════════════════════
-   Form submit
-═══════════════════════════════════════════════════ */
+
 document
   .getElementById("updateUserForm")
   .addEventListener("submit", async function (e) {
@@ -175,11 +159,9 @@ document
     const addrEl = document.getElementById("userAddress");
     const submitBtn = form.querySelector("[type='submit']");
 
-    // Reset custom validity before re-checking
     emailEl.setCustomValidity("");
     passEl.setCustomValidity("");
 
-    // Email duplicate check (skip if unchanged)
     if (emailEl.value) {
       const taken = await isEmailTakenByOther(emailEl.value);
       if (taken) {
@@ -192,37 +174,32 @@ document
       }
     }
 
-    // Password: only validate if the field has a value (it's optional on update)
     if (passEl.value.length > 0) {
       const passed = evaluatePasswordRules(passEl.value);
       updateStrengthBar(passed, true);
       pwRulesList.classList.add("visible");
       passEl.setCustomValidity(passed === PW_RULES.length ? "" : "weak");
     } else {
-      // Empty = keep existing password → always valid
       passEl.setCustomValidity("");
     }
 
-    // Trigger Bootstrap visual validation state
     form.classList.add("was-validated");
 
     if (!form.checkValidity()) return;
 
-    // ── All valid – submit ──
     submitBtn.disabled = true;
     submitBtn.innerHTML =
       '<span class="spinner-border spinner-border-sm me-2"></span>Updating…';
 
     try {
-      // Build the updated user object; keep old password if field is blank
       const existingUser = await DB.findById(userId);
 
       const updatedUser = {
-        ...existingUser, // preserve id, createdAt, etc.
+        ...existingUser,
         name: nameEl.value.trim(),
         email: emailEl.value.trim().toLowerCase(),
         password:
-          passEl.value.trim() !== "" ? passEl.value : existingUser.password, // keep old password if blank
+          passEl.value.trim() !== "" ? passEl.value : existingUser.password,
         role: roleEl.value,
         address: addrEl.value.trim(),
         updatedAt: new Date().toISOString(),

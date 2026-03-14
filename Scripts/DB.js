@@ -1,21 +1,6 @@
-// ══════════════════════════════════════════════════════════════════
-//  db.js  —  API-backed "Database" using JSON Server
-//
-//  JSON Server running at https://e-commerce-server-xi.vercel.app (Deployed by Vercel)
-//  Endpoints: /users, /products, /cart, /orders
-//
-//  shop_session → { id, name, email, role, address, createdAt }  (localStorage only, no password)
-//
-//  Roles: "admin" | "seller" | "customer"
-// ══════════════════════════════════════════════════════════════════
-
 API_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
 
 const DB = {
-  // ══════════════════════════════════════════════════════════════
-  //  SESSION  (localStorage only)
-  // ══════════════════════════════════════════════════════════════
-
   getSession() {
     return JSON.parse(localStorage.getItem("shop_session") || "null");
   },
@@ -28,10 +13,6 @@ const DB = {
   clearSession() {
     localStorage.removeItem("shop_session");
   },
-
-  // ══════════════════════════════════════════════════════════════
-  //  USERS
-  // ══════════════════════════════════════════════════════════════
 
   async getUsers() {
     const res = await fetch(`${API_URL}/users`);
@@ -77,7 +58,6 @@ const DB = {
     if (!res.ok) throw new Error(`updateUser failed: ${res.status}`);
     const updated = await res.json();
 
-    // Keep session in sync if it's the logged-in user
     const session = this.getSession();
     if (session && session.id === id) {
       const { password, ...safe } = { ...session, ...changes };
@@ -91,10 +71,6 @@ const DB = {
     if (!res.ok) throw new Error(`deleteUser failed: ${res.status}`);
     return true;
   },
-
-  // ══════════════════════════════════════════════════════════════
-  //  PRODUCTS
-  // ══════════════════════════════════════════════════════════════
 
   async getProducts() {
     const res = await fetch(`${API_URL}/products`);
@@ -141,11 +117,6 @@ const DB = {
     return true;
   },
 
-  // ══════════════════════════════════════════════════════════════
-  //  CART
-  //  Cart item shape: { id, userId, productId, quantity }
-  // ══════════════════════════════════════════════════════════════
-
   async getCart(userId) {
     const url = userId ? `${API_URL}/cart?userId=${userId}` : `${API_URL}/cart`;
     const res = await fetch(url);
@@ -155,7 +126,6 @@ const DB = {
   },
 
   async addToCart(item) {
-    // item: { id, userId, productId, quantity }
     const res = await fetch(`${API_URL}/cart`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -186,16 +156,10 @@ const DB = {
   },
 
   async clearCart(userId) {
-    // Fetch all cart items for user then delete each one
     const items = await this.getCart(userId);
-    
+
     await Promise.all(items.map((item) => this.removeFromCart(item.id)));
   },
-
-  // ══════════════════════════════════════════════════════════════
-  //  ORDERS
-  //  Order shape: { id, userId, items:[{productId, quantity}], total, status }
-  // ══════════════════════════════════════════════════════════════
 
   async getOrders(userId) {
     const url = userId

@@ -1,20 +1,17 @@
 const BASE_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
 
-// ── AUTH CHECK ─────────────────────────────────────────────────
 const session = DB.getSession();
 if (!session || (session.role !== "seller" && session.role !== "admin")) {
   window.location.href = "../../index.html";
 }
 const SELLER_ID = session.id;
 
-// ── MODAL INSTANCES (declare globally) ────────────────────────
 let productModal;
 let editModal;
 let deleteModal;
 
 let currentProductId = null;
 
-// ── FETCH WITH DEBUG ───────────────────────────────────────────
 async function fetchWithDebug(url, options) {
   const response = await fetch(url, options);
 
@@ -26,7 +23,6 @@ async function fetchWithDebug(url, options) {
   return { response, data: responseData };
 }
 
-// ── RENDER ALL PRODUCTS ────────────────────────────────────────
 async function renderProducts() {
   const tbody = document.getElementById("products-tbody");
   if (!tbody) return;
@@ -98,7 +94,6 @@ async function renderProducts() {
   }
 }
 
-// ── RENDER FILTERED PRODUCTS ───────────────────────────────────
 function renderFilteredProducts(products) {
   const tbody = document.getElementById("products-tbody");
 
@@ -156,7 +151,6 @@ function renderFilteredProducts(products) {
   });
 }
 
-// ── VIEW PRODUCT ───────────────────────────────────────────────
 async function viewProduct(productId) {
   try {
     const res = await fetch(`${BASE_URL}/products/${productId}`);
@@ -184,7 +178,6 @@ async function viewProduct(productId) {
   }
 }
 
-// ── CONFIRM DELETE MODAL ───────────────────────────────────────
 async function confirmDelete(productId) {
   try {
     const res = await fetch(`${BASE_URL}/products/${productId}`);
@@ -199,9 +192,7 @@ async function confirmDelete(productId) {
   }
 }
 
-// ── DOM READY ──────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", function () {
-  // ── MODALS ───────────────────────────────────────────────────
   const productModalElement = document.getElementById("productModal");
   const editModalElement = document.getElementById("editmodal");
   const deleteModalElement = document.getElementById("deleteModal");
@@ -211,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (editModalElement) editModal = new bootstrap.Modal(editModalElement);
   if (deleteModalElement) deleteModal = new bootstrap.Modal(deleteModalElement);
 
-  // ── NAVBAR ───────────────────────────────────────────────────
   const userNameEl = document.getElementById("user-name");
   if (userNameEl) {
     userNameEl.textContent = session.name;
@@ -234,7 +224,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── ADD PRODUCT ──────────────────────────────────────────────
   const addBtn = document.getElementById("btn-add-product");
   if (addBtn) {
     addBtn.addEventListener("click", function () {
@@ -252,7 +241,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── EDIT PRODUCT ─────────────────────────────────────────────
   const editBtn = document.getElementById("btn-edit");
   if (editBtn) {
     editBtn.addEventListener("click", async function () {
@@ -289,7 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── SAVE PRODUCT ─────────────────────────────────────────────
   const saveBtn = document.getElementById("btn-save");
   if (saveBtn) {
     saveBtn.addEventListener("click", async function () {
@@ -371,7 +358,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── DELETE BUTTON (from view modal) ──────────────────────────
   const deleteBtn = document.getElementById("btn-delete");
   if (deleteBtn) {
     deleteBtn.addEventListener("click", async function () {
@@ -381,7 +367,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── CONFIRM DELETE ───────────────────────────────────────────
   const confirmDeleteBtn = document.getElementById("btn-confirm-delete");
   if (confirmDeleteBtn) {
     confirmDeleteBtn.addEventListener("click", async function () {
@@ -406,7 +391,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── SEARCH ───────────────────────────────────────────────────
   const searchBtn = document.getElementById("btn-search");
   if (searchBtn) {
     searchBtn.addEventListener("click", async function () {
@@ -434,6 +418,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ── INITIAL RENDER ───────────────────────────────────────────
   renderProducts();
 });
