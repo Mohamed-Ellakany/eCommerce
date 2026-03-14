@@ -23,12 +23,10 @@ const DB = {
   saveSession(user) {
     const { password, ...safe } = user;
     localStorage.setItem("shop_session", JSON.stringify(safe));
-    console.log("[DB] saveSession:", safe);
   },
 
   clearSession() {
     localStorage.removeItem("shop_session");
-    console.log("[DB] clearSession");
   },
 
   // ══════════════════════════════════════════════════════════════
@@ -39,7 +37,6 @@ const DB = {
     const res = await fetch(`${API_URL}/users`);
     if (!res.ok) throw new Error(`getUsers failed: ${res.status}`);
     const data = await res.json();
-    console.log("[DB] getUsers:", data);
     return data;
   },
 
@@ -50,7 +47,6 @@ const DB = {
     if (!res.ok) throw new Error(`findByEmail failed: ${res.status}`);
     const users = await res.json();
     const found = users[0] || null;
-    console.log("[DB] findByEmail:", email, "→", found);
     return found;
   },
 
@@ -58,7 +54,6 @@ const DB = {
     const res = await fetch(`${API_URL}/users/${id}`);
     if (!res.ok) return null;
     const data = await res.json();
-    console.log("[DB] findById:", id, "→", data);
     return data;
   },
 
@@ -70,7 +65,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`addUser failed: ${res.status}`);
     const created = await res.json();
-    console.log("[DB] addUser:", created);
     return created;
   },
 
@@ -82,7 +76,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`updateUser failed: ${res.status}`);
     const updated = await res.json();
-    console.log("[DB] updateUser:", id, "→", updated);
 
     // Keep session in sync if it's the logged-in user
     const session = this.getSession();
@@ -96,7 +89,6 @@ const DB = {
   async deleteUser(id) {
     const res = await fetch(`${API_URL}/users/${id}`, { method: "DELETE" });
     if (!res.ok) throw new Error(`deleteUser failed: ${res.status}`);
-    console.log("[DB] deleteUser:", id);
     return true;
   },
 
@@ -108,7 +100,6 @@ const DB = {
     const res = await fetch(`${API_URL}/products`);
     if (!res.ok) throw new Error(`getProducts failed: ${res.status}`);
     const data = await res.json();
-    console.log("[DB] getProducts:", data);
     return data;
   },
 
@@ -119,7 +110,6 @@ const DB = {
       return null;
     }
     const data = await res.json();
-    console.log("[DB] getProductById:", id, "→", data);
     return data;
   },
 
@@ -131,7 +121,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`addProduct failed: ${res.status}`);
     const created = await res.json();
-    console.log("[DB] addProduct:", created);
     return created;
   },
 
@@ -143,14 +132,12 @@ const DB = {
     });
     if (!res.ok) throw new Error(`updateProduct failed: ${res.status}`);
     const updated = await res.json();
-    console.log("[DB] updateProduct:", id, changes, "→", updated);
     return updated;
   },
 
   async deleteProduct(id) {
     const res = await fetch(`${API_URL}/products/${id}`, { method: "DELETE" });
     if (!res.ok) throw new Error(`deleteProduct failed: ${res.status}`);
-    console.log("[DB] deleteProduct:", id);
     return true;
   },
 
@@ -164,7 +151,6 @@ const DB = {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`getCart failed: ${res.status}`);
     const data = await res.json();
-    console.log("[DB] getCart (userId:", userId, "):", data);
     return data;
   },
 
@@ -177,7 +163,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`addToCart failed: ${res.status}`);
     const created = await res.json();
-    console.log("[DB] addToCart:", created);
     return created;
   },
 
@@ -189,7 +174,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`updateCartItem failed: ${res.status}`);
     const updated = await res.json();
-    console.log("[DB] updateCartItem:", cartItemId, "→", updated);
     return updated;
   },
 
@@ -198,21 +182,14 @@ const DB = {
       method: "DELETE",
     });
     if (!res.ok) throw new Error(`removeFromCart failed: ${res.status}`);
-    console.log("[DB] removeFromCart:", cartItemId);
     return true;
   },
 
   async clearCart(userId) {
     // Fetch all cart items for user then delete each one
     const items = await this.getCart(userId);
-    console.log(
-      "[DB] clearCart — deleting",
-      items.length,
-      "items for userId:",
-      userId,
-    );
+    
     await Promise.all(items.map((item) => this.removeFromCart(item.id)));
-    console.log("[DB] clearCart — done for userId:", userId);
   },
 
   // ══════════════════════════════════════════════════════════════
@@ -227,7 +204,6 @@ const DB = {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`getOrders failed: ${res.status}`);
     const data = await res.json();
-    console.log("[DB] getOrders (userId:", userId, "):", data);
     return data;
   },
 
@@ -235,7 +211,6 @@ const DB = {
     const res = await fetch(`${API_URL}/orders/${id}`);
     if (!res.ok) return null;
     const data = await res.json();
-    console.log("[DB] getOrderById:", id, "→", data);
     return data;
   },
 
@@ -246,7 +221,6 @@ const DB = {
       createdAt: new Date().toISOString(),
       ...orderData,
     };
-    console.log("[DB] placeOrder — submitting:", order);
     const res = await fetch(`${API_URL}/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -254,7 +228,6 @@ const DB = {
     });
     if (!res.ok) throw new Error(`placeOrder failed: ${res.status}`);
     const saved = await res.json();
-    console.log("[DB] placeOrder — saved:", saved);
     return saved;
   },
 
@@ -266,14 +239,12 @@ const DB = {
     });
     if (!res.ok) throw new Error(`updateOrderStatus failed: ${res.status}`);
     const updated = await res.json();
-    console.log("[DB] updateOrderStatus:", id, "→", status);
     return updated;
   },
 
   async deleteOrder(id) {
     const res = await fetch(`${API_URL}/orders/${id}`, { method: "DELETE" });
     if (!res.ok) throw new Error(`deleteOrder failed: ${res.status}`);
-    console.log("[DB] deleteOrder:", id);
     return true;
 
     return res.json();

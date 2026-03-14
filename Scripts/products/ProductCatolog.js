@@ -1,7 +1,7 @@
 let allProducts = [];
 async function getProducts() {
   const response = await fetch(
-    "https://json-server-for-ecomerce-app-cst.vercel.app/products"
+    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
   );
 
   const data = await response.json();
@@ -10,8 +10,6 @@ async function getProducts() {
   let categoryFromURL = params.get("category");
 
   let filteredProducts;
-
-
 
   if (categoryFromURL) {
     filteredProducts = allProducts.filter(
@@ -26,9 +24,7 @@ async function getProducts() {
 
 getProducts();
 
-for (let i = 0; i < allProducts.length; i++) {
-  console.log(allProducts[i].images);
-}
+for (let i = 0; i < allProducts.length; i++) {}
 
 var ProductCatologDiv = document.getElementById("ProductCatolog");
 
@@ -36,7 +32,7 @@ function displayProducts(productList) {
   ProductCatologDiv.innerHTML = "";
   if (productList.length > 0) {
     for (let i = 0; i < productList.length; i++) {
-    const inStock = (productList[i].stock || 0) > 0;
+      const inStock = (productList[i].stock || 0) > 0;
 
       ProductCatologDiv.innerHTML += `
   <div class="flash-product-card flex-shrink-0 pb-4 flex-wrap col-sm-6 col-md-4 col-lg-3">
@@ -73,11 +69,8 @@ function displayProducts(productList) {
       </div>
     </div>
   </div>`;
-        
-        
-      }
-  WL.initButtons();
-      
+    }
+    WL.initButtons();
   } else {
     ProductCatologDiv.innerHTML = `<h4 class="text-center alert alert-danger ">No Products Found</h4>`;
   }
@@ -129,7 +122,6 @@ function applyFilters() {
   }
 
   displayProducts(filtered);
-  console.log("hello");
 }
 
 applyFilters();

@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   function logout() {
     localStorage.removeItem("shop_session");
     window.location.href = "../../pages/Auth/login.html";
-    console.log(this);
   }
 
   const usersContainer = document.getElementById("users");

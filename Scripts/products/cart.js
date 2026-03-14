@@ -203,7 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!btn) return;
 
     const card = btn.parentElement?.parentElement;
-    console.log(btn.dataset);
     let product = null;
 
     if (card) {
@@ -234,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ── Open modal ───────────────────────────────────────────────────
   function openModal(product) {
-    console.log("[Cart] openModal for product:", product);
     const stock = parseInt(product.stock) || 0;
     const outOfStock = stock <= 0;
 

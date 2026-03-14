@@ -16,19 +16,12 @@ let currentProductId = null;
 
 // ── FETCH WITH DEBUG ───────────────────────────────────────────
 async function fetchWithDebug(url, options) {
-  console.log("Making request to:", url);
-  console.log("Request body:", options.body ? JSON.parse(options.body) : null);
-
   const response = await fetch(url, options);
-  console.log("Response status:", response.status);
 
   let responseData;
   try {
     responseData = await response.json();
-    console.log("Response data:", responseData);
-  } catch (e) {
-    console.log("Could not parse response as JSON");
-  }
+  } catch (e) {}
 
   return { response, data: responseData };
 }
@@ -53,7 +46,9 @@ async function renderProducts() {
       return;
     }
 
-    tbody.innerHTML = products.map((p) => `
+    tbody.innerHTML = products
+      .map(
+        (p) => `
       <tr>
         <td class="py-3">
           <div class="product-img-wrap">
@@ -76,7 +71,9 @@ async function renderProducts() {
           </button>
         </td>
       </tr>
-    `).join("");
+    `,
+      )
+      .join("");
 
     document.getElementById("product-count").textContent = products.length;
 
@@ -95,7 +92,6 @@ async function renderProducts() {
         await confirmDelete(currentProductId);
       });
     });
-
   } catch (error) {
     console.error("Error loading products:", error);
     tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger py-4">Error loading products. Please try again.</td></tr>`;
@@ -112,7 +108,9 @@ function renderFilteredProducts(products) {
     return;
   }
 
-  tbody.innerHTML = products.map((p) => `
+  tbody.innerHTML = products
+    .map(
+      (p) => `
     <tr>
       <td class="py-3">
         <div class="product-img-wrap">
@@ -135,7 +133,9 @@ function renderFilteredProducts(products) {
         </button>
       </td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 
   document.getElementById("product-count").textContent = products.length;
 
@@ -165,14 +165,17 @@ async function viewProduct(productId) {
     const product = await res.json();
 
     document.getElementById("modal-product-name").textContent = product.name;
-    document.getElementById("modal-product-price").textContent = `$${product.price}`;
+    document.getElementById("modal-product-price").textContent =
+      `$${product.price}`;
     document.getElementById("modal-product-stock").textContent = product.stock;
     document.getElementById("modal-product-description").textContent =
       Array.isArray(product.details)
         ? product.details.join(", ")
         : product.details || "No description available";
     document.getElementById("modal-product-img").src =
-      product.images && product.images[0] ? product.images[0] : "Imgs/prod1.png";
+      product.images && product.images[0]
+        ? product.images[0]
+        : "Imgs/prod1.png";
 
     productModal.show();
   } catch (error) {
@@ -198,13 +201,13 @@ async function confirmDelete(productId) {
 
 // ── DOM READY ──────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", function () {
-
   // ── MODALS ───────────────────────────────────────────────────
   const productModalElement = document.getElementById("productModal");
   const editModalElement = document.getElementById("editmodal");
   const deleteModalElement = document.getElementById("deleteModal");
 
-  if (productModalElement) productModal = new bootstrap.Modal(productModalElement);
+  if (productModalElement)
+    productModal = new bootstrap.Modal(productModalElement);
   if (editModalElement) editModal = new bootstrap.Modal(editModalElement);
   if (deleteModalElement) deleteModal = new bootstrap.Modal(deleteModalElement);
 
@@ -236,7 +239,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (addBtn) {
     addBtn.addEventListener("click", function () {
       currentProductId = null;
-      document.getElementById("edit-modal-title").textContent = "Add New Product";
+      document.getElementById("edit-modal-title").textContent =
+        "Add New Product";
       document.getElementById("product-name").value = "";
       document.getElementById("product-category").value = "";
       document.getElementById("price").value = "";
@@ -261,13 +265,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const product = await res.json();
 
-        document.getElementById("edit-modal-title").textContent = "Edit Product";
+        document.getElementById("edit-modal-title").textContent =
+          "Edit Product";
         document.getElementById("product-name").value = product.name || "";
-        document.getElementById("product-category").value = product.category || "";
+        document.getElementById("product-category").value =
+          product.category || "";
         document.getElementById("price").value = product.price || "";
         document.getElementById("stock").value = product.stock || "";
-        document.getElementById("description").value =
-          Array.isArray(product.details) ? product.details.join(", ") : product.details || "";
+        document.getElementById("description").value = Array.isArray(
+          product.details,
+        )
+          ? product.details.join(", ")
+          : product.details || "";
         document.getElementById("image-url").value =
           product.images && product.images[0] ? product.images[0] : "";
         document.getElementById("form-error").classList.add("d-none");
@@ -329,9 +338,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       try {
-        const url = currentProductId === null
-          ? `${BASE_URL}/products`
-          : `${BASE_URL}/products/${currentProductId}`;
+        const url =
+          currentProductId === null
+            ? `${BASE_URL}/products`
+            : `${BASE_URL}/products/${currentProductId}`;
 
         const method = currentProductId === null ? "POST" : "PATCH";
 
@@ -345,13 +355,17 @@ document.addEventListener("DOMContentLoaded", function () {
           editModal.hide();
           await renderProducts();
         } else {
-          const errorMessage = data?.message || data?.error || `Failed with status ${response.status}`;
+          const errorMessage =
+            data?.message ||
+            data?.error ||
+            `Failed with status ${response.status}`;
           errorBox.textContent = `Error: ${errorMessage}`;
           errorBox.classList.remove("d-none");
         }
       } catch (error) {
         console.error("Error saving product:", error);
-        errorBox.textContent = error.message || "Error saving product. Please try again.";
+        errorBox.textContent =
+          error.message || "Error saving product. Please try again.";
         errorBox.classList.remove("d-none");
       }
     });
@@ -376,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         const { response, data } = await fetchWithDebug(
           `${BASE_URL}/products/${currentProductId}`,
-          { method: "DELETE" }
+          { method: "DELETE" },
         );
 
         if (!response.ok) {
@@ -396,11 +410,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchBtn = document.getElementById("btn-search");
   if (searchBtn) {
     searchBtn.addEventListener("click", async function () {
-      const query = document.getElementById("search-input").value.trim().toLowerCase();
+      const query = document
+        .getElementById("search-input")
+        .value.trim()
+        .toLowerCase();
       const res = await fetch(`${BASE_URL}/products`);
       const allProducts = await res.json();
       const filtered = allProducts.filter(
-        (p) => p.sellerId === SELLER_ID && p.name.toLowerCase().includes(query)
+        (p) => p.sellerId === SELLER_ID && p.name.toLowerCase().includes(query),
       );
       renderFilteredProducts(filtered);
     });
