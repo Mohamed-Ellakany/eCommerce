@@ -1,19 +1,9 @@
-/**
- * wishlist.js — Complete Wishlist System
- * Works on: Home page (dynamic cards) + Wishlist page
- *
- * Session key : "shop_session"
- * API         : https://e-commerce-server-xi.vercel.app
- * Dependencies: Bootstrap 5, Font Awesome
- */
+
 
 const WL = (() => {
   const API_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
   const SESSION_KEY = "shop_session";
 
-  /* ─────────────────────────────────────────
-     Session
-  ───────────────────────────────────────── */
   function getSession() {
     try {
       return JSON.parse(localStorage.getItem(SESSION_KEY)) || null;
@@ -22,11 +12,8 @@ const WL = (() => {
     }
   }
 
-  /* ─────────────────────────────────────────
-     API
-  ───────────────────────────────────────── */
-  // Fetch ALL wishlist items then filter client-side
-  // (json-server on Vercel ignores query params for filtering)
+
+
   async function fetchItems() {
     const session = getSession();
     if (!session?.id) return [];
@@ -34,7 +21,7 @@ const WL = (() => {
       const res = await fetch(`${API_URL}/wishlist`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const all = await res.json();
-      // ✅ Filter by current user client-side
+
       return all.filter((item) => String(item.userId) === String(session.id));
     } catch (err) {
       console.error("[WL] fetchItems:", err);
@@ -43,7 +30,7 @@ const WL = (() => {
   }
 
   async function isInWishlist(productId) {
-    const items = await fetchItems(); // already filtered by userId
+    const items = await fetchItems();
     return items.some((item) => String(item.productId) === String(productId));
   }
 
@@ -52,7 +39,7 @@ const WL = (() => {
     if (!session?.id) return { ok: false, reason: "not_logged_in" };
     const pid = String(productId);
     try {
-      const existing = await fetchItems(); // already filtered by userId
+      const existing = await fetchItems();
       if (existing.some((i) => String(i.productId) === pid)) {
         return { ok: true, reason: "already_exists" };
       }
@@ -80,10 +67,9 @@ const WL = (() => {
     if (!session?.id) return false;
     const pid = String(productId);
     try {
-      // fetchItems() already filters by userId — safe, never touches other users
       const items = await fetchItems();
       const target = items.find((i) => String(i.productId) === pid);
-      if (!target) return true; // already gone
+      if (!target) return true;
 
       const del = await fetch(`${API_URL}/wishlist/${target.id}`, {
         method: "DELETE",
@@ -108,13 +94,11 @@ const WL = (() => {
   }
 
   async function getCount() {
-    const items = await fetchItems(); // already filtered by userId
+    const items = await fetchItems();
     return items.length;
   }
 
-  /* ─────────────────────────────────────────
-     UI — Badge
-  ───────────────────────────────────────── */
+
   async function updateBadge() {
     const count = await getCount();
     document
@@ -127,9 +111,7 @@ const WL = (() => {
       });
   }
 
-  /* ─────────────────────────────────────────
-     UI — Button state
-  ───────────────────────────────────────── */
+
   function applyBtnState(btn, isWishlisted) {
     if (!btn) return;
     const icon = btn.querySelector("i");
@@ -146,9 +128,6 @@ const WL = (() => {
     }
   }
 
-  /* ─────────────────────────────────────────
-     UI — Toast
-  ───────────────────────────────────────── */
   function showToast(message, type = "add") {
     const bgMap = {
       add: "bg-danger",
@@ -184,9 +163,7 @@ const WL = (() => {
     el.addEventListener("hidden.bs.toast", () => el.remove());
   }
 
-  /* ─────────────────────────────────────────
-     Toggle (heart button click)
-  ───────────────────────────────────────── */
+
   async function toggle(btn, productId) {
     if (!btn || !productId) return;
 
@@ -230,17 +207,13 @@ const WL = (() => {
     }
   }
 
-  /* ─────────────────────────────────────────
-     Init toggle buttons
-     *** Call this AFTER dynamic cards render ***
-  ───────────────────────────────────────── */
+
   async function initButtons(container = document) {
     const buttons = container.querySelectorAll(
       ".wishlist-toggle-btn[data-product-id]",
     );
     if (!buttons.length) return;
 
-    // ONE request for all buttons — no N+1
     const items = await fetchItems();
     const wishlistedIds = new Set(items.map((i) => String(i.productId)));
 
@@ -248,7 +221,6 @@ const WL = (() => {
       const pid = String(btn.dataset.productId);
       applyBtnState(btn, wishlistedIds.has(pid));
 
-      // Clone to wipe stale listeners
       const fresh = btn.cloneNode(true);
       btn.replaceWith(fresh);
 
@@ -262,9 +234,7 @@ const WL = (() => {
     await updateBadge();
   }
 
-  /* ─────────────────────────────────────────
-     WISHLIST PAGE — Render
-  ───────────────────────────────────────── */
+
   async function renderPage() {
     const grid = document.getElementById("wishlistGrid");
     const emptyRow = document.getElementById("emptyWishlistRow");
@@ -331,9 +301,7 @@ const WL = (() => {
     }
   }
 
-  /* ─────────────────────────────────────────
-     WISHLIST PAGE — Card HTML
-  ───────────────────────────────────────── */
+
   function buildCard(product) {
     const img =
       product.images?.[0] ||
@@ -383,9 +351,6 @@ const WL = (() => {
       </div>`;
   }
 
-  /* ─────────────────────────────────────────
-     WISHLIST PAGE — Wire buttons
-  ───────────────────────────────────────── */
   function wirePageButtons() {
     document.querySelectorAll(".wl-remove-btn").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
@@ -448,9 +413,7 @@ const WL = (() => {
     });
   }
 
-  /* ─────────────────────────────────────────
-     WISHLIST PAGE — Helpers
-  ───────────────────────────────────────── */
+
   function animateRemove(btn, callback) {
     const card =
       btn.closest("[data-wishlist-item-id]")?.closest("[class*='col-']") ||
@@ -483,31 +446,25 @@ const WL = (() => {
     );
   }
 
-  /* ─────────────────────────────────────────
-     Public API
-  ───────────────────────────────────────── */
+
   return {
-    initButtons, // call after rendering dynamic cards on home page
-    renderPage, // call on wishlist page
-    updateBadge, // refresh nav badge
-    showToast, // reusable toast
-    toggle, // for quick-view modal
-    applyBtnState, // for quick-view modal
-    isInWishlist, // for quick-view modal
+    initButtons,
+    renderPage,
+    updateBadge,
+    showToast,
+    toggle,
+    applyBtnState,
+    isInWishlist,
   };
 })();
 
-/* ═══════════════════════════════════════════
-   AUTO-INIT
-═══════════════════════════════════════════ */
+
 document.addEventListener("DOMContentLoaded", async () => {
   await WL.updateBadge();
 
-  // Wishlist page only
   if (document.getElementById("wishlistGrid")) {
     await WL.renderPage();
   }
-  // Home page: WL.initButtons() is called by home.js after cards render
 });
 
 document.addEventListener("visibilitychange", async () => {

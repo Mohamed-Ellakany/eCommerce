@@ -1,43 +1,9 @@
-// ══════════════════════════════════════════════════════════════════
-//  Checkout.js  —  Cart rendering + Order placement
-//  Depends on: DB.js + cart.js  (both must be loaded first)
-//
-//  Cart item shape (from cart.js):
-//    { id, name, price, qty, images: [...], stock, category, sellerId }
-//
-//  New Order shape:
-//  {
-//    id          : string (timestamp),
-//    date        : ISO string,
-//    customer    : { userId, name, email, address },
-//    paymentMethod: string,
-//    totalPrice  : number,
-//    status      : "pending",
-//    suborders   : [
-//      {
-//        id          : string  ("<orderId>-<sellerId>"),
-//        parentOrderId: string,
-//        sellerId    : string,
-//        date        : ISO string,
-//        customer    : { userId, name, email, address },
-//        products    : [{ productId, name, price, quantity, image }],
-//        paymentMethod: string,
-//        subTotal    : number,
-//        status      : "pending"
-//      }
-//    ]
-//  }
-// ══════════════════════════════════════════════════════════════════
-
-// ── Auth guard ────────────────────────────────────────────────────
 (function guardAuth() {
   const session = DB.getSession();
   if (!session) {
     window.location.href = "../../pages/Auth/login.html";
   }
 })();
-
-// ── Helpers ───────────────────────────────────────────────────────
 
 function formatUSD(n) {
   return (
@@ -54,7 +20,6 @@ function toNum(v) {
   return isNaN(n) ? 0 : n;
 }
 
-// Resolves first image from array or string; returns <img> or placeholder div
 function resolveImage(images, name) {
   const src = Array.isArray(images) ? images[0] : images;
   if (!src) return `<div class="item-placeholder">📦</div>`;
@@ -64,8 +29,6 @@ function resolveImage(images, name) {
     ? `<img src="${src}" alt="${name}" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'item-placeholder\\'>📦</div>'" />`
     : `<div class="item-placeholder">${src}</div>`;
 }
-
-// ── Render cart ───────────────────────────────────────────────────
 
 function renderCart() {
   const cart = Cart.getAll();
@@ -104,8 +67,6 @@ function renderCart() {
   document.getElementById("total").textContent = formatUSD(subtotal);
 }
 
-// ── Payment toggle ────────────────────────────────────────────────
-
 function selectPayment(method) {
   document
     .getElementById("opt-bank")
@@ -116,8 +77,6 @@ function selectPayment(method) {
   document.getElementById("radio-bank").checked = method === "bank";
   document.getElementById("radio-cod").checked = method === "cod";
 }
-
-// ── Form validation ───────────────────────────────────────────────
 
 function getFormData() {
   const required = [
@@ -145,10 +104,7 @@ function getFormData() {
   return data;
 }
 
-// ── Build suborders by grouping cart items per sellerId ───────────
-
 function buildSuborders(cart, orderId, customerInfo, paymentMethod, date) {
-  // Group items by sellerId
   const sellerMap = {};
 
   cart.forEach((item) => {
@@ -184,16 +140,11 @@ function buildSuborders(cart, orderId, customerInfo, paymentMethod, date) {
   });
 }
 
-// ── Stock update ──────────────────────────────────────────────────
-
 async function updateStock(cart) {
   const results = await Promise.allSettled(
     cart.map(async (item) => {
-      // cart.js may store the product id as item.id or item.productId
       const productId = item.productId || item.id;
       const qty = toNum(item.qty) || 1;
-
-     
 
       const product = await DB.getProductById(productId);
 
@@ -207,11 +158,7 @@ async function updateStock(cart) {
       const currentStock = toNum(product.stock);
       const newStock = Math.max(0, currentStock - qty);
 
-    
-
       await DB.updateProduct(productId, { stock: newStock });
-
-    
     }),
   );
 
@@ -221,10 +168,7 @@ async function updateStock(cart) {
   });
 }
 
-// ── Place Order ───────────────────────────────────────────────────
-
 async function placeOrder() {
-  // 1. Session
   const session = DB.getSession();
   if (!session) {
     alert("Please log in to place an order.");
@@ -232,24 +176,20 @@ async function placeOrder() {
     return;
   }
 
-  // 2. Validate form
   const formData = getFormData();
   if (!formData) return;
 
-  // 3. Payment method
   const paymentEl = document.querySelector('input[name="payment"]:checked');
   const paymentValue = paymentEl ? paymentEl.value : "cod";
   const paymentMethod =
     paymentValue === "cod" ? "Cash on Delivery" : "Bank Transfer";
 
-  // 4. Cart
   const cart = Cart.getAll();
   if (!cart.length) {
     alert("Your cart is empty. Please add items before placing an order.");
     return;
   }
 
-  // 5. Build shared data
   const orderId = Date.now().toString();
   const date = new Date().toISOString();
 
@@ -264,7 +204,6 @@ async function placeOrder() {
     address,
   };
 
-  // 6. Total price
   const totalPrice =
     Math.round(
       cart.reduce(
@@ -273,7 +212,6 @@ async function placeOrder() {
       ) * 100,
     ) / 100;
 
-  // 7. Build suborders (grouped by sellerId)
   const suborders = buildSuborders(
     cart,
     orderId,
@@ -282,7 +220,6 @@ async function placeOrder() {
     date,
   );
 
-  // 8. Assemble full order matching DB shape
   const orderData = {
     id: orderId,
     date,
@@ -293,9 +230,6 @@ async function placeOrder() {
     suborders,
   };
 
- 
-
-  // 9. Disable button
   const btn = document.querySelector(".btn-place");
   btn.disabled = true;
   btn.textContent = "Placing Order…";
@@ -310,8 +244,6 @@ async function placeOrder() {
     btn.textContent = "Place Order";
   }
 }
-
-// ── Post-order success ────────────────────────────────────────────
 
 async function onOrderSuccess(orderId, paymentMethod, cart) {
   try {
@@ -333,5 +265,4 @@ async function onOrderSuccess(orderId, paymentMethod, cart) {
   window.location.href = "../../index.html";
 }
 
-// ── Init ──────────────────────────────────────────────────────────
 renderCart();

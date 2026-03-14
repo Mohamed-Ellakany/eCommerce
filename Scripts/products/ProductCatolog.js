@@ -76,10 +76,6 @@ function displayProducts(productList) {
   }
 }
 
-// displayProducts(allProducts);
-
-// displayProducts(allProducts);
-
 let filtersButtons = document.querySelectorAll(".filter-btn");
 
 filtersButtons.forEach((btn) => {
@@ -107,14 +103,12 @@ let currentSearch = "";
 function applyFilters() {
   let filtered = allProducts;
 
-  // category filter
   if (currentCategory !== "all") {
     filtered = filtered.filter(
       (p) => p.category.toLowerCase() === currentCategory,
     );
   }
 
-  // search filter
   if (currentSearch !== "") {
     filtered = filtered.filter((p) =>
       p.name.toLowerCase().includes(currentSearch),

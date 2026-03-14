@@ -1,11 +1,4 @@
-// ══════════════════════════════════════════════════════════════════
-//  seller-orders.js
-//  Displays only the suborders that belong to the logged-in seller.
-//  Allows updating the status of each suborder.
-// ══════════════════════════════════════════════════════════════════
-
 (async () => {
-  // ── 1. Auth guard ──────────────────────────────────────────────
   const session = DB.getSession();
   if (!session || (session.role !== "seller" && session.role !== "admin")) {
     alert("Access denied. Please log in as a seller or admin.");
@@ -13,7 +6,6 @@
     return;
   }
 
-  // ── 2. Populate navbar username & logout ───────────────────────
   const userNameEl = document.getElementById("user-name");
   if (userNameEl) userNameEl.textContent = session.name;
 
@@ -23,25 +15,19 @@
     window.location.href = "../../index.html";
   });
 
-  // ── 3. State ───────────────────────────────────────────────────
-  let allSuborders = []; // flat list of this seller's suborders
+  let allSuborders = [];
   let activeFilter = "all";
   let searchTerm = "";
 
-  // We need to track which parent order each suborder belongs to
-  // so we can PATCH the right place. We'll store parentOrderId on each suborder.
-
-  // ── 4. Fetch & flatten ─────────────────────────────────────────
   async function loadOrders() {
     try {
-      const orders = await DB.getOrders(); // all orders
+      const orders = await DB.getOrders();
       allSuborders = [];
 
       orders.forEach((order) => {
         if (!Array.isArray(order.suborders)) return;
         order.suborders.forEach((sub) => {
           if (String(sub.sellerId) === String(session.id)) {
-            // attach parent info for display
             allSuborders.push({
               ...sub,
               _parentOrderId: order.id,
@@ -63,7 +49,6 @@
     }
   }
 
-  // ── 5. Stats ───────────────────────────────────────────────────
   function renderStats() {
     document.getElementById("stat-total").textContent = allSuborders.length;
     document.getElementById("stat-pending").textContent = allSuborders.filter(
@@ -77,7 +62,6 @@
     ).length;
   }
 
-  // ── 6. Filter + search ─────────────────────────────────────────
   function getFiltered() {
     return allSuborders.filter((sub) => {
       const matchFilter = activeFilter === "all" || sub.status === activeFilter;
@@ -91,7 +75,6 @@
     });
   }
 
-  // ── 7. Render cards ────────────────────────────────────────────
   function renderCards() {
     const container = document.getElementById("orders-container");
     const filtered = getFiltered();
@@ -112,7 +95,6 @@
       .map((sub, idx) => buildCard(sub, idx))
       .join("");
 
-    // bind edit-status buttons
     container.querySelectorAll(".btn-edit-status").forEach((btn) => {
       btn.addEventListener("click", () =>
         openEditModal(
@@ -124,7 +106,6 @@
     });
   }
 
-  // ── 8. Build a single card ─────────────────────────────────────
   function buildCard(sub, idx) {
     const date = new Date(sub._orderDate || sub.date).toLocaleDateString(
       "en-GB",
@@ -187,7 +168,6 @@
       </div>`;
   }
 
-  // ── 9. Edit status modal ───────────────────────────────────────
   let _editSubId = null;
   let _editParentId = null;
 
@@ -209,30 +189,23 @@
       saveBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Saving…`;
 
       try {
-        // 1. Fetch the fresh parent order
         const parentOrder = await DB.getOrderById(_editParentId);
         if (!parentOrder) throw new Error("Parent order not found");
 
-        // 2. Update the target suborder's status
         const updatedSuborders = parentOrder.suborders.map((sub) =>
           sub.id === _editSubId ? { ...sub, status: newStatus } : sub,
         );
 
-        // 3. Determine the parent order's new status:
-        //    - If ALL suborders share the same status → parent = that status
-        //    - Otherwise → parent = "pending"
         const allStatuses = updatedSuborders.map((s) => s.status);
         const uniqueStatuses = [...new Set(allStatuses)];
         const parentStatus =
           uniqueStatuses.length === 1 ? uniqueStatuses[0] : "pending";
 
-        // 4. Persist both changes in one PATCH
         await DB.updateOrder(_editParentId, {
           suborders: updatedSuborders,
           status: parentStatus,
         });
 
-        // 5. Sync local state
         const target = allSuborders.find((s) => s.id === _editSubId);
         if (target) target.status = newStatus;
 
@@ -251,7 +224,6 @@
       }
     });
 
-  // ── 10. Filter chips ───────────────────────────────────────────
   document.getElementById("filter-chips").addEventListener("click", (e) => {
     const chip = e.target.closest(".chip");
     if (!chip) return;
@@ -263,15 +235,11 @@
     renderCards();
   });
 
-  // ── 11. Search ────────────────────────────────────────────────
   document.getElementById("search-input").addEventListener("input", (e) => {
     searchTerm = e.target.value.trim();
     renderCards();
   });
 
-  // ── 12. Bootstrap guard: add updateOrder to DB if missing ─────
-  //  DB.js doesn't expose updateOrder by name — it uses updateProduct etc.
-  //  We'll patch it here so seller-orders works without touching DB.js.
   if (!DB.updateOrder) {
     DB.updateOrder = async (id, changes) => {
       const res = await fetch(`${API_URL}/orders/${id}`, {
@@ -284,6 +252,5 @@
     };
   }
 
-  // ── 13. Init ──────────────────────────────────────────────────
   await loadOrders();
 })();

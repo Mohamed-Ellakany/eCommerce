@@ -1,9 +1,4 @@
-// ══════════════════════════════════════════════════════════════════
-//  admin-analytics.js — User analytics (light/bootstrap theme)
-// ══════════════════════════════════════════════════════════════════
-
 document.addEventListener("DOMContentLoaded", async function () {
-  // ── Auth guard ────────────────────────────────────────────────
   const session = DB.getSession();
   if (!session || session.role !== "admin") {
     window.location.href = "../../index.html";
@@ -16,7 +11,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.location.href = "../../pages/Auth/login.html";
   });
 
-  // ── Load users ────────────────────────────────────────────────
   let users = [];
   try {
     users = await DB.getUsers();
@@ -25,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
 
-  // ── KPI ───────────────────────────────────────────────────────
   const admins = users.filter((u) => u.role === "admin");
   const sellers = users.filter((u) => u.role === "seller");
   const customers = users.filter((u) => u.role === "customer");
@@ -35,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   document.getElementById("kpi-sellers").textContent = sellers.length;
   document.getElementById("kpi-customers").textContent = customers.length;
 
-  // ── Chart.js light defaults ───────────────────────────────────
   Chart.defaults.color = "#6c757d";
   Chart.defaults.font.family = "inherit";
   Chart.defaults.plugins.legend.labels.boxWidth = 12;
@@ -49,7 +41,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     cum: "#0d6efd",
   };
 
-  // ── 1. Timeline (line) ────────────────────────────────────────
   const monthCounts = {};
   users.forEach((u, idx) => {
     let date = u.createdAt
@@ -129,7 +120,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   });
 
-  // ── 2. Donut ──────────────────────────────────────────────────
   new Chart(document.getElementById("chart-donut"), {
     type: "doughnut",
     data: {
@@ -158,7 +148,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   });
 
-  // ── 3. Horizontal bar ─────────────────────────────────────────
   new Chart(document.getElementById("chart-bar"), {
     type: "bar",
     data: {
@@ -189,7 +178,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   });
 
-  // ── 4. Polar area ─────────────────────────────────────────────
   new Chart(document.getElementById("chart-polar"), {
     type: "polarArea",
     data: {
@@ -219,7 +207,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   });
 
-  // ── Recent users table ────────────────────────────────────────
   const tbody = document.getElementById("recent-users-tbody");
   const sorted = [...users]
     .sort((a, b) =>

@@ -5,20 +5,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   let allProducts = [];
 
-  // ===============================
-  // Fetch Products From JSON Server
-  // ===============================
-
   try {
     allProducts = await DB.getProducts();
     displayProducts(allProducts);
   } catch (err) {
     console.error("Failed to load products", err);
   }
-
-  // ===============================
-  // Display Products
-  // ===============================
 
   function displayProducts(products) {
     productsContainer.innerHTML = "";
@@ -99,10 +91,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  // ===============================
-  // Search Products
-  // ===============================
-
   const searchInput = document.querySelector("input[type='search']");
 
   if (searchInput) {
@@ -116,10 +104,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       displayProducts(filtered);
     });
   }
-
-  // ===============================
-  // Add To Cart
-  // ===============================
 
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("add-to-cart-btn")) {

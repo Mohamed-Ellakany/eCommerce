@@ -156,11 +156,6 @@ function displayProductDetails(_product) {
   });
 }
 
-// let wishList=document.getElementById("wishList");
-// wishList.addEventListener("click",()=>{
-// wishList.classList.toggle("btn-danger");
-// });
-
 const swiper = new Swiper(".relatedSwiper", {
   slidesPerView: 4,
   slidesPerGroup: 1,

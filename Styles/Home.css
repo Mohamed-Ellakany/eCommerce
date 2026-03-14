@@ -3,7 +3,7 @@
     min-height: 560px;
 }
 
-/* ---- SIDEBAR ---- */
+
 .main aside {
     width: 220px;
     min-width: 200px;
@@ -17,14 +17,15 @@ aside ul li {
     cursor: pointer;
     font-size: 1.1rem;
     font-family: var(--mainFont);
-    
+
     padding: 0.65rem 0.75rem;
     margin: .3rem 0;
     border-radius: 8px;
     transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
     letter-spacing: 0.01em;
 }
-aside ul li a{
+
+aside ul li a {
     color: #333 !important;
 }
 
@@ -41,7 +42,8 @@ aside ul li:hover {
     background-color: rgba(219, 68, 68, 0.06);
     transform: translateX(3px);
 }
-aside ul li:hover a{
+
+aside ul li:hover a {
     color: var(--mainColor) !important;
 
 }
@@ -51,7 +53,7 @@ aside ul li:hover::after {
     transform: translateX(3px);
 }
 
-/* Active sidebar item */
+
 aside ul li.active {
     color: var(--mainColor);
     font-weight: 600;
@@ -63,7 +65,7 @@ aside ul li.active {
     color: white;
 }
 
-/* ---- CAROUSEL WRAPPER ---- */
+
 
 
 #carouselExampleIndicators {
@@ -123,13 +125,13 @@ aside ul li.active {
     border: 3px solid white !important;
 }
 
-/* Flash Products */
+
 .flash-sales {
     max-width: 1400px;
     margin: 0 auto;
 }
 
-/* Today's badge */
+
 .today-badge {
     font-size: 14px;
     color: #DB4444;
@@ -142,12 +144,12 @@ aside ul li.active {
     border-radius: 4px;
 }
 
-/* Flash title */
+
 .flash-title {
     font-size: 2rem;
 }
 
-/* Countdown */
+
 .time-value {
     font-size: 2rem !important;
     line-height: 1;
@@ -164,7 +166,7 @@ aside ul li.active {
     font-weight: 600;
 }
 
-/* Nav buttons */
+
 .flash-nav-btn {
     width: 46px;
     height: 46px;
@@ -180,7 +182,7 @@ aside ul li.active {
     color: #fff;
 }
 
-/* Products track */
+
 .flash-products-wrapper {
     cursor: grab;
 }
@@ -189,7 +191,7 @@ aside ul li.active {
     transition: transform 0.4s ease;
 }
 
-/* Product card */
+
 .flash-product-card {
     width: 270px;
     min-width: 270px;
@@ -212,7 +214,7 @@ aside ul li.active {
     transform: scale(1.05);
 }
 
-/* Discount badge */
+
 .discount-badge {
     position: absolute;
     top: 12px;
@@ -225,7 +227,7 @@ aside ul li.active {
     z-index: 2;
 }
 
-/* Action buttons (heart + eye) */
+
 .product-actions {
     top: 12px;
     right: 12px;
@@ -246,7 +248,7 @@ aside ul li.active {
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     transition: background 0.2s, color 0.2s;
-    border:none !important;
+    border: none !important;
 }
 
 .action-btn:hover {
@@ -254,7 +256,7 @@ aside ul li.active {
     color: #fff;
 }
 
-/* Add to cart button */
+
 .add-to-cart-btn {
     position: absolute;
     bottom: 0;
@@ -274,7 +276,7 @@ aside ul li.active {
     opacity: 1;
 }
 
-/* Product info */
+
 .product-name {
     font-size: 15px;
     font-weight: 500;
@@ -297,7 +299,7 @@ aside ul li.active {
     font-size: 13px;
 }
 
-/* View All button */
+
 .view-all-btn {
     background: #DB4444;
     color: #fff;
@@ -313,21 +315,22 @@ aside ul li.active {
     color: #fff;
 }
 
-/* Categories */
+
 .flash-products-wrapper .categ {
     border-radius: 10px;
     border: 1px solid #d3cece !important;
 }
-.categText
-{
-    color:#000;
+
+.categText {
+    color: #000;
 }
 
 .categ i {
     font-size: 3rem;
 }
 
-.categ:hover,.categ:hover a{
+.categ:hover,
+.categ:hover a {
     background-color: #DB4444 !important;
     border: 1px solid #DB4444 !important;
     color: #fff !important;
@@ -349,20 +352,20 @@ aside ul li.active {
     pointer-events: none;
 }
 
-/* Categories label */
+
 .categories-label {
     color: var(--green);
     font-size: .85rem;
     letter-spacing: .12em;
 }
 
-/* Hero title */
+
 .hero-title {
     font-size: clamp(2.4rem, 5vw, 4rem);
     letter-spacing: -.01em;
 }
 
-/* Countdown items */
+
 .countdown-item {
     width: 72px;
     height: 72px;
@@ -384,7 +387,7 @@ aside ul li.active {
     margin-top: 2px;
 }
 
-/* Buy button */
+
 .btn-buy {
     background: var(--green);
     color: #000;
@@ -401,7 +404,7 @@ aside ul li.active {
     box-shadow: 0 8px 28px rgba(0, 233, 77, .35) !important;
 }
 
-/* Speaker glow */
+
 .speaker-glow {
     width: 72%;
     height: 72%;
@@ -409,7 +412,7 @@ aside ul li.active {
     filter: blur(32px);
 }
 
-/* Speaker image */
+
 .speaker-img {
     max-width: 580px;
     filter: drop-shadow(0 24px 48px rgba(0, 0, 0, .8));
@@ -418,7 +421,7 @@ aside ul li.active {
 
 .service-icon i {
     padding: 15px;
-    font-size:1.5rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
     border-radius: 50%;
     color: #fff;

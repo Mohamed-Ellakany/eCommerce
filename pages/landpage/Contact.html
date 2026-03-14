@@ -29,37 +29,38 @@
 
     <header>
         <!-- Main navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary px-xl-5 px-3 py-2">
             <div class="container-xl container-fluid d-flex align-items-center">
                 <a class="navbar-brand fw-bold fs-4 me-auto me-lg-0" href="../../index.html">ONLINE SHOP</a>
-        
+
                 <div class="d-flex align-items-center gap-3 order-lg-3">
                     <div class="position-relative d-none d-md-block d-lg-block" style="width: 250px">
                         <input class="form-control rounded-5 py-2 ps-4 pe-5" type="search"
                             placeholder="What are you looking for?" aria-label="Search" />
-                        <i class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
+                        <i
+                            class="fas fa-search position-absolute top-50 end-0 me-3 translate-middle-y text-secondary"></i>
                     </div>
-        
+
                     <!-- Cart icon with badge -->
                     <div class="cart-nav-wrapper" onclick="location.href = './../products/cart.html'">
                         <i class="fa-solid fa-cart-shopping fa-xl text-success-emphasis"></i>
                         <span class="cart-badge" id="navCartCount">0</span>
                     </div>
-        
+
                     <!--  Wishlist icon with badge -->
-                    <div class="wishlist-nav-wrapper" onclick="location.href='./../products/wishlist.html'" role="button"
-                        aria-label="Wishlist" style="cursor:pointer;">
+                    <div class="wishlist-nav-wrapper" onclick="location.href='./../products/wishlist.html'"
+                        role="button" aria-label="Wishlist" style="cursor:pointer;">
                         <i class="fa-solid fa-heart fa-xl text-danger-emphasis"></i>
                         <span class="wishlist-badge d-flex justify-content-center" id="navWishlistCount">0</span>
                     </div>
                     <i class="fa-solid fa-arrow-right-from-bracket text-danger fa-xl d-none" id="logout"></i>
-        
+
                     <button class="navbar-toggler  p-0" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-        
+
                 <div class="collapse navbar-collapse ms-xl-5 ps-xl-5" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 ms-xl-5 mb-lg-0 gap-lg-3 mt-3 mt-lg-0">
                         <li class="nav-item">
@@ -96,7 +97,8 @@
         <!-- Breadcrumb (Bootstrap) -->
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../index.html" class="text-decoration-none text-secondary">Home</a>
+                <li class="breadcrumb-item"><a href="../../index.html"
+                        class="text-decoration-none text-secondary">Home</a>
                 </li>
                 <li class="breadcrumb-item active text-danger" aria-current="page">Contact</li>
             </ol>
@@ -285,8 +287,8 @@
 
     <!-- Main Script -->
     <script src="../../Scripts/script.js"></script>
-     <script src="../../Scripts/products/wishList.js"></script>
-     <script src="../../Scripts/products/cart.js"></script>
+    <script src="../../Scripts/products/wishList.js"></script>
+    <script src="../../Scripts/products/cart.js"></script>
 
     <!-- Bootstrap JS -->
 
@@ -300,7 +302,7 @@
             const toastEl = document.getElementById('liveToast');
             const toastMessage = document.getElementById('toastMessage');
 
-            // Form validation
+
             function validateForm(formData) {
                 const name = formData.get('name');
                 const email = formData.get('email');
@@ -368,7 +370,7 @@
                 try {
                     await new Promise(resolve => setTimeout(resolve, 1500));
 
-               
+
 
                     showMessage('success', 'Thank you for contacting us! We will get back to you within 24 hours.');
                     showToast('Message sent successfully!', 'success');

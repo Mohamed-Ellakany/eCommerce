@@ -1,11 +1,4 @@
-// ══════════════════════════════════════════════════════════════════
-//  admin-orders.js
-//  Admin view: shows ALL orders, each with its suborders nested.
-//  Admin can update the overall order status → cascades to ALL suborders.
-// ══════════════════════════════════════════════════════════════════
-
 (async () => {
-  // ── 1. Auth guard ──────────────────────────────────────────────
   const session = DB.getSession();
   if (!session || session.role !== "admin") {
     alert("Access denied. Admins only.");
@@ -13,7 +6,6 @@
     return;
   }
 
-  // ── 2. Navbar ──────────────────────────────────────────────────
   const userNameEl = document.getElementById("user-name");
   if (userNameEl) userNameEl.textContent = session.name;
 
@@ -23,7 +15,6 @@
     window.location.href = "../../index.html";
   });
 
-  // ── 3. Patch DB with updateOrder if missing ────────────────────
   if (!DB.updateOrder) {
     DB.updateOrder = async (id, changes) => {
       const res = await fetch(`${API_URL}/orders/${id}`, {
@@ -36,12 +27,10 @@
     };
   }
 
-  // ── 4. State ───────────────────────────────────────────────────
-  let allOrders = []; // full parent orders array
+  let allOrders = [];
   let activeFilter = "all";
   let searchTerm = "";
 
-  // ── 5. Load ────────────────────────────────────────────────────
   async function loadOrders() {
     try {
       allOrders = await DB.getOrders();
@@ -56,7 +45,6 @@
     }
   }
 
-  // ── 6. Stats (based on parent order status) ────────────────────
   function renderStats() {
     document.getElementById("stat-total").textContent = allOrders.length;
     document.getElementById("stat-pending").textContent = allOrders.filter(
@@ -70,7 +58,6 @@
     ).length;
   }
 
-  // ── 7. Filter + search ─────────────────────────────────────────
   function getFiltered() {
     return allOrders.filter((order) => {
       const matchFilter =
@@ -87,7 +74,6 @@
     });
   }
 
-  // ── 8. Render all cards ────────────────────────────────────────
   function renderCards() {
     const container = document.getElementById("orders-container");
     const filtered = getFiltered();
@@ -108,7 +94,6 @@
       .map((order, idx) => buildOrderCard(order, idx))
       .join("");
 
-    // bind "Edit Overall Status" buttons
     container.querySelectorAll(".btn-edit-overall").forEach((btn) => {
       btn.addEventListener("click", () =>
         openEditModal(btn.dataset.orderid, btn.dataset.status),
@@ -116,7 +101,6 @@
     });
   }
 
-  // ── 9. Build a parent order card with nested suborders ─────────
   function buildOrderCard(order, idx) {
     const date = new Date(order.date).toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -185,7 +169,6 @@
       </div>`;
   }
 
-  // ── 10. Build a single suborder block ─────────────────────────
   function buildSuborderBlock(sub) {
     const badgeCls = `badge-status status-${sub.status}`;
     const productsHtml = (sub.products || [])
@@ -221,7 +204,6 @@
       </div>`;
   }
 
-  // ── 11. Edit modal ─────────────────────────────────────────────
   let _editOrderId = null;
 
   function openEditModal(orderId, currentStatus) {
@@ -241,23 +223,19 @@
       saveBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Saving…`;
 
       try {
-        // Fetch fresh parent order
         const parentOrder = await DB.getOrderById(_editOrderId);
         if (!parentOrder) throw new Error("Order not found");
 
-        // Cascade new status to ALL suborders
         const updatedSuborders = (parentOrder.suborders || []).map((sub) => ({
           ...sub,
           status: newStatus,
         }));
 
-        // PATCH order: overall status + all suborders
         await DB.updateOrder(_editOrderId, {
           status: newStatus,
           suborders: updatedSuborders,
         });
 
-        // Sync local state
         const localOrder = allOrders.find((o) => o.id === _editOrderId);
         if (localOrder) {
           localOrder.status = newStatus;
@@ -279,7 +257,6 @@
       }
     });
 
-  // ── 12. Filter chips ───────────────────────────────────────────
   document.getElementById("filter-chips").addEventListener("click", (e) => {
     const chip = e.target.closest(".chip");
     if (!chip) return;
@@ -291,12 +268,10 @@
     renderCards();
   });
 
-  // ── 13. Search ────────────────────────────────────────────────
   document.getElementById("search-input").addEventListener("input", (e) => {
     searchTerm = e.target.value.trim();
     renderCards();
   });
 
-  // ── 14. Init ──────────────────────────────────────────────────
   await loadOrders();
 })();
