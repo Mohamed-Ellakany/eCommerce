@@ -1,4 +1,4 @@
-const BASE_URL = "https://e-commerce-server-xi.vercel.app";
+const BASE_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
 
 // ── AUTH CHECK ─────────────────────────────────────────────────
 const session = DB.getSession();
