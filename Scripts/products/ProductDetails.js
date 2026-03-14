@@ -194,6 +194,7 @@ function displayRelatedProducts(products) {
     .filter((p) => p.id != productId)
     .slice(0, 4)
     .forEach((product) => {
+      if (product.stock == 0) return;
       relatedProductsDiv.innerHTML += `
 <div class="flash-product-card flex-shrink-1 pb-4 flex-wrap col-sm-6 col-md-4 col-lg-3">
 
