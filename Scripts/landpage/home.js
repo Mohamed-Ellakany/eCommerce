@@ -57,20 +57,32 @@ function updateCountdown() {
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-  document.getElementById("flash-days").textContent = String(days).padStart(
-    2,
-    "0",
-  );
-  document.getElementById("flash-hours").textContent = String(hours).padStart(
-    2,
-    "0",
-  );
-  document.getElementById("flash-minutes").textContent = String(
-    minutes,
-  ).padStart(2, "0");
-  document.getElementById("flash-seconds").textContent = String(
-    seconds,
-  ).padStart(2, "0");
+//   document.getElementById("flash-days").textContent = String(days).padStart(
+//     2,
+//     "0",
+//   );
+//   document.getElementById("flash-hours").textContent = String(hours).padStart(
+//     2,
+//     "0",
+//   );
+//   document.getElementById("flash-minutes").textContent = String(
+//     minutes,
+//   ).padStart(2, "0");
+//   document.getElementById("flash-seconds").textContent = String(
+//     seconds,
+//   ).padStart(2, "0");
+
+
+const daysEl = document.getElementById("flash-days");
+const hoursEl = document.getElementById("flash-hours");
+const minutesEl = document.getElementById("flash-minutes");
+const secondsEl = document.getElementById("flash-seconds");
+
+daysEl ? (daysEl.textContent = String(days).padStart(2, "0")) : null;
+hoursEl ? (hoursEl.textContent = String(hours).padStart(2, "0")) : null;
+minutesEl ? (minutesEl.textContent = String(minutes).padStart(2, "0")) : null;
+secondsEl ? (secondsEl.textContent = String(seconds).padStart(2, "0")) : null;
+
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);

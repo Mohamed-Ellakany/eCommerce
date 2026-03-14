@@ -4,7 +4,7 @@ Welcome to the **E-Commerce Platform Frontend** repository! This project is a fe
 
 ## 🚀 Live Demo & API Resources
 
-- **JSON Server Deployment:** [https://e-commerce-server-xi.vercel.app/](https://e-commerce-server-xi.vercel.app/)
+- **JSON Server Deployment:** [(https://json-server-for-ecomerce-app-cst.vercel.app/)]
 - **Server Application Repo:** [GitHub - E-commerce_Server](https://github.com/rawda2/E-commerce_Server)
 
 ---
@@ -61,7 +61,7 @@ This project was built without any backend framework. The application purely uti
  ┃ ┣ 📜 media.css      # Global responsive media queries
  ┃ ┗ 📜 ...            # Component-specific styles (cart, products, admin)
  ┣ 📜 index.html       # Application Entry Point (Home functionality)
- ┣ 📜 seller_dashboard.html # Main dashboard entry for sellers
+
  ┗ 📜 README.md        # Project documentation
 ```
 
