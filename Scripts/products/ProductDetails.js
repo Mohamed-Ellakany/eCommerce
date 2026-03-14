@@ -253,37 +253,30 @@ products
 .forEach(product => {
 
 relatedProductsDiv.innerHTML += `
-<div
- class="flash-product-card flex-shrink-1 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3 ">
+<div class="flash-product-card flex-shrink-1 pb-4 flex-wrap col-sm-6 col-md-4 col-lg-3">
 
   <div class="product-img-wrap position-relative">
-
     <span class="discount-badge">-40%</span>
-<a href="../../pages/products/productDetails.html?id=${product.id}"> 
-    <img src="${product.images[0]}" 
-         alt="${product.name}" 
-         class="w-100"/>
-</a>
+
+    <a href="../../pages/products/productDetails.html?id=${product.id}"> 
+      <img src="${product.images[0]}" alt="${product.name}" class="w-100"/>
+    </a>
+
     <div class="product-actions position-absolute d-flex flex-column gap-2">
-
-      <div class="product-actions position-absolute d-flex flex-column gap-2">
-          <button class="wishlist-toggle-btn action-btn border-none d-flex justify-content-center align-items-center"
-                  aria-label="Add to wishlist" title="Add to wishlist"
-                  data-product-id="${product.id}">
-            <i class="fa-regular fa-heart"></i>
-          </button>
-        
-
+      <button class="wishlist-toggle-btn action-btn border-none d-flex justify-content-center align-items-center"
+              aria-label="Add to wishlist" title="Add to wishlist"
+              data-product-id="${product.id}">
+        <i class="fa-regular fa-heart"></i>
+      </button>
     </div>
 
-    <button class="add-to-cart-btn w-100">
+    <button class="add-to-cart-btn w-100" data-id="${product.id}">
       Add To Cart
     </button>
 
   </div>
 
   <div class="pt-2">
-
     <p class="product-name mb-1">${product.name}</p>
 
     <div class="d-flex gap-2 align-items-center mb-1">
@@ -301,13 +294,11 @@ relatedProductsDiv.innerHTML += `
       </div>
       <span class="review-count">(88)</span>
     </div>
-
   </div>
 
-</div>
+</div>`;
 
-`;
-  WL.initButtons(relatedProductsDiv);
+WL.initButtons(relatedProductsDiv);
 
 });
 
