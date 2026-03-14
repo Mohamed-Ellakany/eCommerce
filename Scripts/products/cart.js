@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                   <span class="text-muted" id="modalMaxNote"></span>
                 </div>
-                <!-- Out-of-stock warning (hidden by default) -->
                 <div id="modalOutOfStockMsg" class="alert alert-danger d-none mt-3 mb-0 py-2 px-3" role="alert">
                   <i class="fas fa-ban me-2"></i>This product is <strong>out of stock</strong> and cannot be added to the cart.
                 </div>
