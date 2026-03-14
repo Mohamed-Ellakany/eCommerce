@@ -41,32 +41,28 @@ This project was built without any backend framework. The application purely uti
 ```text
 📦 eCommerce
  ┣ 📂 Imgs             # Static image assets used throughout the platform
- ┣ 📂 pages            # Additional specialized pages (e.g., admin interfaces)
- ┣ 📂 Scripts          # JavaScript files handling all logic (Auth, Cart, API calls)
- ┃ ┣ 📜 admin/
- ┃ ┣ 📜 DB.js          # Core API and LocalStorage interface logic
- ┃ ┣ 📜 home.js
- ┃ ┣ 📜 cart.js
- ┃ ┣ 📜 Checkout.js
- ┃ ┣ 📜 Login.js
- ┃ ┣ 📜 Register.js
- ┃ ┣ 📜 seller-dashboard.js
- ┃ ┗ 📜 ...
+ ┣ 📂 pages            # HTML views categorized by domain
+ ┃ ┣ 📂 admin          # Admin panels (dashboard, analytics, orders, user management)
+ ┃ ┣ 📂 Auth           # Login and Registration pages
+ ┃ ┣ 📂 landpage       # Static informational pages (About, Contact, FAQ, etc.)
+ ┃ ┣ 📂 products       # Catalog, Details, Cart, Checkout, and Wishlist pages
+ ┃ ┗ 📂 seller         # Seller analytics and order management
+ ┣ 📂 Scripts          # JavaScript files handling page-specific logic
+ ┃ ┣ 📜 DB.js          # Core API fetch logic and LocalStorage interface
+ ┃ ┣ 📜 script.js      # Global utilities
+ ┃ ┣ 📂 admin          # JS for Admin dashboard charts and data tables
+ ┃ ┣ 📂 Auth           # Auth validation and login logic
+ ┃ ┣ 📂 landpage       # Profile and Home page dynamic content
+ ┃ ┣ 📂 products       # Cart calculations, checkout flow, product rendering
+ ┃ ┗ 📂 seller         # Seller dashboard data aggregations
  ┣ 📂 Styles           # CSS stylesheets governing the visual feel of the app
- ┃ ┣ 📜 Home.css
- ┃ ┣ 📜 Contact.css
- ┃ ┣ 📜 style.css
- ┃ ┗ 📜 ...
- ┣ 📜 index.html         # Application Entry Point
- ┣ 📜 cart.html          # Shopping Cart route
- ┣ 📜 Checkout.html      # Secure checkout portal
- ┣ 📜 login.html         # User Sign-in page
- ┣ 📜 Register.html      # New user Sign-up page
- ┣ 📜 ProductCatalog.html
- ┣ 📜 ProductDetails.html
- ┣ 📜 seller_dashboard.html
- ┣ 📜 Profile.html
- ┗ 📜 README.md          # Project documentation
+ ┃ ┣ 📜 style.css      # Base/Global styles
+ ┃ ┣ 📜 Home.css       # Landing page styling
+ ┃ ┣ 📜 media.css      # Global responsive media queries
+ ┃ ┗ 📜 ...            # Component-specific styles (cart, products, admin)
+ ┣ 📜 index.html       # Application Entry Point (Home functionality)
+ ┣ 📜 seller_dashboard.html # Main dashboard entry for sellers
+ ┗ 📜 README.md        # Project documentation
 ```
 
 ---

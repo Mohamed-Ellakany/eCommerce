@@ -1,5 +1,3 @@
-
-
 const Cart = (() => {
   const KEY = "user_cart";
 
@@ -21,8 +19,8 @@ const Cart = (() => {
 
   /**
    * Add a product to the cart.
-   * @param {Object} product  
-   * @param {number} qty     
+   * @param {Object} product
+   * @param {number} qty
    */
   function add(product, qty = 1) {
     const stock = parseInt(product.stock) || 0;
@@ -86,7 +84,6 @@ const Cart = (() => {
 
   return { getAll, getItem, add, updateQty, remove, clear, totalQty };
 })();
-
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!document.getElementById("addToCartModal")) {
@@ -178,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart-btn, [data-add-to-cart]");
+    console.log("prodcut add btn click", btn);
     if (!btn) return;
 
     const card = btn.parentElement?.parentElement;
