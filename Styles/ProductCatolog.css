@@ -11,3 +11,58 @@
     background:#ff4d4d;
     color:white;
 }
+
+ /* pagination container */
+
+#pagination{
+    margin-top:40px;
+    gap:8px;
+}
+
+/* general button style */
+
+#pagination button{
+    min-width:40px;
+    height:40px;
+    border-radius:8px;
+    border:1px solid #DB4444;
+    background-color:white;
+    color:#DB4444;
+    font-weight:500;
+    transition:all 0.25s ease;
+}
+
+/* hover */
+
+#pagination button:hover{
+    background-color:#DB4444;
+    color:white;
+    transform:translateY(-2px);
+}
+
+/* active page */
+
+#pagination button.active{
+    background-color:#DB4444;
+    color:white;
+    border-color:#DB4444;
+    box-shadow:0 4px 10px rgba(219,68,68,0.3);
+}
+
+/* disabled buttons */
+
+#pagination button:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+    background-color:#f5f5f5;
+    color:#999;
+    border-color:#ddd;
+}
+
+/* prev & next buttons */
+
+#pagination button:first-child,
+#pagination button:last-child{
+    padding:0 14px;
+    font-weight:600;
+}
