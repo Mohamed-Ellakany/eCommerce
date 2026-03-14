@@ -173,10 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let _currentProduct = null;
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".add-to-cart-btn, [data-add-to-cart]");
-    console.log("prodcut add btn click", btn);
     if (!btn) return;
+    const _product = await DB.getProductById(btn.dataset?.id);
 
     const card = btn.parentElement?.parentElement;
     let product = null;
@@ -187,18 +187,21 @@ document.addEventListener("DOMContentLoaded", () => {
         '.price-new, .price, [class*="price"]',
       );
       const imgEl = card.querySelector("img");
-
-      product = {
-        id: btn.dataset.id || "product_" + Date.now(),
-        name: nameEl ? nameEl.trim() : "Product",
-        price: priceEl
-          ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, "")) || 0
-          : 0,
-        stock: parseInt(btn.dataset.stock) || 0,
-        images: imgEl ? [imgEl.src] : [],
-        category: btn.dataset.category || "",
-        sellerId: btn.dataset.sellerid || "",
-      };
+      if (!btn?.dataset?.sellerId) {
+        product = _product;
+      } else {
+        product = {
+          id: btn.dataset.id || "product_" + Date.now(),
+          name: nameEl ? nameEl.trim() : "Product",
+          price: priceEl
+            ? parseFloat(priceEl.textContent.replace(/[^0-9.]/g, "")) || 0
+            : 0,
+          stock: parseInt(btn.dataset.stock) || 0,
+          images: imgEl ? [imgEl.src] : [],
+          category: btn.dataset.category || "",
+          sellerId: btn.dataset.sellerid || "",
+        };
+      }
     }
 
     if (!product) return;
