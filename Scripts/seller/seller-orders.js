@@ -7,8 +7,8 @@
 (async () => {
   // ── 1. Auth guard ──────────────────────────────────────────────
   const session = DB.getSession();
-  if (!session || session.role !== "seller") {
-    alert("Access denied. Please log in as a seller.");
+  if (!session || (session.role !== "seller" && session.role !== "admin")) {
+    alert("Access denied. Please log in as a seller or admin.");
     window.location.href = "../../index.html";
     return;
   }

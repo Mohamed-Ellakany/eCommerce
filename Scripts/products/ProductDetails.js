@@ -6,18 +6,25 @@
 const params = new URLSearchParams(window.location.search);
 
 const productId = params.get("id");
+let _currentProduct = null;
+
 
 
 async function getProductDetails(){
 
-    let response = await fetch(`https://e-commerce-server-xi.vercel.app/products/${productId}`);
+    let response = await fetch(
+      `https://json-server-for-ecomerce-app-cst.vercel.app/products/${productId}`,
+    );
 
     let product = await response.json();
+
+    _currentProduct = product;
+
 
     displayProductDetails(product);
 
     getRelatedProducts(product.category);
-
+  await WL.initButtons(document.querySelector(".productDetails"));
 }
 
 getProductDetails();
@@ -26,7 +33,7 @@ getProductDetails();
 async function getRelatedProducts(category){
 
     let response = await fetch(
-        `https://e-commerce-server-xi.vercel.app/products?category=${category}`
+        `https://json-server-for-ecomerce-app-cst.vercel.app/products?category=${category}`
     );
 
     let products = await response.json();
@@ -34,6 +41,7 @@ async function getRelatedProducts(category){
     displayRelatedProducts(products);
 
 }
+
 
 
 
@@ -88,26 +96,22 @@ for (let i = 0; i < pic.length; i++) {
  }
 
 
+  const wishlistBtn = document.querySelector(
+    ".productDetails .wishlist-toggle-btn"
+  );
+  if (wishlistBtn) {
+    wishlistBtn.setAttribute("data-product-id", _product.id);
+  }
 
+  document.querySelectorAll(".color").forEach((color) => {
+    color.addEventListener("click", function () {
+      document.querySelectorAll(".color").forEach((c) => c.classList.remove("active"));
+      this.classList.add("active");
+    });
 
-
-
-
-
-
-let colors = document.querySelectorAll(".color");
-
-colors.forEach(color => {
-
-color.addEventListener("click", function(){
-
-colors.forEach(c => c.classList.remove("active"));
-
-this.classList.add("active");
 
 })
 
-});
 
 
 
@@ -155,7 +159,6 @@ if(_product.category!="Electronics"){
 
 
 let plus = document.querySelector(".plus");
-let minus = document.querySelector(".minus");
 let number = document.querySelector(".border-start");
 
 let count = 1;
@@ -174,6 +177,19 @@ plus.addEventListener("click", () => {
   }
   console.log(count);
 });
+  
+  const buyNowBtn = document.querySelector(".btn.btn-danger.px-4, .btn.btn-danger.px-lg-5");
+  document.querySelectorAll(".productDetails .btn-danger").forEach((btn) => {
+    if (btn.textContent.trim() === "Buy Now") {
+      btn.addEventListener("click", () => {
+        if (!_currentProduct) return;
+        Cart.add(_currentProduct, count);
+        window.location.href = "../../pages/products/cart.html";
+      });
+    }
+  });
+}
+let minus = document.querySelector(".minus");
 
 minus.addEventListener("click", () => {
   if (count > 1) {
@@ -185,10 +201,10 @@ minus.addEventListener("click", () => {
   }
 });
 
-let wishList=document.getElementById("wishList");
-wishList.addEventListener("click",()=>{
-wishList.classList.toggle("btn-danger");
-});
+// let wishList=document.getElementById("wishList");
+// wishList.addEventListener("click",()=>{
+// wishList.classList.toggle("btn-danger");
+// });
 
 const swiper = new Swiper(".relatedSwiper", {
 
@@ -226,10 +242,6 @@ const swiper = new Swiper(".relatedSwiper", {
 
 
 
-
-}
-
-
 let relatedProductsDiv = document.getElementById("relatedProducts");
 
 function displayRelatedProducts(products){
@@ -242,37 +254,30 @@ products
 .forEach(product => {
 
 relatedProductsDiv.innerHTML += `
-<div
- class="flash-product-card flex-shrink-1 pb-4  flex-wrap  col-sm-6 col-md-4 col-lg-3 ">
+<div class="flash-product-card flex-shrink-1 pb-4 flex-wrap col-sm-6 col-md-4 col-lg-3">
 
   <div class="product-img-wrap position-relative">
-
     <span class="discount-badge">-40%</span>
-<a href="../../pages/products/productDetails.html?id=${product.id}"> 
-    <img src="${product.images[0]}" 
-         alt="${product.name}" 
-         class="w-100"/>
-</a>
-    <div class="product-actions position-absolute d-flex flex-column gap-2">
 
-      <button class="action-btn d-flex justify-content-center align-items-center border-0">
+    <a href="../../pages/products/productDetails.html?id=${product.id}"> 
+      <img src="${product.images[0]}" alt="${product.name}" class="w-100"/>
+    </a>
+
+    <div class="product-actions position-absolute d-flex flex-column gap-2">
+      <button class="wishlist-toggle-btn action-btn border-none d-flex justify-content-center align-items-center"
+              aria-label="Add to wishlist" title="Add to wishlist"
+              data-product-id="${product.id}">
         <i class="fa-regular fa-heart"></i>
       </button>
-
-      <button class="action-btn d-flex justify-content-center align-items-center border-0">
-        <i class="fa-regular fa-eye"></i>
-      </button>
-
     </div>
 
-    <button class="add-to-cart-btn w-100">
+    <button class="add-to-cart-btn w-100" data-id="${product.id}">
       Add To Cart
     </button>
 
   </div>
 
   <div class="pt-2">
-
     <p class="product-name mb-1">${product.name}</p>
 
     <div class="d-flex gap-2 align-items-center mb-1">
@@ -290,17 +295,13 @@ relatedProductsDiv.innerHTML += `
       </div>
       <span class="review-count">(88)</span>
     </div>
-
   </div>
 
-</div>
+</div>`;
 
-`;
+WL.initButtons(relatedProductsDiv);
 
 });
-
-
-
 
 
 }
