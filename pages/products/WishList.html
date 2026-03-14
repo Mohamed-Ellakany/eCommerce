@@ -96,41 +96,48 @@
     </header>
 
     <!-- ==================== MAIN WISHLIST CONTENT ==================== -->
-    <main class="container my-5 py-3">
+    <main class="container py-3 min-vh-100">
         <!-- Loading spinner -->
-        <div id="loadingSpinner" class="text-center py-5 d-none">
+        <div id="loadingSpinner" class="text-center d-flex flex-column align-items-center    d-none">
             <div class="spinner-border text-danger" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
 
-        <div id="wishlistContent">
-            <div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <h1 class="display-6 fw-semibold mb-0"><i class="fa-regular fa-heart text-danger me-2"></i>My
-                        Wishlist</h1>
-                    <p class="text-secondary mt-2 mb-0"><span id="wishlistCount">0</span> items saved</p>
-                </div>
-              
+    <div id="wishlistContent">
+    
+        <!-- Header -->
+        <div class="wishlist-header">
+            <div class="title-badge">
+                <i class="fa-regular fa-heart"></i> My Collection
             </div>
-
-            <!-- wishlist items grid -->
-            <div class="row g-4" id="wishlistGrid"></div>
-
-            <!-- empty state -->
+            <h1>My Wishlist</h1>
+            <p class="subtitle"><strong id="wishlistCount">0</strong> items saved</p>
+            <div class="wishlist-divider"></div>
+        </div>
+    
+        <!-- Wishlist Grid -->
+        <div class="row g-4 justify-content-center" id="wishlistGrid">
+            <!-- Cards injected here by JS -->
+        </div>
+    
+        <!-- Empty State -->
         <div class="row d-none" id="emptyWishlistRow">
-            <div class="col-12 wishlist-empty">
-                <div class="wishlist-empty-icon">
-                    <i class="fa-regular fa-heart"></i>
+            <div class="col-12">
+                <div class="wishlist-empty">
+                    <div class="wishlist-empty-icon">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <h3>Your wishlist is empty</h3>
+                    <p>Save your favorite items to find them here whenever you're ready.</p>
+                    <a href="../products/ProductCatalog.html" class="btn btn-danger px-5">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping
+                    </a>
                 </div>
-                <h3>Your wishlist is empty</h3>
-                <p>Save your favorite items to see them here.</p>
-                <a href="../products/ProductCatalog.html" class="btn btn-danger px-5">
-                    <i class="fa-solid fa-arrow-left me-2"></i>Continue Shopping
-                </a>
             </div>
         </div>
-        </div>
+    
+    </div>
     </main>
 
     <!-- ==================== FOOTER ==================== -->
