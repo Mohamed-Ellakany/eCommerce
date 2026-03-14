@@ -1,6 +1,3 @@
-// $(".Pic").click(function(){
-//     console.log($(this).text());
-// })
 
 
 const params = new URLSearchParams(window.location.search);
@@ -116,11 +113,6 @@ for (let i = 0; i < pic.length; i++) {
 
 
 let sz=document.getElementsByClassName("sz");
-    // for (let i = 0; i < sz.length; i++) {        
-    //     sz[i].addEventListener("click",function(){
-
-    //     })
-    // }
 
 
 let sizes = document.querySelectorAll(".sz");
@@ -177,6 +169,17 @@ plus.addEventListener("click", () => {
   }
   console.log(count);
 });
+  let minus = document.querySelector(".minus");
+
+  minus.addEventListener("click", () => {
+    if (count > 1) {
+      count--;
+      number.textContent = count;
+      if (count < _product.stock) {
+        plus.removeAttribute("disabled");
+      }
+    }
+  });
   
   const buyNowBtn = document.querySelector(".btn.btn-danger.px-4, .btn.btn-danger.px-lg-5");
   document.querySelectorAll(".productDetails .btn-danger").forEach((btn) => {
@@ -189,17 +192,7 @@ plus.addEventListener("click", () => {
     }
   });
 }
-let minus = document.querySelector(".minus");
 
-minus.addEventListener("click", () => {
-  if (count > 1) {
-    count--;
-    number.textContent = count;
-    if(count<_product.stock){
-      plus.removeAttribute("disabled");
-    }
-  }
-});
 
 // let wishList=document.getElementById("wishList");
 // wishList.addEventListener("click",()=>{
