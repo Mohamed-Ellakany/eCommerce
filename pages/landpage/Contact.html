@@ -307,7 +307,6 @@
                 const phone = formData.get('phone');
                 const message = formData.get('message');
 
-                console.log('Form Values:', { name, email, phone, message });
 
                 if (!name || name.trim().length < 2) {
                     return { valid: false, message: 'Please enter your full name' };

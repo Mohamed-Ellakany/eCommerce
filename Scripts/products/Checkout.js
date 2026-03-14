@@ -69,7 +69,6 @@ function resolveImage(images, name) {
 
 function renderCart() {
   const cart = Cart.getAll();
-  console.log("[Checkout] renderCart — cart:", cart);
 
   const container = document.getElementById("cart-items");
 
@@ -188,17 +187,13 @@ function buildSuborders(cart, orderId, customerInfo, paymentMethod, date) {
 // ── Stock update ──────────────────────────────────────────────────
 
 async function updateStock(cart) {
-  console.log("[Checkout] updateStock — cart items received:", cart);
-
   const results = await Promise.allSettled(
     cart.map(async (item) => {
       // cart.js may store the product id as item.id or item.productId
       const productId = item.productId || item.id;
       const qty = toNum(item.qty) || 1;
 
-      console.log(
-        `[Checkout] updateStock — looking up product id: "${productId}" for "${item.name}"`,
-      );
+     
 
       const product = await DB.getProductById(productId);
 
@@ -212,15 +207,11 @@ async function updateStock(cart) {
       const currentStock = toNum(product.stock);
       const newStock = Math.max(0, currentStock - qty);
 
-      console.log(
-        `[Checkout] updateStock — PATCHING "${item.name}" (id: ${productId}): stock ${currentStock} → ${newStock}`,
-      );
+    
 
       await DB.updateProduct(productId, { stock: newStock });
 
-      console.log(
-        `[Checkout] updateStock — ✅ "${item.name}" stock updated to ${newStock}`,
-      );
+    
     }),
   );
 
@@ -228,8 +219,6 @@ async function updateStock(cart) {
     if (r.status === "rejected")
       console.error(`[Checkout] updateStock — ❌ item[${i}] threw:`, r.reason);
   });
-
-  console.log("[Checkout] updateStock — done.");
 }
 
 // ── Place Order ───────────────────────────────────────────────────
@@ -304,10 +293,7 @@ async function placeOrder() {
     suborders,
   };
 
-  console.log(
-    "[Checkout] placeOrder — orderData:",
-    JSON.stringify(orderData, null, 2),
-  );
+ 
 
   // 9. Disable button
   const btn = document.querySelector(".btn-place");
@@ -316,7 +302,6 @@ async function placeOrder() {
 
   try {
     const saved = await DB.placeOrder(orderData);
-    console.log("[Checkout] placeOrder — ✅ saved:", saved);
     await onOrderSuccess(saved.id, paymentMethod, cart);
   } catch (err) {
     console.error("[Checkout] placeOrder — ❌ failed:", err.message);
@@ -329,11 +314,8 @@ async function placeOrder() {
 // ── Post-order success ────────────────────────────────────────────
 
 async function onOrderSuccess(orderId, paymentMethod, cart) {
-  console.log("[Checkout] onOrderSuccess — cart passed to stock update:", cart);
-
   try {
     await updateStock(cart);
-    console.log("[Checkout] onOrderSuccess — ✅ stock update complete.");
   } catch (err) {
     console.warn(
       "[Checkout] onOrderSuccess — stock update error:",
@@ -342,7 +324,6 @@ async function onOrderSuccess(orderId, paymentMethod, cart) {
   }
 
   Cart.clear();
-  console.log("[Checkout] onOrderSuccess — cart cleared.");
 
   alert(
     `✅ Order placed successfully!\n` +
