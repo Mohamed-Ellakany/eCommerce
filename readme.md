@@ -61,7 +61,6 @@ This project was built without any backend framework. The application purely uti
  ┃ ┣ 📜 media.css      # Global responsive media queries
  ┃ ┗ 📜 ...            # Component-specific styles (cart, products, admin)
  ┣ 📜 index.html       # Application Entry Point (Home functionality)
- ┣ 📜 seller_dashboard.html # Main dashboard entry for sellers
  ┗ 📜 README.md        # Project documentation
 ```
 
