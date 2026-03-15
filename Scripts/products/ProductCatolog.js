@@ -91,7 +91,6 @@ function displayProducts(productList) {
         <span class="review-count">(${product.stock})</span>
       </div>
 
-      <span class="review-count">(75)</span>
 
     </div>
 
