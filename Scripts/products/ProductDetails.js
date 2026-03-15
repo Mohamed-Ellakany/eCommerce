@@ -235,7 +235,7 @@ function displayRelatedProducts(products) {
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
       </div>
-      <span class="review-count">(88)</span>
+      <span class="review-count">(${product.stock})</span>
     </div>
   </div>
 
