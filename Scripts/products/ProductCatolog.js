@@ -83,31 +83,19 @@ function displayProducts(productList) {
       </button>
 
     </div>
-
-    <button class="add-to-cart-btn w-100"
-      data-id="${product.id}">
-      Add To Cart
-    </button>
-
-  </div>
-
-  <div class="pt-2">
-
-    <p class="product-name mb-1">${product.name}</p>
-
-    <div class="d-flex gap-2 align-items-center mb-1">
-      <span class="price-new">$${product.price}</span>
-      <span class="price-old">$1160</span>
-    </div>
-
-    <div class="d-flex align-items-center gap-1">
-
-      <div class="stars" style="color:#FFAD33;">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star-half-alt"></i>
+    <div class="pt-2">
+      <p class="product-name mb-1">${productList[i].name}</p>
+      <div class="d-flex gap-2 align-items-center mb-1">
+        <span class="price-new">$${productList[i].price}</span>
+        <span class="price-old">$1160</span>
+      </div>
+      <div class="d-flex align-items-center gap-1">
+        <div class="stars" style="color:#FFAD33;">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+        <span class="review-count">(${productList[i].stock})</span>
       </div>
 
       <span class="review-count">(75)</span>

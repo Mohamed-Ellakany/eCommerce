@@ -170,7 +170,7 @@ const WL = (() => {
     const session = getSession();
     if (!session?.id) {
       showToast("Please log in to save items to your wishlist.", "warn");
-      setTimeout(() => (window.location.href = "login.html"), 1500);
+      setTimeout(() => (window.location.href = "../../pages/Auth/login.html"), 1500);
       return;
     }
 

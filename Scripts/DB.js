@@ -76,7 +76,8 @@ const DB = {
     const res = await fetch(`${API_URL}/products`);
     if (!res.ok) throw new Error(`getProducts failed: ${res.status}`);
     const data = await res.json();
-    return data;
+    const filtered = data.filter((p) => p.stock > 0);
+    return filtered;
   },
 
   async getProductById(id) {
