@@ -15,15 +15,13 @@ var ProductCatologDiv = document.getElementById("ProductCatolog");
 let SearchInput = document.getElementById("SearchInput");
 let filtersButtons = document.querySelectorAll(".filter-btn");
 
-
 /* ============================
    Fetch Products
 ============================ */
 
 async function getProducts() {
-
   const response = await fetch(
-    "https://json-server-for-ecomerce-app-cst.vercel.app/products"
+    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
   );
 
   const data = await response.json();
@@ -42,25 +40,20 @@ async function getProducts() {
 
 getProducts();
 
-
 /* ============================
    Display Products
 ============================ */
 
 function displayProducts(productList) {
-
   ProductCatologDiv.innerHTML = "";
 
   if (productList.length === 0) {
-
-    ProductCatologDiv.innerHTML =
-      `<h4 class="text-center alert alert-danger">No Products Found</h4>`;
+    ProductCatologDiv.innerHTML = `<h4 class="text-center alert alert-danger">No Products Found</h4>`;
 
     return;
   }
 
-  productList.forEach(product => {
-
+  productList.forEach((product) => {
     ProductCatologDiv.innerHTML += `
     
 <div class="flash-product-card flex-shrink-0 pb-4 flex-wrap col-sm-6 col-md-4 col-lg-3">
@@ -84,9 +77,9 @@ function displayProducts(productList) {
 
     </div>
     <div class="pt-2">
-      <p class="product-name mb-1">${productList[i].name}</p>
+      <p class="product-name mb-1">${product.name}</p>
       <div class="d-flex gap-2 align-items-center mb-1">
-        <span class="price-new">$${productList[i].price}</span>
+        <span class="price-new">$${product.price}</span>
         <span class="price-old">$1160</span>
       </div>
       <div class="d-flex align-items-center gap-1">
@@ -95,7 +88,7 @@ function displayProducts(productList) {
           <i class="fas fa-star"></i><i class="fas fa-star"></i>
           <i class="fas fa-star-half-alt"></i>
         </div>
-        <span class="review-count">(${productList[i].stock})</span>
+        <span class="review-count">(${product.stock})</span>
       </div>
 
       <span class="review-count">(75)</span>
@@ -107,43 +100,36 @@ function displayProducts(productList) {
 </div>
 
 `;
-
   });
 
   WL.initButtons();
 }
-
 
 /* ============================
    Filters + Pagination
 ============================ */
 
 function applyFilters() {
-
   let filtered = allProducts;
 
   /* Remove Out Of Stock */
 
-  filtered = filtered.filter(p => (p.stock || 0) > 0);
+  filtered = filtered.filter((p) => (p.stock || 0) > 0);
 
   /* Category Filter */
 
   if (currentCategory !== "all") {
-
     filtered = filtered.filter(
-      p => p.category.toLowerCase() === currentCategory
+      (p) => p.category.toLowerCase() === currentCategory,
     );
-
   }
 
   /* Search Filter */
 
   if (currentSearch !== "") {
-
-    filtered = filtered.filter(p =>
-      p.name.toLowerCase().includes(currentSearch)
+    filtered = filtered.filter((p) =>
+      p.name.toLowerCase().includes(currentSearch),
     );
-
   }
 
   /* Pagination */
@@ -156,16 +142,13 @@ function applyFilters() {
   displayProducts(paginatedProducts);
 
   renderPagination(filtered.length);
-
 }
-
 
 /* ============================
    Pagination
 ============================ */
 
 function renderPagination(totalProducts) {
-
   const paginationDiv = document.getElementById("pagination");
 
   if (!paginationDiv) return;
@@ -173,7 +156,6 @@ function renderPagination(totalProducts) {
   paginationDiv.innerHTML = "";
 
   const totalPages = Math.ceil(totalProducts / productsPerPage);
-
 
   /* PREV BUTTON */
 
@@ -186,25 +168,21 @@ function renderPagination(totalProducts) {
   prevBtn.disabled = currentPage === 1;
 
   prevBtn.addEventListener("click", () => {
-
     currentPage--;
 
     applyFilters();
 
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
-
   });
 
   paginationDiv.appendChild(prevBtn);
 
-
   /* PAGE NUMBERS */
 
   for (let i = 1; i <= totalPages; i++) {
-
     const btn = document.createElement("button");
 
     btn.innerText = i;
@@ -216,21 +194,18 @@ function renderPagination(totalProducts) {
     }
 
     btn.addEventListener("click", () => {
-
       currentPage = i;
 
       applyFilters();
 
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
-
     });
 
     paginationDiv.appendChild(btn);
   }
-
 
   /* NEXT BUTTON */
 
@@ -243,32 +218,26 @@ function renderPagination(totalProducts) {
   nextBtn.disabled = currentPage === totalPages;
 
   nextBtn.addEventListener("click", () => {
-
     currentPage++;
 
     applyFilters();
 
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
-
   });
 
   paginationDiv.appendChild(nextBtn);
-
 }
-
 
 /* ============================
    Category Filter
 ============================ */
 
-filtersButtons.forEach(btn => {
-
+filtersButtons.forEach((btn) => {
   btn.addEventListener("click", function () {
-
-    filtersButtons.forEach(b => b.classList.remove("active"));
+    filtersButtons.forEach((b) => b.classList.remove("active"));
 
     this.classList.add("active");
 
@@ -277,22 +246,17 @@ filtersButtons.forEach(btn => {
     currentPage = 1;
 
     applyFilters();
-
   });
-
 });
-
 
 /* ============================
    Search
 ============================ */
 
 SearchInput.addEventListener("keyup", function () {
-
   currentSearch = this.value.toLowerCase();
 
   currentPage = 1;
 
   applyFilters();
-
 });
