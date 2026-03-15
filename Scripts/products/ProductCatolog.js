@@ -72,7 +72,7 @@ function displayProducts(productList) {
           <i class="fas fa-star"></i><i class="fas fa-star"></i>
           <i class="fas fa-star-half-alt"></i>
         </div>
-        <span class="review-count">(75)</span>
+        <span class="review-count">(${productList[i].stock})</span>
       </div>
     </div>
   </div>`;
