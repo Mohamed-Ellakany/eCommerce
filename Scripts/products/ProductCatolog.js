@@ -14,14 +14,60 @@ var ProductCatologDiv = document.getElementById("ProductCatolog");
 
 let SearchInput = document.getElementById("SearchInput");
 let filtersButtons = document.querySelectorAll(".filter-btn");
+const CategoryFilterDiv = document.querySelector(".category-filter"); // Select the container
 
+/* ============================
+   Fetch Categories (NEW)
+============================ */
+async function getCategories() {
+  try {
+    const response = await fetch(
+      "https://json-server-for-ecomerce-app-clear.vercel.app/categories",
+    );
+    const categories = await response.json();
+
+    // Start with the 'All' button
+    let buttonsHTML = `<button class="filter-btn ${currentCategory === "all" ? "active" : ""}" data-category="all">All</button>`;
+
+    // Add dynamic buttons
+    categories.forEach((cat) => {
+      // Use cat.name or cat depending on your JSON structure
+      const catName = typeof cat === "object" ? cat.name : cat;
+      const isActive =
+        currentCategory === catName.toLowerCase() ? "active" : "";
+
+      buttonsHTML += `<button class="filter-btn ${isActive}" data-category="${catName}">${catName}</button>`;
+    });
+
+    CategoryFilterDiv.innerHTML = buttonsHTML;
+
+    // IMPORTANT: Re-attach listeners to the new buttons
+    attachCategoryListeners();
+  } catch (error) {
+    console.error("Error loading categories:", error);
+  }
+}
+
+function attachCategoryListeners() {
+  const dynamicButtons = document.querySelectorAll(".filter-btn");
+  dynamicButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      dynamicButtons.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      currentCategory = this.dataset.category.toLowerCase();
+      currentPage = 1;
+      applyFilters();
+    });
+  });
+}
 /* ============================
    Fetch Products
 ============================ */
 
 async function getProducts() {
   const response = await fetch(
-    "https://json-server-for-ecomerce-app-cst.vercel.app/products",
+    "https://json-server-for-ecomerce-app-clear.vercel.app/products",
   );
 
   const data = await response.json();
@@ -34,7 +80,7 @@ async function getProducts() {
   if (categoryFromURL) {
     currentCategory = categoryFromURL.toLowerCase();
   }
-
+  await getCategories(); // to render category buttons before
   applyFilters();
 }
 

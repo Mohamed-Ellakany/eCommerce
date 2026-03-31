@@ -5,7 +5,7 @@ let _currentProduct = null;
 
 async function getProductDetails() {
   let response = await fetch(
-    `https://json-server-for-ecomerce-app-cst.vercel.app/products/${productId}`,
+    `https://json-server-for-ecomerce-app-clear.vercel.app/products/${productId}`,
   );
 
   let product = await response.json();
@@ -22,7 +22,7 @@ getProductDetails();
 
 async function getRelatedProducts(category) {
   let response = await fetch(
-    `https://json-server-for-ecomerce-app-cst.vercel.app/products?category=${category}`,
+    `https://json-server-for-ecomerce-app-clear.vercel.app/products?category=${category}`,
   );
 
   let products = await response.json();
