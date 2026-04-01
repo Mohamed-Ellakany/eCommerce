@@ -4,7 +4,7 @@ Welcome to the **E-Commerce Platform Frontend** repository! This project is a fe
 
 ## 🚀 Live Demo & API Resources
 
-- **JSON Server Deployment:** [(https://json-server-for-ecomerce-app-cst.vercel.app/)]
+- **JSON Server Deployment:** [Data](https://json-server-for-ecomerce-app-clear.vercel.app/)
 - **Server Application Repo:** [GitHub - E-commerce_Server](https://github.com/rawda2/E-commerce_Server)
 
 ---
