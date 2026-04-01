@@ -1,4 +1,4 @@
-const BASE_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
+const BASE_URL = "https://json-server-for-ecomerce-app-clear.vercel.app";
 
 const session = DB.getSession();
 if (!session || (session.role !== "seller" && session.role !== "admin")) {
@@ -11,7 +11,7 @@ let editModal;
 let deleteModal;
 
 let currentProductId = null;
-
+document.getElementById("product-category").selectedIndex = 0; // Reset dropdown
 async function fetchWithDebug(url, options) {
   const response = await fetch(url, options);
 
@@ -191,11 +191,35 @@ async function confirmDelete(productId) {
     alert("Error loading product details");
   }
 }
+async function populateCategoryDropdown() {
+  const categorySelect = document.getElementById("product-category");
+  if (!categorySelect) return;
 
-document.addEventListener("DOMContentLoaded", function () {
+  try {
+    const res = await fetch(`${BASE_URL}/categories`);
+    const categories = await res.json();
+
+    let options =
+      '<option value="" selected disabled>Select a category</option>';
+    categories.forEach((cat) => {
+      // Handles both array of strings ["Electronics"] or objects [{name: "Electronics"}]
+      const name = typeof cat === "object" ? cat.name : cat;
+      options += `<option value="${name}">${name}</option>`;
+    });
+
+    categorySelect.innerHTML = options;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    categorySelect.innerHTML =
+      '<option value="" disabled>Error loading categories</option>';
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
   const productModalElement = document.getElementById("productModal");
   const editModalElement = document.getElementById("editmodal");
   const deleteModalElement = document.getElementById("deleteModal");
+  await populateCategoryDropdown();
 
   if (productModalElement)
     productModal = new bootstrap.Modal(productModalElement);
@@ -231,8 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("edit-modal-title").textContent =
         "Add New Product";
       document.getElementById("product-name").value = "";
-      document.getElementById("product-category").value = "";
-      document.getElementById("price").value = "";
+      document.getElementById("product-category").selectedIndex = 0; // Reset dropdown      document.getElementById("price").value = "";
       document.getElementById("stock").value = "";
       document.getElementById("description").value = "";
       document.getElementById("image-url").value = "";
@@ -287,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const description = document.getElementById("description").value.trim();
       const imageUrl = document.getElementById("image-url").value.trim();
       const errorBox = document.getElementById("form-error");
-
       if (!name || !category || !price || !stock) {
         errorBox.textContent = "Name, category, price and stock are required.";
         errorBox.classList.remove("d-none");

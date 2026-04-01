@@ -1,4 +1,4 @@
-API_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
+API_URL = "https://json-server-for-ecomerce-app-clear.vercel.app";
 
 const DB = {
   getSession() {

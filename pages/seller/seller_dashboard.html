@@ -1,360 +1,447 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Dashboard</title>
+  </head>
+  <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <!-- Bootstrap CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  />
+  <!-- Animate.css -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- Team CSS -->
+  <link rel="stylesheet" href="../../Styles/style.css" />
+  <link rel="stylesheet" href="../../Styles/Home.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seller Dashboard</title>
-</head>
-<!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
-<!-- Animate.css -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-<!-- Team CSS -->
-<link rel="stylesheet" href="../../Styles/style.css" />
-<link rel="stylesheet" href="../../Styles/Home.css" />
+  <link rel="stylesheet" href="../../Styles/media.css" />
+  <!-- New seller dashboard CSS -->
+  <link rel="stylesheet" href="../../Styles/seller-dashboard.css" />
 
-<link rel="stylesheet" href="../../Styles/media.css" />
-<!-- New seller dashboard CSS -->
-<link rel="stylesheet" href="../../Styles/seller-dashboard.css" />
+  <style>
+    img {
+      border-radius: 4px;
+    }
 
-<style>
-  img {
-    border-radius: 4px;
-  }
+    .admin-logo {
+      color: var(--mainColor) !important;
+    }
 
-  .admin-logo {
-    color: var(--mainColor) !important;
-  }
+    .img-wrap {
+      background: #f5f5f5;
+      border-radius: 4px;
+      overflow: hidden;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+    }
 
-  .img-wrap {
-    background: #f5f5f5;
-    border-radius: 4px;
-    overflow: hidden;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-  }
+    .img-wrap img {
+      height: 160px;
+      width: 160px;
+      object-fit: contain;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  .img-wrap img {
-    height: 160px;
-    width: 160px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
+    .img-wrap img:hover {
+      transform: scale(1.1);
+    }
 
-  .img-wrap img:hover {
-    transform: scale(1.1);
-  }
+    img:hover {
+      transform: scale(1.1);
+      transition-duration: 0.3s;
+    }
+  </style>
 
-  img:hover {
-    transform: scale(1.1);
-    transition-duration: 0.3s;
-  }
-</style>
-
-<body>
-  <!-- View Product Modal -->
-  <div class="modal fade" id="productModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-product-name">Product Name</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body text-center">
-          <img id="modal-product-img" src="" class="img-fluid mb-3 rounded" style="max-height: 200px" />
-          <p>
-            <strong>Price:</strong> $<span id="modal-product-price"></span>
-          </p>
-          <p>
-            <strong>Stock:</strong> <span id="modal-product-stock"></span>
-          </p>
-          <p id="modal-product-description" class="text-muted"></p>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button class="btn btn-danger" id="btn-delete">
-            <i class="fas fa-trash me-1"></i> Delete
-          </button>
-          <button class="btn btn-warning" id="btn-edit">
-            <i class="fas fa-edit me-1"></i> Edit
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Edit / Add Product Modal -->
-  <div class="modal fade" id="editmodal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="edit-modal-title">Edit Product</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label">Product Name</label>
-            <input type="text" class="form-control" id="product-name" />
+  <body>
+    <!-- View Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-product-name">Product Name</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Category</label>
-            <input type="text" class="form-control" id="product-category"
-              placeholder="e.g., Electronics, Clothing, Books" />
+          <div class="modal-body text-center">
+            <img
+              id="modal-product-img"
+              src=""
+              class="img-fluid mb-3 rounded"
+              style="max-height: 200px"
+            />
+            <p>
+              <strong>Price:</strong> $<span id="modal-product-price"></span>
+            </p>
+            <p>
+              <strong>Stock:</strong> <span id="modal-product-stock"></span>
+            </p>
+            <p id="modal-product-description" class="text-muted"></p>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Stock</label>
-            <input type="number" class="form-control" id="stock" />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Image URL</label>
-            <input type="text" class="form-control" id="image-url" placeholder="https://example.com/image.jpg" />
-            <small class="text-muted">Enter direct link to image</small>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Details (comma separated)</label>
-            <textarea class="form-control" id="description" rows="3"
-              placeholder="e.g., 4GB RAM, 128GB Storage, Blue color"></textarea>
-          </div>
-          <div id="form-error" class="alert alert-danger d-none"></div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button class="btn btn-danger" data-bs-dismiss="modal">
-            <i class="fa-solid fa-x me-1"></i> Cancel
-          </button>
-          <button class="btn btn-warning" id="btn-save">
-            <i class="fas fa-save me-1"></i> Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Confirm Modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirm Delete</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            Are you sure you want to delete
-            <strong id="delete-product-name"></strong>?
-          </p>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
-            Cancel
-          </button>
-          <button class="btn btn-danger btn-sm" id="btn-confirm-delete">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><span class="admin-logo">Seller </span>
-        Dashboard
-      </a>
-      <!-- this button for collapse nav bar if navbar-expand specified in the nav bar  -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-          <li class="nav-item">
-            <a class="nav-link" href="./seller_dashboard.html">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active-tab" href="./seller-orders.html">Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./seller-analytics.html">Analytics</a>
-          </li>
-        </ul>
-        <!-- ms-auto for pushing elements to the right of navbar -->
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-              my profile
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a class="dropdown-item" id="user-name" href="../landpage/Profile.html"></a>
-              </li>
-              <li>
-                <a class="dropdown-item" id="home-btn" href="../../index.html">home</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item" id="logout-btn" href="#">logout</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Controls Row -->
-  <div class="container-fluid px-4 py-3 border-bottom">
-    <div class="d-flex align-items-center gap-3 flex-wrap">
-      <!-- Left: product count card -->
-      <div class="card text-bg-primary mb-0" style="min-width: 160px">
-        <div class="card-body py-2 px-3">
-          <h4 class="mb-0 small text-center">Total Products</h4>
-          <h5 class="mb-0 fw-bold text-center" id="product-count">0</h5>
-        </div>
-      </div>
-
-      <!-- Middle: search -->
-      <div class="d-flex gap-2 flex-grow-1">
-        <input type="search" class="form-control" id="search-input" placeholder="Search your products..." />
-        <button class="btn btn-outline-secondary" id="btn-search">
-          <i class="fas fa-search"></i> Search
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Dashboard -->
-  <div class="container py-4">
-    <!-- Add New Product button -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="mb-0">Your Products</h4>
-      <button class="btn btn-primary" id="btn-add-product">
-        <i class="fas fa-plus me-1"></i> Add New Product
-      </button>
-    </div>
-
-    <!-- Products Table -->
-    <table class="table text-center w-100">
-      <thead class="table-dark">
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Stock</th>
-          <th>Edit/Delete</th>
-        </tr>
-      </thead>
-      <tbody id="products-tbody">
-        <!-- JS fills this -->
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Footer -->
-  <footer class="pt-3">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-12 col-sm-6 col-lg-3">
-          <h6 class="text-white fs-4 mb-3">Exclusive</h6>
-          <p class="mb-1" style="color: #fff; font-weight: 500">Subscribe</p>
-          <p class="subscribe-label mb-2 text-secondary">
-            Get 10% off your first order
-          </p>
-          <div class="subscribe-form d-flex border-1 border-secondary">
-            <input type="email" placeholder="Enter your email" class="px-2 py-2" />
-            <button type="button" class="px-2 py-2">
-              <i class="fa-solid fa-paper-plane"></i>
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-danger" id="btn-delete">
+              <i class="fas fa-trash me-1"></i> Delete
+            </button>
+            <button class="btn btn-warning" id="btn-edit">
+              <i class="fas fa-edit me-1"></i> Edit
             </button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-12 col-sm-6 col-lg-2">
-          <h6 class="text-white fs-4 mb-3">Support</h6>
-          <address>
-            111 Bijoy sarani, Dhaka,<br />
-            DH 1515, Bangladesh.<br />
-            exclusive@gmail.com<br />
-            +88015-88888-9999
-          </address>
+    <!-- Edit / Add Product Modal -->
+    <div class="modal fade" id="editmodal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="edit-modal-title">Edit Product</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="product-name" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Category</label>
+              <select class="form-select" id="product-category">
+                <option value="" selected disabled>
+                  Loading categories...
+                </option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Stock</label>
+              <input type="number" class="form-control" id="stock" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Image URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="image-url"
+                placeholder="https://example.com/image.jpg"
+              />
+              <small class="text-muted">Enter direct link to image</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Details (comma separated)</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+                placeholder="e.g., 4GB RAM, 128GB Storage, Blue color"
+              ></textarea>
+            </div>
+            <div id="form-error" class="alert alert-danger d-none"></div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="fa-solid fa-x me-1"></i> Cancel
+            </button>
+            <button class="btn btn-warning" id="btn-save">
+              <i class="fas fa-save me-1"></i> Save
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-12 col-sm-6 col-lg-2">
-          <h6 class="text-white fs-4 mb-3">Account</h6>
-          <a href="#">My Account</a>
-          <a href="#">Login / Register</a>
-          <a href="#">Cart</a>
-          <a href="#">Wishlist</a>
-          <a href="#">Shop</a>
+    <!-- Delete Confirm Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm Delete</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Are you sure you want to delete
+              <strong id="delete-product-name"></strong>?
+            </p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button class="btn btn-danger btn-sm" id="btn-confirm-delete">
+              Delete
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-12 col-sm-6 col-lg-2">
-          <h6 class="text-white fs-4 mb-3">Quick Link</h6>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms Of Use</a>
-          <a href="#">FAQ</a>
-          <a href="#">Contact</a>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-3">
-          <h6 class="text-white fs-4 mb-3">Download App</h6>
-          <p class="save-text mb-1">Save $3 with App New User Only</p>
-
-          <div class="d-flex gap-3 align-items-start mb-3">
-            <div class="app-badges d-flex gap-2 mt-1">
-              <a href="#" class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
-                <i class="fa-brands fa-google-play fs-4"></i>
-                <div class="badge-text">
-                  <small class="d-block text-secondary mb-1">GET IT ON</small>
-                  <span class="text-white">Google Play</span>
-                </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><span class="admin-logo">Seller </span>
+          Dashboard
+        </a>
+        <!-- this button for collapse nav bar if navbar-expand specified in the nav bar  -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a class="nav-link" href="./seller_dashboard.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active-tab" href="./seller-orders.html"
+                >Orders</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./seller-analytics.html">Analytics</a>
+            </li>
+          </ul>
+          <!-- ms-auto for pushing elements to the right of navbar -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                my profile
               </a>
-              <a href="#" class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2">
-                <i class="fa-brands fa-apple fs-4"></i>
-                <div class="badge-text">
-                  <small class="d-block text-secondary mb-1">Download on the</small>
-                  <span class="text-white">App Store</span>
-                </div>
-              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="user-name"
+                    href="../landpage/Profile.html"
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" id="home-btn" href="../../index.html"
+                    >home</a
+                  >
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" id="logout-btn" href="#">logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Controls Row -->
+    <div class="container-fluid px-4 py-3 border-bottom">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <!-- Left: product count card -->
+        <div class="card text-bg-primary mb-0" style="min-width: 160px">
+          <div class="card-body py-2 px-3">
+            <h4 class="mb-0 small text-center">Total Products</h4>
+            <h5 class="mb-0 fw-bold text-center" id="product-count">0</h5>
+          </div>
+        </div>
+
+        <!-- Middle: search -->
+        <div class="d-flex gap-2 flex-grow-1">
+          <input
+            type="search"
+            class="form-control"
+            id="search-input"
+            placeholder="Search your products..."
+          />
+          <button class="btn btn-outline-secondary" id="btn-search">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="container py-4">
+      <!-- Add New Product button -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Your Products</h4>
+        <button class="btn btn-primary" id="btn-add-product">
+          <i class="fas fa-plus me-1"></i> Add New Product
+        </button>
+      </div>
+
+      <!-- Products Table -->
+      <table class="table text-center w-100">
+        <thead class="table-dark">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody id="products-tbody">
+          <!-- JS fills this -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-3">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <h6 class="text-white fs-4 mb-3">Exclusive</h6>
+            <p class="mb-1" style="color: #fff; font-weight: 500">Subscribe</p>
+            <p class="subscribe-label mb-2 text-secondary">
+              Get 10% off your first order
+            </p>
+            <div class="subscribe-form d-flex border-1 border-secondary">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="px-2 py-2"
+              />
+              <button type="button" class="px-2 py-2">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
             </div>
           </div>
 
-          <div class="social-icons d-flex gap-2 mt-2">
-            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0"><i
-                class="fa-brands fa-facebook"></i></a>
-            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0"><i
-                class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0"><i
-                class="fa-brands fa-twitter"></i></a>
-            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle mb-0"><i
-                class="fa-brands fa-linkedin"></i></a>
+          <div class="col-12 col-sm-6 col-lg-2">
+            <h6 class="text-white fs-4 mb-3">Support</h6>
+            <address>
+              111 Bijoy sarani, Dhaka,<br />
+              DH 1515, Bangladesh.<br />
+              exclusive@gmail.com<br />
+              +88015-88888-9999
+            </address>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-2">
+            <h6 class="text-white fs-4 mb-3">Account</h6>
+            <a href="#">My Account</a>
+            <a href="#">Login / Register</a>
+            <a href="#">Cart</a>
+            <a href="#">Wishlist</a>
+            <a href="#">Shop</a>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-2">
+            <h6 class="text-white fs-4 mb-3">Quick Link</h6>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms Of Use</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-3">
+            <h6 class="text-white fs-4 mb-3">Download App</h6>
+            <p class="save-text mb-1">Save $3 with App New User Only</p>
+
+            <div class="d-flex gap-3 align-items-start mb-3">
+              <div class="app-badges d-flex gap-2 mt-1">
+                <a
+                  href="#"
+                  class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2"
+                >
+                  <i class="fa-brands fa-google-play fs-4"></i>
+                  <div class="badge-text">
+                    <small class="d-block text-secondary mb-1">GET IT ON</small>
+                    <span class="text-white">Google Play</span>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  class="app-badge text-white text-decoration-none d-flex align-items-center gap-1 px-1 py-2"
+                >
+                  <i class="fa-brands fa-apple fs-4"></i>
+                  <div class="badge-text">
+                    <small class="d-block text-secondary mb-1"
+                      >Download on the</small
+                    >
+                    <span class="text-white">App Store</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="social-icons d-flex gap-2 mt-2">
+              <a
+                href="#"
+                class="d-flex align-items-center justify-content-center rounded-circle mb-0"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a
+                href="#"
+                class="d-flex align-items-center justify-content-center rounded-circle mb-0"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="d-flex align-items-center justify-content-center rounded-circle mb-0"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+              <a
+                href="#"
+                class="d-flex align-items-center justify-content-center rounded-circle mb-0"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary">
-      <div class="container">
-        &copy; Copyright Rimel 2022. All right reserved
+      <div
+        class="footer-bottom py-3 border-top border-secondary mt-3 text-center text-secondary"
+      >
+        <div class="container">
+          &copy; Copyright Rimel 2022. All right reserved
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="../../Scripts/DB.js"></script>
-  <!-- <script src="../../Scripts/landpage/home.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../Scripts/seller/seller-dashboard.js"></script>
-  <script src="../../Scripts/seller/seller-general.js"></script>
-</body>
-
+    <script src="../../Scripts/DB.js"></script>
+    <!-- <script src="../../Scripts/landpage/home.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../Scripts/seller/seller-dashboard.js"></script>
+    <script src="../../Scripts/seller/seller-general.js"></script>
+  </body>
 </html>

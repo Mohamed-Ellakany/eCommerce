@@ -5,6 +5,80 @@ const closeBtn = document.getElementById("sidebarClose");
 const overlay = document.createElement("div");
 overlay.className = "sidebar-overlay";
 document.body.appendChild(overlay);
+const iconMap = {
+  electronics: "bi-phone",
+  fashion: "bi-handbag",
+  "home & kitchen": "bi-house-heart",
+  "sports & outdoors": "bi-bicycle",
+  "books & stationery": "bi-book",
+  "beauty & personal care": "bi-magic",
+  "toys & games": "bi-controller",
+  default: "bi-tag",
+};
+async function loadDynamicCategories() {
+  const categoriesTrack = document.querySelector(".categc");
+  const sidebarList = document.getElementById("sidebarCategoryList");
+
+  if (!categoriesTrack && !sidebarList) return;
+
+  try {
+    const response = await fetch(
+      "https://json-server-for-ecomerce-app-clear.vercel.app/categories",
+    );
+    const categories = await response.json();
+
+    // Clear existing static content
+    if (categoriesTrack) categoriesTrack.innerHTML = "";
+    if (sidebarList) sidebarList.innerHTML = "";
+
+    categories.forEach((cat, index) => {
+      const catName = cat.name;
+      const catLower = catName.toLowerCase();
+      const iconClass = iconMap[catLower] || iconMap["default"];
+      const catalogUrl = `./pages/products/ProductCatalog.html?category=${encodeURIComponent(catLower)}`;
+
+      // --- 1. Update Slider HTML ---
+      if (categoriesTrack) {
+        const sliderHTML = `
+                    <a class="text-decoration-none categText" href="${catalogUrl}">
+                        <div class="flash-product-card categ flex-shrink-0 d-flex flex-column align-items-center justify-content-center">
+                            <i class="bi ${iconClass} fs-2 mb-2"></i>
+                            <p class="mb-0 text-center" style="font-size: 14px;">${catName}</p>
+                        </div>
+                    </a>`;
+        categoriesTrack.insertAdjacentHTML("beforeend", sliderHTML);
+      }
+
+      // --- 2. Update Sidebar HTML ---
+      if (sidebarList) {
+        // Set the first item as active by default
+        const activeClass = index === 0 ? "active" : "";
+        const sidebarHTML = `
+                    <li class="d-flex justify-content-between align-items-center ${activeClass}">
+                        <a href="${catalogUrl}" class="text-decoration-none">${catName}</a>
+                    </li>`;
+        sidebarList.insertAdjacentHTML("beforeend", sidebarHTML);
+      }
+    });
+
+    // Re-initialize Slider & Sidebar click listeners
+    initializeSliders();
+    attachSidebarListeners();
+  } catch (err) {
+    console.error("Failed to load categories:", err);
+  }
+}
+
+// Add this helper to handle sidebar 'active' state switching
+function attachSidebarListeners() {
+  const items = document.querySelectorAll("#sidebarCategoryList li");
+  items.forEach((li) => {
+    li.addEventListener("click", () => {
+      items.forEach((el) => el.classList.remove("active"));
+      li.classList.add("active");
+    });
+  });
+}
 
 toggleBtn?.addEventListener("click", () => {
   const isOpen = sidebarMenu.classList.toggle("open");
@@ -56,6 +130,8 @@ function updateCountdown() {
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  /* Update your iconMap to match the new category names */
 
   //   document.getElementById("flash-days").textContent = String(days).padStart(
   //     2,
@@ -137,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     showErrorMessage("Failed to load products. Please refresh the page.");
     return;
   }
-
+  await loadDynamicCategories();
   if (flashTrack) renderFlashSales(flashTrack, allProducts.slice(0, 6));
   if (bestSellingGrid)
     renderBestSelling(bestSellingGrid, allProducts.slice(0, 4));
