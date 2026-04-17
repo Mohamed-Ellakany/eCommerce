@@ -1,7 +1,7 @@
 
 
 const WL = (() => {
-  const API_URL = "https://json-server-for-ecomerce-app-cst.vercel.app";
+  const API_URL = "https://json-server-for-ecomerce-app-clear.vercel.app";
   const SESSION_KEY = "shop_session";
 
   function getSession() {
